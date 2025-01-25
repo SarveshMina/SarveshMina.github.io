@@ -1,29 +1,33 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-    />
-    <title>Sarvesh Mina - Portfolio</title>
-    <meta
-            name="description"
-            content="Portfolio website of Sarvesh Mina, showcasing projects, skills, education, and experience."
-    />
-    <meta name="keywords" content="Sarvesh Mina, Portfolio, Computer Science, AI, Software Engineering, Game Development" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Runway Redeclaration Tool</title>
+    <meta name="description" content="Runway Redeclaration Tool running via CheerpJ" />
+    <meta name="keywords" content="Runway, Java, CheerpJ, JAR Execution" />
     <meta name="author" content="Sarvesh Mina" />
-    <!-- Favicon -->
     <link rel="icon" href="/main.png" />
-    <!-- AOS CSS -->
-    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <script type="module" crossorigin src="/assets/index-BHzqIY2C.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-vTeg1Y9_.css">
+
+    <!-- Load CheerpJ -->
+    <script src="https://cjrtnc.leaningtech.com/2.2/loader.js"></script>
 </head>
 <body>
-<div id="app"></div>
-<!-- AOS JS -->
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<h2>Runway Redeclaration Tool</h2>
+<p>Click below to run the application in your browser:</p>
+
+<!-- Button to run the JAR -->
+<button onclick="runJar()">Run Application</button>
+
+<!-- CheerpJ App Container -->
+<div id="cheerpj-container"></div>
+
+<script>
+    function runJar() {
+        // Load the JAR file using CheerpJ
+        cheerpjInit();
+        cheerpjRunJar("/downloads/RunwayRedeclaration.jar");
+    }
+</script>
 </body>
 </html>
