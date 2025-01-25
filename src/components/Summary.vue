@@ -3,7 +3,7 @@
   <section id="summary" class="summary-section" data-aos="fade-up">
     <h2>Summary</h2>
     <p>
-      Ambitious and dedicated Computer Science student with a strong foundation in AI education, software engineering, and technical society leadership. Proficient in game development, collaborative project management, and driving community engagement. Passionate about leveraging technology to solve real-world challenges and advance innovation in AI and software development.
+      Ambitious and dedicated Computer Science student with a strong foundation in Computer Science, AI education, , and leadership. Proficient in Game Development, Web Development, Cloud Technologies, Collaborative Project Management, and driving community engagement. Passionate about leveraging technology to solve real-world challenges and advance innovation in software development and AI.
     </p>
   </section>
 </template>
