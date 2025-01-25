@@ -10,7 +10,7 @@
         </div>
         <p class="project-description">{{ project.description }}</p>
         <div class="project-links">
-          <a v-if="project.liveDemo" :href="project.liveDemo" target="_blank" class="project-btn">Live Demo</a>
+          <a v-if="project.liveDemo" :href="project.liveDemo" target="_blank" class="project-btn">{{ project.buttonText }}</a>
           <a :href="project.repo" target="_blank" class="project-btn">GitHub Repo</a>
         </div>
       </div>
@@ -29,21 +29,24 @@ export default {
           duration: 'Oct 2024 – Jan 2025',
           description: 'A collaborative event scheduling app using Vue.js and Azure. Features include user authentication, event management, dynamic calendar views, and real-time notifications.',
           liveDemo: 'https://sarveshmina.github.io/CAD-gwc-frontend/',
-          repo: 'https://github.com/SarveshMina/CAD-gwc-frontend'
+          repo: 'https://github.com/SarveshMina/CAD-gwc-frontend',
+          buttonText: 'Live Demo'
         },
         {
           title: 'Cube Runner 3D',
           duration: 'Apr 2022 – Oct 2022',
           description: 'An endless 3D runner game built with Unity and C#. Features procedural level generation, adaptive AI difficulty, and smooth performance optimizations.',
           liveDemo: 'https://sarveshmina.github.io/games/cube_runner_3d/',
-          repo: 'https://github.com/SarveshMina/Cube_Runner_3D'
+          repo: 'https://github.com/SarveshMina/Cube_Runner_3D',
+          buttonText: 'Play Game'
         },
         {
           title: 'Runway Redeclaration Tool',
           duration: 'Oct 2023 – March 2023',
           description: 'Developed a tool to modernize aviation safety protocols. Implemented TODA and ASDA calculations for flight safety, designed a user-friendly interface, and integrated mathematical models for accurate predictions.',
-          liveDemo: '/runway-redeclaration.html', // Link to the CheerpJ page
-          repo: 'https://github.com/bryanvullo/RunwayRedeclaration'
+          liveDemo: '/downloads/RunwayRedeclaration.jar',
+          repo: 'https://github.com/bryanvullo/RunwayRedeclaration',
+          buttonText: 'Download JAR'
         }
       ]
     }
