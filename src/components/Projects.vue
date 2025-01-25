@@ -35,7 +35,7 @@ export default {
           title: 'Cube Runner 3D',
           duration: 'Apr 2022 – Oct 2022',
           description: 'An endless 3D runner game built with Unity and C#. Features procedural level generation, adaptive AI difficulty, and smooth performance optimizations.',
-          liveDemo: 'https://sarveshmina.github.io/games/cube_runner_3d/',  // Corrected URL
+          liveDemo: 'https://sarveshmina.github.io/games/cube_runner_3d/',
           repo: 'https://github.com/SarveshMina/Cube_Runner_3D'
         }
       ]
