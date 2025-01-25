@@ -4,7 +4,11 @@
       <div class="logo">
         <h1><a href="#">Sarvesh Mina</a></h1>
       </div>
-      <ul :class="{ 'nav-active': navActive }">
+      <ul :class="{ 'nav-active': navActive }" ref="navMenu">
+        <!-- Close button for mobile -->
+        <li class="close-btn" v-if="navActive">
+          <button @click="closeNav">✖</button>
+        </li>
         <li><a href="#summary" @click="smoothScroll($event, 'summary')" :class="{ active: activeSection === 'summary' }">Summary</a></li>
         <li><a href="#education-experience" @click="smoothScroll($event, 'education-experience')" :class="{ active: activeSection === 'education-experience' }">Education & Experience</a></li>
         <li><a href="#skills" @click="smoothScroll($event, 'skills')" :class="{ active: activeSection === 'skills' }">Skills</a></li>
@@ -15,7 +19,7 @@
         </li>
       </ul>
       <!-- Burger Menu for Mobile -->
-      <div class="burger" @click="toggleNav" :aria-expanded="navActive" aria-label="Toggle navigation">
+      <div class="burger" @click="toggleNav" ref="burgerMenu" :aria-expanded="navActive" aria-label="Toggle navigation">
         <div :class="{ 'line1': navActive }"></div>
         <div :class="{ 'line2': navActive }"></div>
         <div :class="{ 'line3': navActive }"></div>
@@ -30,12 +34,13 @@ export default {
   data() {
     return {
       navActive: false,
-      cvUrl: `${import.meta.env.BASE_URL}/SarveshMina.pdf`,
+      cvUrl: `//SarveshMina.pdf`,
       activeSection: "",
     };
   },
   methods: {
-    toggleNav() {
+    toggleNav(event) {
+      event.stopPropagation(); // Prevent the outside click from triggering immediately
       this.navActive = !this.navActive;
       document.body.classList.toggle("nav-open", this.navActive);
     },
@@ -57,7 +62,7 @@ export default {
       });
     },
     smoothScroll(event, sectionId) {
-      event.preventDefault(); // Prevent default jump behavior
+      event.preventDefault();
 
       const targetSection = document.getElementById(sectionId);
       if (targetSection) {
@@ -69,12 +74,25 @@ export default {
         this.closeNav(); // Close mobile nav after clicking
       }
     },
+    handleOutsideClick(event) {
+      if (
+          this.navActive &&
+          this.$refs.navMenu &&
+          !this.$refs.navMenu.contains(event.target) &&
+          this.$refs.burgerMenu !== event.target &&
+          !this.$refs.burgerMenu.contains(event.target)
+      ) {
+        this.closeNav();
+      }
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
+    document.addEventListener("click", this.handleOutsideClick);
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
+    document.removeEventListener("click", this.handleOutsideClick);
   },
 };
 </script>
@@ -176,6 +194,7 @@ ul li a.active {
     transform: translateX(100%);
     transition: transform 0.5s ease-in-out;
     padding-top: 5rem;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
   }
 
   ul.nav-active {
@@ -185,10 +204,26 @@ ul li a.active {
   .burger {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
   }
 
   ul li {
     margin: 1.5rem 0;
+  }
+
+  /* Close Button */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+  }
+
+  .close-btn button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: black;
   }
 }
 </style>

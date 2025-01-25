@@ -67,14 +67,27 @@ export default {
       experienceList: [
         {
           title: "Tech Manager",
-          company: "Google Developer Group, University of Southampton",
+          company: "Google Developer Group Southampton",
           location: "Southampton, UK",
           duration: "October 2024 – Present",
           points: [
-            "Organized workshops and hands-on sessions on Google Cloud and AI.",
-            "Hosted panel discussions with industry experts.",
-            "Managed a team for tech operations and event execution.",
-            "Maintained the digital infrastructure of the society.",
+            "Organized workshops on Google technologies.",
+            "Hosted talks and panels with industry experts.",
+            "Led a team to run technical operations smoothly.",
+            "Maintained the society's digital infrastructure.",
+          ],
+        },
+        {
+          title: "Head of Education",
+          company: "Artificial Intelligence Society Southampton",
+          location: "Southampton, UK",
+          duration: "July 2023 – September 2024",
+          points: [
+            "Led AI and coding workshops for students.",
+            "Coached hackathon teams, boosting their confidence.",
+            "Expanded educational offerings, increasing attendance.",
+            "Delivered presentations on AI and programming.",
+            "Engaged with industry professionals for mentorship.",
           ],
         },
         {
