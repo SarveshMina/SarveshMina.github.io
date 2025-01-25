@@ -37,6 +37,13 @@ export default {
           description: 'An endless 3D runner game built with Unity and C#. Features procedural level generation, adaptive AI difficulty, and smooth performance optimizations.',
           liveDemo: 'https://sarveshmina.github.io/games/cube_runner_3d/',
           repo: 'https://github.com/SarveshMina/Cube_Runner_3D'
+        },
+        {
+          title: 'Runway Redeclaration Tool',
+          duration: 'Oct 2023 – March 2023',
+          description: 'Developed a tool to modernize aviation safety protocols. Implemented TODA and ASDA calculations for flight safety, designed a user-friendly interface, and integrated mathematical models for accurate predictions.',
+          liveDemo: '/runway-redeclaration.html', // Link to the CheerpJ page
+          repo: 'https://github.com/bryanvullo/RunwayRedeclaration'
         }
       ]
     }
