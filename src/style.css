@@ -1,0 +1,208 @@
+/* src/style.css */
+/* src/style.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Source+Code+Pro:wght@400;700&display=swap');
+
+:root {
+    /* Light Mode Colors */
+    --background-color: #ffffff; /* White */
+    --primary-color: #000000; /* Black */
+    --secondary-color: #333333; /* Dark Gray */
+    --text-color: #000000; /* Black */
+    --accent-color: #555555; /* Medium Gray */
+    --button-bg-color: #000000; /* Black */
+    --button-text-color: #ffffff; /* White */
+    --button-hover-bg-color: #555555; /* Medium Gray */
+    --link-color: #000000; /* Black */
+    --link-hover-color: #555555; /* Medium Gray */
+}
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    scroll-behavior: smooth;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Header Styles */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: 'Source Code Pro', monospace;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--link-hover-color);
+}
+
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--link-color);
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+.nav-active {
+    transform: translateX(0%);
+}
+
+.line1.active,
+.line2.active,
+.line3.active {
+    /* Add animations for burger menu when active */
+}
+
+.dark-mode-toggle {
+    background: none;
+    border: 2px solid var(--link-color);
+    border-radius: 20px;
+    color: var(--link-color);
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 0.9rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.dark-mode-toggle:hover {
+    background-color: var(--link-hover-color);
+    color: var(--background-color);
+}
+
+/* Main Content */
+.content main {
+    padding-top: 80px; /* Height of the header */
+}
+
+/* Section Styles */
+section {
+    padding: 2rem 1rem;  /* Reduced padding */
+    min-height: auto;    /* Prevents excessive spacing */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Heading Styles */
+section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem; /* Less spacing */
+    font-size: 2rem;     /* Slightly smaller for balance */
+    position: relative;
+    display: inline-block;
+    font-family: 'Source Code Pro', monospace;
+    border-bottom: none !important;
+}
+
+section h2::after {
+    content: none;
+    width: 50px;
+    height: 4px;
+    background-color: var(--accent-color);
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+}
+
+
+/* Link Styles */
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--link-hover-color);
+}
+
+/* Button Styles */
+button {
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    padding: 0.5rem 1rem; /* Reduced padding for compact buttons */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+button:hover {
+    background-color: var(--button-hover-bg-color);
+    color: var(--button-text-color);
+}
+
+footer {
+    padding: 1.5rem; /* Reduced padding */
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    section {
+        padding: 1.5rem; /* Reduced padding for mobile */
+    }
+
+    section h2 {
+        font-size: 1.8rem; /* Adjusted for smaller screens */
+    }
+
+    button {
+        padding: 0.4rem 0.8rem; /* More compact buttons */
+    }
+}
+
+/* Smooth transitions for background changes */
+body, header, footer, section, .skill-category, .project-item, .education-item {
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
