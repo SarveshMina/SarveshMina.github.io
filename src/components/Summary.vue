@@ -1,6 +1,6 @@
 <!-- src/components/LandingPage.vue -->
 <template>
-  <section id="summary" class="landing-section" data-aos="fade-up">
+  <section id="summary" class="landing-section">
     <div class="container">
       <div class="image-container">
         <img
@@ -16,10 +16,17 @@
       <div class="text-container">
         <h2>Welcome to My Portfolio</h2>
         <p>
-          Ambitious and dedicated Computer Science student with a strong foundation in Cloud Technologies, Game Development, and Frontend Development.
-          Passionate about leveraging technology to solve real-world challenges and advance innovation in software development and AI.
+          Ambitious and dedicated Computer Science student with a strong foundation in Cloud Technologies,
+          Game Development, and Frontend Development. Passionate about leveraging technology to solve real-world
+          challenges and advance innovation in software development and AI.
         </p>
       </div>
+    </div>
+
+    <!-- Scroll Down Indicator (Shown only if showArrow is true) -->
+    <div class="scroll-down" v-if="showArrow" @click="scrollDown">
+      <font-awesome-icon icon="chevron-down" class="arrow-icon" />
+      <span class="scroll-text">Scroll Down</span>
     </div>
 
     <!-- Modal for Image Preview -->
@@ -42,35 +49,47 @@
         >
           &times;
         </span>
-        <img src="/imgs/profile.jpg" alt="Sarvesh Mina" class="modal-image" id="modal-title" />
+        <img
+            src="/imgs/profile.jpg"
+            alt="Sarvesh Mina"
+            class="modal-image"
+            id="modal-title"
+        />
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+// If you're using Font Awesome icons, ensure it's already set up in main.js
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
   name: 'LandingPage',
   data() {
     return {
-      showModal: false, // Tracks the visibility of the modal
-      lastFocusedElement: null, // To store the element that was focused before the modal opened
+      showModal: false,
+      lastFocusedElement: null,
+      showArrow: true, // Whether to show the "Scroll Down" indicator
     };
   },
   methods: {
     openModal() {
       this.showModal = true;
-      document.body.style.overflow = 'hidden'; // Prevent background scrolling
-      this.lastFocusedElement = document.activeElement; // Store the last focused element
+      document.body.style.overflow = 'hidden';
+      this.lastFocusedElement = document.activeElement;
       this.$nextTick(() => {
-        this.$refs.closeButton.focus(); // Shift focus to the close button
+        this.$refs.closeButton.focus();
       });
     },
     closeModal() {
       this.showModal = false;
-      document.body.style.overflow = ''; // Restore scrolling
+      document.body.style.overflow = '';
       if (this.lastFocusedElement) {
-        this.lastFocusedElement.focus(); // Return focus to the last focused element
+        this.lastFocusedElement.focus();
       }
     },
     handleKeyDown(event) {
@@ -78,13 +97,78 @@ export default {
         this.closeModal();
       }
     },
+
+    // Smoothly scroll to next section (e.g., #education-experience)
+    scrollDown() {
+      const nextSection = document.getElementById('education-experience');
+      if (nextSection) {
+        nextSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    },
+
+    // Hide arrow once user scrolls beyond a threshold (e.g., 100px)
+    handleScroll() {
+      this.showArrow = window.scrollY < 100;
+    },
   },
   mounted() {
     window.addEventListener('keydown', this.handleKeyDown);
+    window.addEventListener('scroll', this.handleScroll);
+
+    // Animate profile image
+    gsap.from(".profile-image", {
+      scrollTrigger: {
+        trigger: ".landing-section",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      scale: 0.8,
+      duration: 1,
+      ease: "power3.out",
+    });
+
+    // Animate text container h2
+    gsap.from(".text-container h2", {
+      scrollTrigger: {
+        trigger: ".text-container h2",
+        start: "top 90%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      delay: 0.2,
+      ease: "power3.out",
+    });
+
+    // Animate text container paragraph
+    gsap.from(".text-container p", {
+      scrollTrigger: {
+        trigger: ".text-container p",
+        start: "top 90%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      delay: 0.4,
+      ease: "power3.out",
+    });
+
+    // Subtle bounce for scroll-down arrow
+    gsap.to(".scroll-down", {
+      y: 10,
+      repeat: -1,
+      yoyo: true,
+      ease: "power1.inOut",
+      duration: 0.8,
+    });
   },
   beforeUnmount() {
     window.removeEventListener('keydown', this.handleKeyDown);
-    document.body.style.overflow = ''; // Ensure scrolling is enabled when component unmounts
+    window.removeEventListener('scroll', this.handleScroll);
+    document.body.style.overflow = '';
   },
 };
 </script>
@@ -154,6 +238,31 @@ export default {
   font-family: 'Source Code Pro', monospace;
 }
 
+/* Scroll-Down Arrow + Text */
+.scroll-down {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  color: var(--text-color);
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.scroll-down .arrow-icon {
+  font-size: 2rem; /* Adjust arrow size */
+}
+
+.scroll-text {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  font-family: 'Source Code Pro', monospace;
+}
+
 /* Modal Styles */
 .modal-overlay {
   position: fixed;
@@ -165,14 +274,14 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10000; /* Ensures the modal is on top */
+  z-index: 10000;
   animation: fadeIn 0.3s;
 }
 
 .modal-content {
   position: relative;
-  width: 500px; /* Fixed smaller width */
-  height: 500px; /* Fixed smaller height */
+  width: 500px;
+  height: 500px;
   max-width: 90%;
   max-height: 90%;
 }
@@ -192,10 +301,10 @@ export default {
   right: -10px;
   background-color: var(--secondary-color);
   color: var(--text-color);
-  width: 25px; /* Reduced size */
-  height: 25px; /* Reduced size */
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
-  font-size: 1rem; /* Reduced font size */
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,10 +1,10 @@
 <!-- src/components/Contact.vue -->
 <template>
-  <section id="contact" class="contact-section" data-aos="fade-up">
+  <section id="contact" class="contact-section">
     <h2>Contact</h2>
     <div class="contact-container">
       <!-- Contact Info -->
-      <div class="contact-info" data-aos="fade-right">
+      <div class="contact-info">
         <p><strong>Email:</strong>
           <a href="mailto:minasarvesh@gmail.com">minasarvesh@gmail.com</a>
         </p>
@@ -20,7 +20,7 @@
       </div>
 
       <!-- Contact Form -->
-      <form @submit.prevent="handleSubmit" class="contact-form" data-aos="fade-left">
+      <form @submit.prevent="handleSubmit" class="contact-form">
         <input
             type="text"
             v-model="name"
@@ -57,7 +57,11 @@
 </template>
 
 <script>
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import emailjs from 'emailjs-com';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default {
   name: 'Contact',
@@ -112,6 +116,35 @@ export default {
         this.isSubmitting = false;
       }
     }
+  },
+  mounted() {
+    // Animate contact info
+    gsap.from(".contact-info p", {
+      scrollTrigger: {
+        trigger: ".contact-info",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      x: -50,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power3.out",
+    });
+
+    // Animate contact form
+    gsap.from(".contact-form input, .contact-form textarea, .contact-form button", {
+      scrollTrigger: {
+        trigger: ".contact-form",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power3.out",
+    });
   }
 };
 </script>

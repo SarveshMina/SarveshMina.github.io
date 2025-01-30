@@ -3,10 +3,6 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './style.css' // Import global styles
 
-// Import AOS and its styles
-import AOS from 'aos'
-import 'aos/dist/aos.css'
-
 // Import Font Awesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -32,15 +28,4 @@ const app = createApp(App)
 // Register FontAwesomeIcon component globally
 app.component('font-awesome-icon', FontAwesomeIcon)
 
-// Initialize AOS
-app.mixin({
-    mounted() {
-        AOS.init({
-            duration: 1000, // Animation duration in milliseconds
-            once: true, // Whether animation should happen only once
-        })
-    }
-})
-
-// Mount the app
 app.mount('#app')

@@ -1,6 +1,6 @@
-//EducationExperience.vue
+<!-- src/components/EducationExperience.vue -->
 <template>
-  <section id="education-experience" class="edu-exp-section" data-aos="fade-up">
+  <section id="education-experience" class="edu-exp-section">
     <h2 class="section-heading">Education & Experience</h2>
 
     <!-- Education Section -->
@@ -14,7 +14,6 @@
             class="education-card"
             v-for="edu in educationList"
             :key="edu.degree"
-            data-aos="fade-in"
         >
           <div class="edu-header">
             <h3>{{ edu.degree }}</h3>
@@ -39,13 +38,12 @@
             class="experience-card"
             v-for="exp in experienceList"
             :key="exp.title"
-            data-aos="fade-up"
         >
           <div class="card-header">
             <h3>{{ exp.title }}</h3>
             <span class="date">{{ exp.duration }}</span>
           </div>
-          <p class="company"><strong>{{ exp.company }}</strong> | {{ exp.location }}</p> <!-- Now Bold & Secondary Color -->
+          <p class="company"><strong>{{ exp.company }}</strong> | {{ exp.location }}</p>
           <div class="experience-details">
             <p v-for="(point, index) in exp.points" :key="index">
               {{ point }}
@@ -58,6 +56,11 @@
 </template>
 
 <script>
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
   name: "EducationExperience",
   data() {
@@ -126,6 +129,34 @@ export default {
       ],
     };
   },
+  mounted() {
+    // Animate education cards
+    gsap.from(".education-card", {
+      scrollTrigger: {
+        trigger: ".edu-container",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      // x: -50,  <-- remove or comment out
+      duration: 1,
+      stagger: 0.3,
+      ease: "power3.out",
+    });
+
+    gsap.from(".experience-card", {
+      scrollTrigger: {
+        trigger: ".exp-container",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      // x: 50,   <-- remove or comment out
+      duration: 1,
+      stagger: 0.3,
+      ease: "power3.out",
+    });
+  }
 };
 </script>
 
@@ -219,7 +250,6 @@ export default {
   color: var(--primary-color);
 }
 
-/* Company Name Fix */
 .company {
   font-size: 1rem;
   font-weight: 600; /* Bold */

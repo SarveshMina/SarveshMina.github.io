@@ -15,6 +15,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "aos": "^2.3.4",
     "emailjs-com": "^3.2.0",
+    "gsap": "^3.12.7",
     "three": "^0.172.0",
     "tsparticles": "^3.8.0",
     "vanta": "^0.5.24",

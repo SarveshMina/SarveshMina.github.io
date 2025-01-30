@@ -1,4 +1,4 @@
-//BackToTop.vue
+<!-- src/components/BackToTop.vue -->
 <template>
   <transition name="fade">
     <button
@@ -13,6 +13,11 @@
 </template>
 
 <script>
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
   name: "BackToTop",
   data() {
@@ -46,6 +51,19 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
+
+    // GSAP Animation for the Back to Top Button
+    gsap.from(".back-to-top", {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".back-to-top",
+        start: "top bottom", // When the button enters the viewport
+        toggleActions: "play none none reverse",
+      }
+    });
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
@@ -54,7 +72,7 @@ export default {
 </script>
 
 <style scoped>
-/* Smooth fade-in effect */
+/* Fade transition */
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s ease;
 }

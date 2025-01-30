@@ -1,4 +1,4 @@
-// Header.vue
+<!-- src/components/Header.vue -->
 <template>
   <header>
     <nav class="navbar">
@@ -61,7 +61,6 @@
             {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
           </button>
         </li>
-
         <li>
           <a :href="cvUrl" target="_blank" class="cv-button">📄 View My CV</a>
         </li>
@@ -83,6 +82,8 @@
 </template>
 
 <script>
+import { gsap } from "gsap";
+
 export default {
   name: "Header",
   data() {
@@ -90,7 +91,7 @@ export default {
       navActive: false,
       cvUrl: `/SarveshMina.pdf`,
       activeSection: "",
-      isDarkMode: false, // <-- Tracks current mode
+      isDarkMode: false, // Tracks current mode
     };
   },
   methods: {
@@ -145,8 +146,10 @@ export default {
       // Add or remove the .dark-mode class on <body>
       if (this.isDarkMode) {
         document.body.classList.add("dark-mode");
+        localStorage.setItem("darkMode", "true"); // Persist preference
       } else {
         document.body.classList.remove("dark-mode");
+        localStorage.setItem("darkMode", "false"); // Persist preference
       }
     },
   },
@@ -154,12 +157,38 @@ export default {
     window.addEventListener("scroll", this.handleScroll);
     document.addEventListener("click", this.handleOutsideClick);
 
-    // (Optional) If you want to remember user preference:
-    // let storedMode = localStorage.getItem('darkMode');
-    // if (storedMode === 'true') {
-    //   this.isDarkMode = true;
-    //   document.body.classList.add("dark-mode");
-    // }
+    // Check for stored dark mode preference
+    const storedMode = localStorage.getItem('darkMode');
+    if (storedMode === 'true') {
+      this.isDarkMode = true;
+      document.body.classList.add("dark-mode");
+    }
+
+    // GSAP Animations for Header without ScrollTrigger
+    // Animate navigation links
+    gsap.from("header .navbar ul li", {
+      opacity: 0,
+      y: -20,
+      duration: 0.5,
+      stagger: 0.1,
+      ease: "power3.out",
+    });
+
+    // Animate logo
+    gsap.from("header .logo h1", {
+      opacity: 0,
+      x: -50,
+      duration: 1,
+      ease: "power3.out",
+    });
+
+    // Animate burger menu
+    gsap.from("header .burger", {
+      opacity: 0,
+      x: 50,
+      duration: 1,
+      ease: "power3.out",
+    });
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
@@ -301,5 +330,28 @@ ul li a.active {
     cursor: pointer;
     color: var(--text-color);
   }
+}
+
+/* Toggle Button for Dark Mode */
+.dark-mode-toggle {
+  background: none;
+  border: 2px solid var(--link-color);
+  border-radius: 20px;
+  color: var(--link-color);
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 0.9rem;
+  font-family: 'Source Code Pro', monospace;
+}
+
+.dark-mode-toggle:hover {
+  background-color: var(--link-hover-color);
+  color: var(--background-color);
+}
+
+/* Smooth transitions for background changes */
+body, header, footer, section, .skill-category, .project-item, .education-item {
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 </style>

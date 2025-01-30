@@ -1,13 +1,12 @@
-//Projects.vue
+<!-- src/components/Projects.vue -->
 <template>
-  <section id="projects" class="projects-section" data-aos="fade-up">
+  <section id="projects" class="projects-section">
     <h2>Projects</h2>
     <div class="projects-container">
       <div
           class="project-card"
           v-for="project in projectsList"
           :key="project.title"
-          data-aos="fade-up"
       >
         <div class="card-header">
           <h3>{{ project.title }}</h3>
@@ -33,6 +32,11 @@
 </template>
 
 <script>
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
   name: 'Projects',
   data() {
@@ -66,12 +70,27 @@ export default {
           title: 'TetrECS – A Tetris-Based Game',
           duration: 'Jan 2025 – Present',
           description: 'A fast-paced Java-based Tetris game with improved mechanics. Originally a university coursework project, now enhanced with new features and multiplayer support under development.',
-          liveDemo: 'https://sarveshmina.github.io/TetrECS/',
+          // liveDemo: 'https://sarveshmina.github.io/TetrECS/',
           repo: 'https://github.com/SarveshMina/TetrECS',
           buttonText: 'Play Now'
         }
       ]
     }
+  },
+  mounted() {
+    // Animate project cards
+    gsap.from(".project-card", {
+      scrollTrigger: {
+        trigger: ".projects-section",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power3.out",
+    });
   }
 }
 </script>

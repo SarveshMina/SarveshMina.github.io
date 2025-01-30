@@ -30,8 +30,55 @@
 </template>
 
 <script>
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
-  name: 'Footer'
+  name: 'Footer',
+  mounted() {
+    // Animate footer-left
+    gsap.from(".footer-left", {
+      scrollTrigger: {
+        trigger: "footer",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      ease: "power3.out",
+    });
+
+    // Animate footer-right
+    gsap.from(".footer-right", {
+      scrollTrigger: {
+        trigger: "footer",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      delay: 0.3,
+      ease: "power3.out",
+    });
+
+    // Animate social icons
+    gsap.from(".social-icons a", {
+      scrollTrigger: {
+        trigger: ".social-icons",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      scale: 0.8,
+      duration: 0.5,
+      stagger: 0.1,
+      ease: "power3.out",
+    });
+  }
 }
 </script>
 

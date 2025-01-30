@@ -1,14 +1,12 @@
-// Skills.vue
-
+<!-- src/components/Skills.vue -->
 <template>
-  <section id="skills" class="skills-section" data-aos="fade-up">
+  <section id="skills" class="skills-section">
     <h2>Skills</h2>
     <div class="skills-container">
       <div
           class="skill-category"
           v-for="category in skillsList"
           :key="category.name"
-          data-aos="zoom-in"
       >
         <div class="skill-header">
           <h3>{{ category.name }}</h3>
@@ -43,6 +41,11 @@
 </template>
 
 <script>
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
   name: 'Skills',
   data() {
@@ -96,6 +99,35 @@ export default {
     hideTooltip() {
       this.tooltip.visible = false;
     }
+  },
+  mounted() {
+    // Animate skill categories
+    gsap.from(".skill-category", {
+      scrollTrigger: {
+        trigger: ".skills-section",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.3,
+      ease: "power3.out",
+    });
+
+    // Animate skill items
+    gsap.from(".skill-item", {
+      scrollTrigger: {
+        trigger: ".skill-item",
+        start: "top 90%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      scale: 0.8,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "power3.out",
+    });
   }
 };
 </script>
