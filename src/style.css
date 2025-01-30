@@ -1,20 +1,36 @@
 /* src/style.css */
-/* src/style.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Source+Code+Pro:wght@400;700&display=swap');
 
 :root {
     /* Light Mode Colors */
-    --background-color: #ffffff; /* White */
-    --primary-color: #000000; /* Black */
-    --secondary-color: #333333; /* Dark Gray */
-    --text-color: #000000; /* Black */
-    --accent-color: #555555; /* Medium Gray */
-    --button-bg-color: #000000; /* Black */
-    --button-text-color: #ffffff; /* White */
-    --button-hover-bg-color: #555555; /* Medium Gray */
-    --link-color: #000000; /* Black */
-    --link-hover-color: #555555; /* Medium Gray */
+    --background-color: #ffffff;
+    --primary-color: #000000;
+    --secondary-color: #ffffff; /* Ensure header is white */
+    --text-color: #000000;
+    --accent-color: #555555;
+    --button-bg-color: #000000;
+    --button-text-color: #ffffff;
+    --button-hover-bg-color: #555555;
+    --link-color: #000000;
+    --link-hover-color: #555555;
+    --card-bg-color: rgba(0, 0, 0, 0.05);
+}
+
+
+/* Dark mode overrides */
+body.dark-mode {
+    --background-color: #000000;    /* Black background */
+    --primary-color: #ffffff;       /* White major heading text */
+    --secondary-color: #111111;     /* Darker area for header/nav */
+    --text-color: #ffffff;          /* White base text */
+    --accent-color: #888888;        /* Medium-light gray accent */
+    --button-bg-color: #ffffff;     /* White button bg in dark mode */
+    --button-text-color: #000000;   /* Black button text in dark mode */
+    --button-hover-bg-color: #aaaaaa; /* Lighter gray on hover */
+    --link-color: #ffffff;          /* White links */
+    --link-hover-color: #dddddd;    /* Slightly lighter link hover */
+    --card-bg-color: #333333;       /* Lighter gray for card backgrounds in dark mode */
 }
 
 /* Global Styles */
@@ -24,7 +40,7 @@
 
 body {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Code Pro', monospace;
     background-color: var(--background-color);
     color: var(--text-color);
     scroll-behavior: smooth;
@@ -36,11 +52,12 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-color); /* This should now be white */
     color: var(--text-color);
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.5s ease, color 0.5s ease;
+    font-family: 'Source Code Pro', monospace;
 }
 
 header nav {
@@ -48,6 +65,19 @@ header nav {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
+}
+
+/* Dark Mode Overrides for Contact Form */
+body.dark-mode .contact-form input,
+body.dark-mode .contact-form textarea {
+    background-color: #222;          /* Darker background for form fields */
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Higher-contrast border color */
+    color: #fff;                     /* White text */
+}
+
+body.dark-mode .contact-form input::placeholder,
+body.dark-mode .contact-form textarea::placeholder {
+    color: #bbb;                     /* Lighter placeholder text in dark mode */
 }
 
 .logo h1 {
@@ -68,7 +98,7 @@ a {
     color: var(--link-color);
     text-decoration: none;
     font-weight: 500;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Code Pro', monospace;
     transition: color 0.3s;
 }
 
@@ -93,12 +123,7 @@ a:hover {
     transform: translateX(0%);
 }
 
-.line1.active,
-.line2.active,
-.line3.active {
-    /* Add animations for burger menu when active */
-}
-
+/* Toggle Button for Dark Mode */
 .dark-mode-toggle {
     background: none;
     border: 2px solid var(--link-color);
@@ -108,7 +133,7 @@ a:hover {
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
     font-size: 0.9rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Code Pro', monospace;
 }
 
 .dark-mode-toggle:hover {
@@ -174,7 +199,7 @@ button {
     cursor: pointer;
     transition: background-color 0.3s;
     font-size: 1rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Code Pro', monospace;
 }
 
 button:hover {
@@ -185,6 +210,11 @@ button:hover {
 footer {
     padding: 1.5rem; /* Reduced padding */
     text-align: center;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode footer {
+    background-color: var(--secondary-color);
 }
 
 /* Responsive Design */

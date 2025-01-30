@@ -1,17 +1,31 @@
-<!-- src/components/Projects.vue -->
+//Projects.vue
 <template>
   <section id="projects" class="projects-section" data-aos="fade-up">
     <h2>Projects</h2>
     <div class="projects-container">
-      <div class="project-card" v-for="project in projectsList" :key="project.title" data-aos="fade-up">
+      <div
+          class="project-card"
+          v-for="project in projectsList"
+          :key="project.title"
+          data-aos="fade-up"
+      >
         <div class="card-header">
           <h3>{{ project.title }}</h3>
           <span class="date">{{ project.duration }}</span>
         </div>
         <p class="project-description">{{ project.description }}</p>
         <div class="project-links">
-          <a v-if="project.liveDemo" :href="project.liveDemo" target="_blank" class="project-btn">{{ project.buttonText }}</a>
-          <a :href="project.repo" target="_blank" class="project-btn">GitHub Repo</a>
+          <a
+              v-if="project.liveDemo"
+              :href="project.liveDemo"
+              target="_blank"
+              class="project-btn"
+          >
+            {{ project.buttonText }}
+          </a>
+          <a :href="project.repo" target="_blank" class="project-btn">
+            GitHub Repo
+          </a>
         </div>
       </div>
     </div>
@@ -47,6 +61,14 @@ export default {
           liveDemo: '/downloads/RunwayRedeclaration.jar',
           repo: 'https://github.com/bryanvullo/RunwayRedeclaration',
           buttonText: 'Download JAR'
+        },
+        {
+          title: 'TetrECS – A Tetris-Based Game',
+          duration: 'Jan 2025 – Present',
+          description: 'A fast-paced Java-based Tetris game with improved mechanics. Originally a university coursework project, now enhanced with new features and multiplayer support under development.',
+          liveDemo: 'https://sarveshmina.github.io/TetrECS/',
+          repo: 'https://github.com/SarveshMina/TetrECS',
+          buttonText: 'Play Now'
         }
       ]
     }
@@ -79,9 +101,9 @@ export default {
   margin: 0 auto;
 }
 
-/* Project Card */
+/* Updated to use var(--card-bg-color) */
 .project-card {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--card-bg-color);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 1.2rem;
@@ -115,7 +137,7 @@ export default {
 .project-card .date {
   font-size: 0.85rem;
   color: var(--accent-color);
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Code Pro', monospace;
 }
 
 /* Description */
@@ -123,7 +145,7 @@ export default {
   margin: 0.5rem 0;
   font-size: 1rem;
   line-height: 1.5;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Code Pro', monospace;
 }
 
 /* Project Links */
@@ -143,6 +165,7 @@ export default {
   border-radius: 5px;
   font-size: 1rem;
   transition: background 0.3s ease, transform 0.2s ease;
+  font-family: 'Source Code Pro', monospace;
 }
 
 .project-btn:hover {

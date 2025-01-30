@@ -1,3 +1,4 @@
+// Header.vue
 <template>
   <header>
     <nav class="navbar">
@@ -9,17 +10,70 @@
         <li class="close-btn" v-if="navActive">
           <button @click="closeNav">✖</button>
         </li>
-        <li><a href="#summary" @click="smoothScroll($event, 'summary')" :class="{ active: activeSection === 'summary' }">Summary</a></li>
-        <li><a href="#education-experience" @click="smoothScroll($event, 'education-experience')" :class="{ active: activeSection === 'education-experience' }">Education & Experience</a></li>
-        <li><a href="#skills" @click="smoothScroll($event, 'skills')" :class="{ active: activeSection === 'skills' }">Skills</a></li>
-        <li><a href="#projects" @click="smoothScroll($event, 'projects')" :class="{ active: activeSection === 'projects' }">Projects</a></li>
-        <li><a href="#contact" @click="smoothScroll($event, 'contact')" :class="{ active: activeSection === 'contact' }">Contact</a></li>
+        <li>
+          <a
+              href="#summary"
+              @click="smoothScroll($event, 'summary')"
+              :class="{ active: activeSection === 'summary' }"
+          >
+            Summary
+          </a>
+        </li>
+        <li>
+          <a
+              href="#skills"
+              @click="smoothScroll($event, 'skills')"
+              :class="{ active: activeSection === 'skills' }"
+          >
+            Skills
+          </a>
+        </li>
+        <li>
+          <a
+              href="#education-experience"
+              @click="smoothScroll($event, 'education-experience')"
+              :class="{ active: activeSection === 'education-experience' }"
+          >
+            Education & Experience
+          </a>
+        </li>
+        <li>
+          <a
+              href="#projects"
+              @click="smoothScroll($event, 'projects')"
+              :class="{ active: activeSection === 'projects' }"
+          >
+            Projects
+          </a>
+        </li>
+        <li>
+          <a
+              href="#contact"
+              @click="smoothScroll($event, 'contact')"
+              :class="{ active: activeSection === 'contact' }"
+          >
+            Contact
+          </a>
+        </li>
+        <!-- Dark Mode Toggle Button -->
+        <li>
+          <button class="dark-mode-toggle" @click="toggleDarkMode">
+            {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
+          </button>
+        </li>
+
         <li>
           <a :href="cvUrl" target="_blank" class="cv-button">📄 View My CV</a>
         </li>
       </ul>
       <!-- Burger Menu for Mobile -->
-      <div class="burger" @click="toggleNav" ref="burgerMenu" :aria-expanded="navActive" aria-label="Toggle navigation">
+      <div
+          class="burger"
+          @click="toggleNav"
+          ref="burgerMenu"
+          :aria-expanded="navActive"
+          aria-label="Toggle navigation"
+      >
         <div :class="{ 'line1': navActive }"></div>
         <div :class="{ 'line2': navActive }"></div>
         <div :class="{ 'line3': navActive }"></div>
@@ -34,13 +88,14 @@ export default {
   data() {
     return {
       navActive: false,
-      cvUrl: `//SarveshMina.pdf`,
+      cvUrl: `/SarveshMina.pdf`,
       activeSection: "",
+      isDarkMode: false, // <-- Tracks current mode
     };
   },
   methods: {
     toggleNav(event) {
-      event.stopPropagation(); // Prevent the outside click from triggering immediately
+      event.stopPropagation(); // Prevent outside click from closing immediately
       this.navActive = !this.navActive;
       document.body.classList.toggle("nav-open", this.navActive);
     },
@@ -63,14 +118,12 @@ export default {
     },
     smoothScroll(event, sectionId) {
       event.preventDefault();
-
       const targetSection = document.getElementById(sectionId);
       if (targetSection) {
         targetSection.scrollIntoView({
           behavior: "smooth",
           block: "start",
         });
-
         this.closeNav(); // Close mobile nav after clicking
       }
     },
@@ -85,10 +138,28 @@ export default {
         this.closeNav();
       }
     },
+    toggleDarkMode() {
+      // Flip isDarkMode
+      this.isDarkMode = !this.isDarkMode;
+
+      // Add or remove the .dark-mode class on <body>
+      if (this.isDarkMode) {
+        document.body.classList.add("dark-mode");
+      } else {
+        document.body.classList.remove("dark-mode");
+      }
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
     document.addEventListener("click", this.handleOutsideClick);
+
+    // (Optional) If you want to remember user preference:
+    // let storedMode = localStorage.getItem('darkMode');
+    // if (storedMode === 'true') {
+    //   this.isDarkMode = true;
+    //   document.body.classList.add("dark-mode");
+    // }
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
@@ -115,9 +186,11 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #ffffff;
+  background-color: var(--secondary-color);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  color: var(--text-color);
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /* Navbar */
@@ -127,6 +200,7 @@ header {
   align-items: center;
   padding: 1rem 2rem;
   max-width: 1200px;
+  font-family: 'Source Code Pro', monospace;
   margin: 0 auto;
 }
 
@@ -140,7 +214,7 @@ header {
 
 .logo a {
   text-decoration: none;
-  color: #000;
+  color: var(--text-color);
 }
 
 /* Navigation Links */
@@ -151,7 +225,7 @@ ul {
 }
 
 ul li a {
-  color: #333;
+  color: var(--link-color);
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
@@ -163,21 +237,23 @@ ul li a {
 /* Active Section Highlight */
 ul li a.active {
   font-weight: bold;
-  color: black;
-  border-bottom: 2px solid black;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
 }
 
 /* View My CV Button */
 .cv-button {
-  background-color: black;
-  color: white;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
   padding: 0.5rem 1rem;
   border-radius: 4px;
   transition: background-color 0.3s ease;
+  font-family: "Source Code Pro", monospace;
+  text-decoration: none;
 }
 
 .cv-button:hover {
-  background-color: #555;
+  background-color: var(--button-hover-bg-color);
 }
 
 /* Mobile Responsive */
@@ -187,7 +263,7 @@ ul li a.active {
     right: 0;
     top: 0;
     height: 100vh;
-    background-color: white;
+    background-color: var(--background-color);
     flex-direction: column;
     align-items: center;
     width: 60%;
@@ -223,7 +299,7 @@ ul li a.active {
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: black;
+    color: var(--text-color);
   }
 }
 </style>

@@ -3,21 +3,54 @@
   <section id="contact" class="contact-section" data-aos="fade-up">
     <h2>Contact</h2>
     <div class="contact-container">
+      <!-- Contact Info -->
       <div class="contact-info" data-aos="fade-right">
-        <p><strong>Email:</strong> <a href="mailto:minasarvesh@gmail.com">minasarvesh@gmail.com</a></p>
-        <p><strong>GitHub:</strong> <a href="https://github.com/SarveshMina" target="_blank">github.com/SarveshMina</a></p>
-        <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/sarvesh-mina/" target="_blank">linkedin.com/in/sarvesh-mina</a></p>
-        <p><strong>Portfolio:</strong> <a href="https://sarveshmina.github.io/" target="_blank">sarveshmina.github.io</a></p>
+        <p><strong>Email:</strong>
+          <a href="mailto:minasarvesh@gmail.com">minasarvesh@gmail.com</a>
+        </p>
+        <p><strong>GitHub:</strong>
+          <a href="https://github.com/SarveshMina" target="_blank">github.com/SarveshMina</a>
+        </p>
+        <p><strong>LinkedIn:</strong>
+          <a href="https://linkedin.com/in/sarvesh-mina/" target="_blank">linkedin.com/in/sarvesh-mina</a>
+        </p>
+        <p><strong>Portfolio:</strong>
+          <a href="https://sarveshmina.github.io/" target="_blank">sarveshmina.github.io</a>
+        </p>
       </div>
+
+      <!-- Contact Form -->
       <form @submit.prevent="handleSubmit" class="contact-form" data-aos="fade-left">
-        <input type="text" v-model="name" placeholder="Your Name" required />
-        <input type="email" v-model="email" placeholder="Your Email" required />
-        <textarea v-model="message" placeholder="Your Message" required></textarea>
+        <input
+            type="text"
+            v-model="name"
+            placeholder="Your Name"
+            required
+        />
+        <input
+            type="email"
+            v-model="email"
+            placeholder="Your Email"
+            required
+        />
+        <textarea
+            v-model="message"
+            placeholder="Your Message"
+            required
+        ></textarea>
+
+        <!-- Submit Button -->
         <button type="submit" :disabled="isSubmitting">
           {{ isSubmitting ? 'Sending...' : 'Send Message' }}
         </button>
-        <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
-        <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+        <!-- Success / Error Feedback -->
+        <p v-if="successMessage" class="success-message">
+          {{ successMessage }}
+        </p>
+        <p v-if="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </p>
       </form>
     </div>
   </section>
@@ -40,32 +73,42 @@ export default {
   },
   methods: {
     async handleSubmit() {
+      // Clear old messages
       this.isSubmitting = true;
       this.successMessage = '';
       this.errorMessage = '';
 
+      // The params that EmailJS uses in your template
       const templateParams = {
         name: this.name,
         email: this.email,
-        message: this.message
+        message: this.message,
+        // OPTIONAL: If you want to pass your own receiving email:
+        // to_email: 'minasarvesh@gmail.com',
       };
 
       try {
+        // Make sure you have these EXACT strings in your EmailJS account:
         await emailjs.send(
-            "service_3qhnot8",  // Replace with your EmailJS Service ID
-            "template_13qgfs8", // Replace with your EmailJS Template ID
+            'service_g9ab3u3',   // Replace with your EmailJS Service ID
+            'template_13qgfs8', // Replace with your EmailJS Template ID
             templateParams,
-            "dg2uWBU9TaygUdL1d"      // Replace with your EmailJS User ID
+            'dg2uWBU9TaygUdL1d' // Replace with your EmailJS Public Key (User ID)
         );
 
+        // Show success feedback
         this.successMessage = 'Your message has been sent successfully!';
+
+        // Clear form fields
         this.name = '';
         this.email = '';
         this.message = '';
       } catch (error) {
+        // Show error feedback
         this.errorMessage = 'There was an error sending your message. Please try again.';
-        console.error(error);
+        console.error('EmailJS Error:', error);
       } finally {
+        // Re-enable the submit button
         this.isSubmitting = false;
       }
     }
@@ -99,6 +142,7 @@ export default {
   flex-wrap: wrap;
 }
 
+/* Contact Info */
 .contact-info {
   flex: 1;
   min-width: 250px;
@@ -108,7 +152,7 @@ export default {
 .contact-info p {
   font-size: 1.1rem;
   margin: 0.5rem 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Code Pro', monospace;
 }
 
 .contact-info a {
@@ -121,6 +165,7 @@ export default {
   color: var(--link-hover-color);
 }
 
+/* Contact Form */
 .contact-form {
   flex: 1;
   min-width: 300px;
@@ -137,7 +182,7 @@ export default {
   font-size: 1rem;
   background-color: var(--background-color);
   color: var(--text-color);
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Code Pro', monospace;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -151,6 +196,7 @@ export default {
   height: 150px;
 }
 
+/* Submit Button */
 .contact-form button {
   align-self: flex-start;
   background-color: var(--button-bg-color);
@@ -161,7 +207,7 @@ export default {
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Code Pro', monospace;
 }
 
 .contact-form button:disabled {
@@ -174,11 +220,12 @@ export default {
   color: var(--button-text-color);
 }
 
+/* Feedback Messages */
 .success-message {
   color: var(--accent-color);
   font-weight: bold;
   margin-top: 1rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Code Pro', monospace;
 }
 
 .error-message {

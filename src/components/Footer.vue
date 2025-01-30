@@ -4,7 +4,7 @@
     <div class="footer-container">
       <div class="footer-left">
         <h2 class="footer-title">Sarvesh Mina</h2>
-        <p>Crafting software solutions with passion.</p>
+        <p>To Be Software Engineer</p>
       </div>
 
       <div class="footer-right">
@@ -79,7 +79,7 @@ footer {
 .footer-right h3 {
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Code Pro', monospace;
 }
 
 /* Social Icons */

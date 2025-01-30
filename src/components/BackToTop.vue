@@ -1,3 +1,4 @@
+//BackToTop.vue
 <template>
   <transition name="fade">
     <button

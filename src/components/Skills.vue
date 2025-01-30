@@ -1,8 +1,15 @@
+// Skills.vue
+
 <template>
   <section id="skills" class="skills-section" data-aos="fade-up">
     <h2>Skills</h2>
     <div class="skills-container">
-      <div class="skill-category" v-for="category in skillsList" :key="category.name" data-aos="zoom-in">
+      <div
+          class="skill-category"
+          v-for="category in skillsList"
+          :key="category.name"
+          data-aos="zoom-in"
+      >
         <div class="skill-header">
           <h3>{{ category.name }}</h3>
         </div>
@@ -25,7 +32,11 @@
     </div>
 
     <!-- Tooltip for Hover Effects -->
-    <div v-if="tooltip.visible" class="tooltip" :style="{ top: tooltip.y + 'px', left: tooltip.x + 'px' }">
+    <div
+        v-if="tooltip.visible"
+        class="tooltip"
+        :style="{ top: tooltip.y + 'px', left: tooltip.x + 'px' }"
+    >
       {{ tooltip.text }}
     </div>
   </section>
@@ -89,28 +100,27 @@ export default {
 };
 </script>
 
-
 <style scoped>
-/* Section Styling */
 .skills-section {
   padding: 4rem 2rem;
   background-color: var(--background-color);
   color: var(--text-color);
   text-align: center;
   transition: background-color 0.5s ease, color 0.5s ease;
+  font-family: 'Source Code Pro', monospace;
 }
 
-/* Skills Container */
 .skills-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
   justify-items: center;
+  font-family: 'Source Code Pro', monospace;
 }
 
-/* Skill Category */
+/* Updated to use var(--card-bg-color) */
 .skill-category {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--card-bg-color);
   backdrop-filter: blur(10px);
   border-radius: 10px;
   padding: 1.5rem;
@@ -118,6 +128,7 @@ export default {
   max-width: 450px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Source Code Pro', monospace;
 }
 
 .skill-category:hover {
@@ -132,7 +143,6 @@ export default {
   font-family: 'Source Code Pro', monospace;
 }
 
-/* Skills Grid */
 .skills-grid {
   display: flex;
   flex-wrap: wrap;
@@ -140,7 +150,6 @@ export default {
   gap: 1rem;
 }
 
-/* Skill Item */
 .skill-item {
   display: flex;
   flex-direction: column;
@@ -159,16 +168,14 @@ export default {
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-/* Skill Icon */
 .skill-icon {
   color: var(--primary-color);
   margin-bottom: 0.5rem;
 }
 
-/* Skill Name */
 .skill-name {
   font-size: 1rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Code Pro', monospace;
   transition: color 0.3s;
 }
 

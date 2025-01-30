@@ -30,8 +30,8 @@ export default {
     Header,
     Footer,
     Summary,
-    EducationExperience,
     Skills,
+    EducationExperience,
     Projects,
     Contact,
     BackToTop
