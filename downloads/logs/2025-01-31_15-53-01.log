@@ -1,0 +1,22 @@
+Jan 31, 2025 3:53:01 PM uk.ac.soton.comp2211.App main
+INFO: Application started.
+Jan 31, 2025 3:53:01 PM com.sun.javafx.application.PlatformImpl startup
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @16e4b1b4'
+Jan 31, 2025 3:53:01 PM uk.ac.soton.comp2211.App openApp
+INFO: Opening login page
+Jan 31, 2025 3:53:01 PM uk.ac.soton.comp2211.UI.AppWindow startTool
+INFO: Starting the tool
+Jan 31, 2025 3:53:02 PM uk.ac.soton.comp2211.UI.AppWindow cleanup
+INFO: Clearing up previous scene
+Jan 31, 2025 3:53:02 PM uk.ac.soton.comp2211.scene.MainScene build
+INFO: Building uk.ac.soton.comp2211.scene.MainScene
+Jan 31, 2025 3:53:02 PM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 21 by JavaFX runtime of version 17.0.0.1
+Jan 31, 2025 3:53:02 PM com.mongodb.internal.diagnostics.logging.Loggers shouldUseSLF4J
+WARNING: SLF4J not found on the classpath.  Logging is disabled for the 'org.mongodb.driver' component
+Jan 31, 2025 3:53:02 PM uk.ac.soton.comp2211.Utility.DBUtils isDbConnected
+INFO: Connected to the database
+Jan 31, 2025 3:53:03 PM uk.ac.soton.comp2211.scene.MainScene initialise
+INFO: initialising the menu scene
+Jan 31, 2025 3:53:15 PM uk.ac.soton.comp2211.App shutdown
+INFO: Application shutting down.
