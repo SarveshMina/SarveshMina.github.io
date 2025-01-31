@@ -6,6 +6,8 @@ import './style.css' // Import global styles
 // Import Font Awesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+// Import Font Awesome
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 // Import specific icons
 import {

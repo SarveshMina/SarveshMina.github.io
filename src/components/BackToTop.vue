@@ -6,6 +6,7 @@
         class="back-to-top"
         @click="scrollToTop"
         aria-label="Back to Top"
+        v-scroll-up
     >
       ⬆
     </button>
@@ -52,7 +53,8 @@ export default {
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
 
-    // GSAP Animation for the Back to Top Button
+    // Existing GSAP Animations (now handled by directive)
+    /*
     gsap.from(".back-to-top", {
       opacity: 0,
       y: 50,
@@ -64,6 +66,7 @@ export default {
         toggleActions: "play none none reverse",
       }
     });
+    */
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScroll);

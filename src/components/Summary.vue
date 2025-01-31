@@ -11,9 +11,10 @@
             tabindex="0"
             @keydown.enter="openModal"
             aria-label="Open Image Preview"
+            v-scroll-up
         />
       </div>
-      <div class="text-container">
+      <div class="text-container" v-scroll-up>
         <h2>Welcome to My Portfolio</h2>
         <p>
           Ambitious and dedicated Computer Science student with a strong foundation in Cloud Technologies,
@@ -24,7 +25,7 @@
     </div>
 
     <!-- Scroll Down Indicator (Shown only if showArrow is true) -->
-    <div class="scroll-down" v-if="showArrow" @click="scrollDown">
+    <div class="scroll-down" v-if="showArrow" @click="scrollDown" v-scroll-up>
       <font-awesome-icon icon="chevron-down" class="arrow-icon" />
       <span class="scroll-text">Scroll Down</span>
     </div>
@@ -38,7 +39,7 @@
         role="dialog"
         aria-labelledby="modal-title"
     >
-      <div class="modal-content">
+      <div class="modal-content" v-scroll-up>
         <span
             class="close-icon"
             @click="closeModal"
@@ -63,7 +64,6 @@
 <script>
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-// If you're using Font Awesome icons, ensure it's already set up in main.js
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -115,7 +115,8 @@ export default {
     window.addEventListener('keydown', this.handleKeyDown);
     window.addEventListener('scroll', this.handleScroll);
 
-    // Animate profile image
+    // Existing GSAP Animations (now handled by directive)
+    /*
     gsap.from(".profile-image", {
       scrollTrigger: {
         trigger: ".landing-section",
@@ -128,7 +129,6 @@ export default {
       ease: "power3.out",
     });
 
-    // Animate text container h2
     gsap.from(".text-container h2", {
       scrollTrigger: {
         trigger: ".text-container h2",
@@ -142,7 +142,6 @@ export default {
       ease: "power3.out",
     });
 
-    // Animate text container paragraph
     gsap.from(".text-container p", {
       scrollTrigger: {
         trigger: ".text-container p",
@@ -156,7 +155,6 @@ export default {
       ease: "power3.out",
     });
 
-    // Subtle bounce for scroll-down arrow
     gsap.to(".scroll-down", {
       y: 10,
       repeat: -1,
@@ -164,6 +162,7 @@ export default {
       ease: "power1.inOut",
       duration: 0.8,
     });
+    */
   },
   beforeUnmount() {
     window.removeEventListener('keydown', this.handleKeyDown);
@@ -176,6 +175,7 @@ export default {
 <style scoped>
 .landing-section {
   height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -334,8 +334,8 @@ export default {
 /* Responsive Adjustments */
 @media (max-width: 1024px) {
   .modal-content {
-    width: 250px;
-    height: 250px;
+    width: 500px;
+    height: 500px;
   }
 }
 
@@ -363,8 +363,8 @@ export default {
   }
 
   .modal-content {
-    width: 160px;
-    height: 160px;
+    width: 350px;
+    height: 350px;
   }
 
   .close-icon {
@@ -378,8 +378,8 @@ export default {
 
 @media (max-width: 480px) {
   .modal-content {
-    width: 140px;
-    height: 140px;
+    width: 300px;
+    height: 300px;
   }
 
   .modal-image {

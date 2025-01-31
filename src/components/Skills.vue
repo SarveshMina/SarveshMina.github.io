@@ -1,12 +1,13 @@
 <!-- src/components/Skills.vue -->
 <template>
   <section id="skills" class="skills-section">
-    <h2>Skills</h2>
+    <h2 v-scroll-up>Skills</h2>
     <div class="skills-container">
       <div
           class="skill-category"
           v-for="category in skillsList"
           :key="category.name"
+          v-scroll-up
       >
         <div class="skill-header">
           <h3>{{ category.name }}</h3>
@@ -21,6 +22,7 @@
               :key="skill.name"
               @mouseover="showTooltip(skill.name, $event)"
               @mouseleave="hideTooltip"
+              v-scroll-up
           >
             <font-awesome-icon :icon="skill.icon" size="3x" class="skill-icon" />
             <p class="skill-name">{{ skill.name }}</p>
@@ -62,14 +64,14 @@ export default {
           skills: [
             { name: 'Java', icon: ['fab', 'java'], url: 'https://www.java.com/' },
             { name: 'Python', icon: ['fab', 'python'], url: 'https://www.python.org/' },
-            { name: 'C++', icon: ['fas', 'code'], url: 'https://isocpp.org/' } // Corrected C++ icon
+            { name: 'C++', icon: ['fas', 'code'], url: 'https://isocpp.org/' }
           ]
         },
         {
           name: 'Frontend Development',
           skills: [
-            { name: 'HTML5', icon: ['fab', 'html5'], url: 'https://developer.mozilla.org/en-US/docs/Web/HTML' }, // HTML5 added
-            { name: 'CSS3', icon: ['fab', 'css3-alt'], url: 'https://developer.mozilla.org/en-US/docs/Web/CSS' }, // CSS3 added
+            { name: 'HTML5', icon: ['fab', 'html5'], url: 'https://developer.mozilla.org/en-US/docs/Web/HTML' },
+            { name: 'CSS3', icon: ['fab', 'css3-alt'], url: 'https://developer.mozilla.org/en-US/docs/Web/CSS' },
             { name: 'JavaScript', icon: ['fab', 'js'], url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript' },
             { name: 'TypeScript', icon: ['fab', 'js'], url: 'https://www.typescriptlang.org/' },
             { name: 'Vue.js', icon: ['fab', 'vuejs'], url: 'https://vuejs.org/' },
@@ -79,11 +81,11 @@ export default {
         {
           name: 'DevOps & Tools',
           skills: [
-            { name: 'Git', icon: ['fab', 'git'], url: 'https://git-scm.com/' }, // Git icon added
+            { name: 'Git', icon: ['fab', 'git'], url: 'https://git-scm.com/' },
             { name: 'GitHub', icon: ['fab', 'github'], url: 'https://github.com/' },
             { name: 'Docker', icon: ['fab', 'docker'], url: 'https://www.docker.com/' },
             { name: 'AWS', icon: ['fab', 'aws'], url: 'https://aws.amazon.com/' },
-            { name: 'VS Code', icon: ['fas', 'laptop-code'], url: 'https://code.visualstudio.com/' } // VS Code added
+            { name: 'VS Code', icon: ['fas', 'laptop-code'], url: 'https://code.visualstudio.com/' }
           ]
         }
       ]
@@ -101,7 +103,8 @@ export default {
     }
   },
   mounted() {
-    // Animate skill categories
+    // Remove existing GSAP ScrollTrigger animations if using the directive
+    /*
     gsap.from(".skill-category", {
       scrollTrigger: {
         trigger: ".skills-section",
@@ -115,7 +118,6 @@ export default {
       ease: "power3.out",
     });
 
-    // Animate skill items
     gsap.from(".skill-item", {
       scrollTrigger: {
         trigger: ".skill-item",
@@ -128,6 +130,7 @@ export default {
       stagger: 0.1,
       ease: "power3.out",
     });
+    */
   }
 };
 </script>
