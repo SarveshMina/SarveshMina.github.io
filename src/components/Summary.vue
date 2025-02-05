@@ -24,7 +24,26 @@
       </div>
     </div>
 
-    <!-- Scroll Down Indicator (Shown only if showArrow is true) -->
+    <!-- Socials and CV Button Section (center-aligned) -->
+    <div class="socials-cv-section" v-scroll-up>
+      <h3>Explore my socials</h3>
+      <div class="social-icons">
+        <a href="mailto:minasarvesh@gmail.com" target="_blank" title="Email">
+          <font-awesome-icon :icon="['fas', 'envelope']" />
+        </a>
+        <a href="https://github.com/SarveshMina" target="_blank" title="GitHub">
+          <font-awesome-icon :icon="['fab', 'github']" />
+        </a>
+        <a href="https://linkedin.com/in/sarvesh-mina/" target="_blank" title="LinkedIn">
+          <font-awesome-icon :icon="['fab', 'linkedin']" />
+        </a>
+      </div>
+      <div class="cv-button-container">
+        <a :href="cvUrl" target="_blank" class="cv-button">View My CV</a>
+      </div>
+    </div>
+
+    <!-- Scroll Down Indicator (placed after socials & CV button) -->
     <div class="scroll-down" v-if="showArrow" @click="scrollDown" v-scroll-up>
       <font-awesome-icon icon="chevron-down" class="arrow-icon" />
       <span class="scroll-text">Scroll Down</span>
@@ -68,18 +87,19 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default {
-  name: 'LandingPage',
+  name: "LandingPage",
   data() {
     return {
       showModal: false,
       lastFocusedElement: null,
       showArrow: true, // Whether to show the "Scroll Down" indicator
+      cvUrl: "/SarveshMina.pdf", // Same as in your Header component
     };
   },
   methods: {
     openModal() {
       this.showModal = true;
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
       this.lastFocusedElement = document.activeElement;
       this.$nextTick(() => {
         this.$refs.closeButton.focus();
@@ -87,96 +107,47 @@ export default {
     },
     closeModal() {
       this.showModal = false;
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
       if (this.lastFocusedElement) {
         this.lastFocusedElement.focus();
       }
     },
     handleKeyDown(event) {
-      if (event.key === 'Escape' && this.showModal) {
+      if (event.key === "Escape" && this.showModal) {
         this.closeModal();
       }
     },
-
-    // Smoothly scroll to next section (e.g., #education-experience)
+    // Smoothly scroll to the next section (e.g., #education-experience)
     scrollDown() {
-      const nextSection = document.getElementById('education-experience');
+      const nextSection = document.getElementById("education-experience");
       if (nextSection) {
-        nextSection.scrollIntoView({ behavior: 'smooth' });
+        nextSection.scrollIntoView({ behavior: "smooth" });
       }
     },
-
     // Hide arrow once user scrolls beyond a threshold (e.g., 100px)
     handleScroll() {
       this.showArrow = window.scrollY < 100;
     },
   },
   mounted() {
-    window.addEventListener('keydown', this.handleKeyDown);
-    window.addEventListener('scroll', this.handleScroll);
-
-    // Existing GSAP Animations (now handled by directive)
-    /*
-    gsap.from(".profile-image", {
-      scrollTrigger: {
-        trigger: ".landing-section",
-        start: "top 80%",
-        toggleActions: "play none none none",
-      },
-      opacity: 0,
-      scale: 0.8,
-      duration: 1,
-      ease: "power3.out",
-    });
-
-    gsap.from(".text-container h2", {
-      scrollTrigger: {
-        trigger: ".text-container h2",
-        start: "top 90%",
-        toggleActions: "play none none none",
-      },
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      delay: 0.2,
-      ease: "power3.out",
-    });
-
-    gsap.from(".text-container p", {
-      scrollTrigger: {
-        trigger: ".text-container p",
-        start: "top 90%",
-        toggleActions: "play none none none",
-      },
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      delay: 0.4,
-      ease: "power3.out",
-    });
-
-    gsap.to(".scroll-down", {
-      y: 10,
-      repeat: -1,
-      yoyo: true,
-      ease: "power1.inOut",
-      duration: 0.8,
-    });
-    */
+    window.addEventListener("keydown", this.handleKeyDown);
+    window.addEventListener("scroll", this.handleScroll);
   },
   beforeUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-    window.removeEventListener('scroll', this.handleScroll);
-    document.body.style.overflow = '';
+    window.removeEventListener("keydown", this.handleKeyDown);
+    window.removeEventListener("scroll", this.handleScroll);
+    document.body.style.overflow = "";
   },
 };
 </script>
 
 <style scoped>
+/* Base Styles */
 .landing-section {
   height: 100vh;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: var(--background-color);
@@ -185,8 +156,17 @@ export default {
   padding: 2rem;
   border-bottom: 4px solid var(--accent-color);
   position: relative;
+  margin-top: 100px; /* Push landing section down to accommodate fixed header */
 }
 
+/* Increase top margin for mobile view */
+@media (max-width: 768px) {
+  .landing-section {
+    margin-top: 150px; /* Adjust value as needed */
+  }
+}
+
+/* Container for image and introductory text */
 .container {
   display: flex;
   align-items: center;
@@ -196,6 +176,7 @@ export default {
   gap: 3rem;
 }
 
+/* Image Styling */
 .image-container {
   flex: 1;
   display: flex;
@@ -220,22 +201,89 @@ export default {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Introductory Text */
 .text-container {
   flex: 2;
-  text-align: left;
+  text-align: center;
 }
 
 .text-container h2 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  font-family: 'Source Code Pro', monospace;
+  margin-left: 1.5rem;
+  font-family: "Source Code Pro", monospace;
+  text-align: left;
 }
 
 .text-container p {
   max-width: 600px;
   font-size: 1.2rem;
   line-height: 1.6;
-  font-family: 'Source Code Pro', monospace;
+  font-family: "Source Code Pro", monospace;
+  text-align: center;
+}
+
+/* Socials and CV Button Section */
+.socials-cv-section {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.socials-cv-section h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  margin-left: 15rem;
+  font-family: "Source Code Pro", monospace;
+  text-align: center;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 16rem;
+}
+
+.social-icons a {
+  color: var(--primary-color);
+  transition: transform 0.3s, color 0.3s;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+  color: var(--link-hover-color);
+}
+
+.cv-button-container {
+  margin-top: 1rem;
+  margin-left: 15rem;
+}
+
+.cv-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 25px;
+  background: transparent;
+  color: var(--primary-color);
+  font-size: 1rem;
+  font-family: "Source Code Pro", monospace;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+body.dark-mode .cv-button:hover {
+  color: black;
+}
+
+.cv-button:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 0 8px var(--primary-color);
 }
 
 /* Scroll-Down Arrow + Text */
@@ -254,13 +302,13 @@ export default {
 }
 
 .scroll-down .arrow-icon {
-  font-size: 2rem; /* Adjust arrow size */
+  font-size: 2rem;
 }
 
 .scroll-text {
   margin-top: 0.3rem;
   font-size: 0.9rem;
-  font-family: 'Source Code Pro', monospace;
+  font-family: "Source Code Pro", monospace;
 }
 
 /* Modal Styles */
@@ -322,23 +370,24 @@ export default {
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes zoomIn {
-  from { transform: scale(0.8); }
-  to { transform: scale(1); }
-}
-
-/* Responsive Adjustments */
-@media (max-width: 1024px) {
-  .modal-content {
-    width: 500px;
-    height: 500px;
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -356,10 +405,24 @@ export default {
 
   .text-container h2 {
     font-size: 2rem;
+    margin-left: 0;
+    text-align: center;
   }
 
   .text-container p {
     font-size: 1rem;
+  }
+
+  /* Remove extra left margins for mobile */
+  .socials-cv-section h3 {
+    margin-left: 0;
+    font-size: 1.6rem;
+  }
+  .social-icons {
+    margin-left: 0;
+  }
+  .cv-button-container {
+    margin-left: 0;
   }
 
   .modal-content {
@@ -393,5 +456,11 @@ export default {
     height: 18px;
     font-size: 0.7rem;
   }
+}
+
+/* Dark Mode Adjustments */
+body.dark-mode .landing-section {
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 </style>

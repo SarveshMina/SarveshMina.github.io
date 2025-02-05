@@ -84,17 +84,13 @@
           <h2 id="modal-title">{{ selectedProject.title }}</h2>
           <p class="modal-description">{{ selectedProject.details }}</p>
 
-          <!-- Skills Used -->
+          <!-- Skills Used as Cards -->
           <h3>Skills Used:</h3>
-          <div class="skills-icons">
-            <i
-                v-for="skill in selectedProject.skills"
-                :key="skill"
-                :class="getSkillIcon(skill)"
-                class="skill-icon"
-                :title="skill"
-                aria-label="Skill: {{ skill }}"
-            ></i>
+          <div class="skills-cards-container">
+            <div class="skill-card" v-for="skill in selectedProject.skills" :key="skill">
+              <i :class="getSkillIcon(skill)" class="skill-icon"></i>
+              <span class="skill-name">{{ skill }}</span>
+            </div>
           </div>
 
           <!-- Additional Project Links (Live Demo & Source Code) -->
@@ -151,7 +147,7 @@ export default {
             "Authentication",
             "Real-time Notifications",
           ],
-          video: "/vids/Calendify.mp4", // Ensure this path is correct
+          video: "/vids/Calendify.mp4",
           liveDemo: "https://sarveshmina.github.io/CAD-gwc-frontend/",
           repo: "https://github.com/SarveshMina/CAD-gwc-frontend",
           buttonText: "Live Demo",
@@ -170,7 +166,7 @@ export default {
             "AI",
             "Game Optimization",
           ],
-          video: "/vids/CubeRunner3D.mp4", // Ensure this path is correct
+          video: "/vids/CubeRunner3D.mp4",
           liveDemo: "https://sarveshmina.github.io/games/cube_runner_3d/",
           repo: "https://github.com/SarveshMina/Cube_Runner_3D",
           buttonText: "Play Game",
@@ -188,7 +184,7 @@ export default {
             "UI/UX Design",
             "Safety Protocols",
           ],
-          video: "/vids/RunwayRedeclaration.mp4", // Ensure this path is correct
+          video: "/vids/RunwayRedeclaration.mp4",
           liveDemo: "/downloads/RunwayRedeclaration.jar",
           repo: "https://github.com/bryanvullo/RunwayRedeclaration",
           buttonText: "Download JAR",
@@ -206,8 +202,8 @@ export default {
             "Multiplayer Integration",
             "JavaFX",
           ],
-          video: "/vids/TetrECS.mp4", // Correct local video path
-          liveDemo: "/downloads/TetrECS.jar", // Ensure this file exists
+          video: "/vids/TetrECS.mp4",
+          liveDemo: "/downloads/TetrECS.jar",
           repo: "https://github.com/SarveshMina/TetrECS",
           buttonText: "Download JAR",
         },
@@ -251,8 +247,7 @@ export default {
           "a[href], button:not([disabled]), textarea, input, select, video"
       );
       const firstElement = focusableElements[0];
-      const lastElement =
-          focusableElements[focusableElements.length - 1];
+      const lastElement = focusableElements[focusableElements.length - 1];
 
       if (event.shiftKey) {
         // If Shift + Tab
@@ -349,7 +344,7 @@ export default {
   margin: 0 auto;
 }
 
-/* Project Card */
+/* Project Card Base Styles */
 .project-card {
   background-color: var(--card-bg-color);
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -359,11 +354,67 @@ export default {
   transition: transform 0.3s, box-shadow 0.3s;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Pseudo-element for fill animation (rainbow glow effect) */
+.project-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: var(--primary-color);
+  opacity: 0;
+  transform: skewX(-20deg);
+  transition: left 0.5s ease, opacity 0.5s ease;
+  z-index: -1;
+}
+
+/* On hover, slide in the fill and trigger rainbow glow */
+.project-card:hover::after {
+  left: 0;
+  opacity: 0.15;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  animation: rainbowGlow 3s infinite;
+}
+
+/* Apply rainbow text glow to inner text elements on hover */
+.project-card:hover h3,
+.project-card:hover p,
+.project-card:hover span,
+.project-card:hover a,
+.project-card:hover button {
+  animation: rainbowTextGlow 3s infinite;
+}
+
+/* Rainbow Glow Keyframes */
+@keyframes rainbowGlow {
+  0% { box-shadow: 0 0 10px red; }
+  14% { box-shadow: 0 0 12px orange; }
+  28% { box-shadow: 0 0 14px yellow; }
+  42% { box-shadow: 0 0 16px green; }
+  56% { box-shadow: 0 0 18px blue; }
+  70% { box-shadow: 0 0 16px indigo; }
+  84% { box-shadow: 0 0 14px violet; }
+  100% { box-shadow: 0 0 12px red; }
+}
+
+/* Rainbow Text Glow Keyframes */
+@keyframes rainbowTextGlow {
+  0% { text-shadow: 0 0 8px red; }
+  14% { text-shadow: 0 0 8px orange; }
+  28% { text-shadow: 0 0 8px yellow; }
+  42% { text-shadow: 0 0 8px green; }
+  56% { text-shadow: 0 0 8px blue; }
+  70% { text-shadow: 0 0 8px indigo; }
+  84% { text-shadow: 0 0 8px violet; }
+  100% { text-shadow: 0 0 8px red; }
 }
 
 /* Card Header */
@@ -404,6 +455,9 @@ export default {
 
 /* Buttons (Card) */
 .project-btn {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
   flex: 1;
   text-align: center;
   background-color: var(--link-color);
@@ -412,53 +466,100 @@ export default {
   padding: 0.5rem;
   border-radius: 5px;
   font-size: 1rem;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: transform 0.2s ease, color 0.3s ease;
   font-family: "Source Code Pro", monospace;
   cursor: pointer;
-  border: none; /* Remove border if using <button> */
+  border: none;
+}
+
+/* Pseudo-element for animated gradient fill on buttons */
+.project-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+  background-size: 400%;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+.project-btn:hover::before {
+  transform: scaleX(1);
 }
 
 .project-btn:hover {
-  background-color: var(--link-hover-color);
   transform: scale(1.05);
 }
 
-/* Modal Overlay */
+/* Modal Overlay with Blur */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent overlay with blur effect */
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;
   padding: 1rem;
-  overflow-y: auto; /* Allow scrolling if content overflows */
+  overflow-y: auto;
 }
 
-/* Modal Content */
+/* Modal Content - Glassmorphism Style */
 .modal-content {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  border-radius: 16px;
+  padding: 2rem;
   width: 100%;
   max-width: 600px;
   max-height: 90vh;
-  overflow-y: auto; /* Scroll if content exceeds viewport */
-  position: relative;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.5s ease, color 0.5s ease;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
 }
 
+/* Scale-in Animation for Modal */
+.modal-enter-active {
+  animation: scaleIn 0.3s forwards;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 /* Dark Mode Adjustment */
 body.dark-mode .modal-content {
-  background-color: var(--card-bg-color);
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Light Mode Adjustment */
+body:not(.dark-mode) .modal-content {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 /* Minimalistic Scrollbar for Modal */
@@ -489,7 +590,7 @@ body.dark-mode .modal-content {
   font-size: 2rem;
   cursor: pointer;
   color: var(--text-color);
-  z-index: 10; /* Ensure it's above other content */
+  z-index: 10;
 }
 
 /* Video Container */
@@ -504,23 +605,43 @@ body.dark-mode .modal-content {
   border-radius: 5px;
 }
 
-/* Skills Icons */
-.skills-icons {
+/* Skills Cards Container */
+.skills-cards-container {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: 1rem;
+  justify-content: center;
 }
 
+/* Skill Card */
+.skill-card {
+  background-color: var(--card-bg-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Skill Icon */
 .skill-icon {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: var(--primary-color);
-  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.skill-icon:hover {
-  color: var(--link-hover-color);
-  transform: scale(1.2);
+/* Skill Name */
+.skill-name {
+  font-size: 1rem;
+  font-family: "Source Code Pro", monospace;
+  color: var(--text-color);
 }
 
 /* Additional Links in Modal */
@@ -541,7 +662,7 @@ body.dark-mode .modal-content {
   transition: background 0.3s ease, transform 0.2s ease;
   font-family: "Source Code Pro", monospace;
   cursor: pointer;
-  border: none; /* If using button or anchor styling */
+  border: none;
 }
 
 .modal-btn:hover {
@@ -571,7 +692,7 @@ body.dark-mode .modal-content {
 @media (max-width: 768px) {
   .projects-container {
     grid-template-columns: 1fr;
-    padding: 0 1rem; /* Add horizontal padding */
+    padding: 0 1rem;
   }
 
   .project-card {
@@ -596,5 +717,59 @@ body.dark-mode .modal-content {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
+
+/* NEW: Rainbow Glow Effect for Project Cards */
+.project-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: var(--primary-color);
+  opacity: 0;
+  transform: skewX(-20deg);
+  transition: left 0.5s ease, opacity 0.5s ease;
+  z-index: -1;
+}
+
+.project-card:hover::after {
+  left: 0;
+  opacity: 0.15;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  animation: rainbowGlow 3s infinite;
+}
+
+.project-card:hover h3,
+.project-card:hover p,
+.project-card:hover span,
+.project-card:hover a,
+.project-card:hover button {
+  animation: rainbowTextGlow 3s infinite;
+}
+
+@keyframes rainbowGlow {
+  0% { box-shadow: 0 0 10px red; }
+  14% { box-shadow: 0 0 12px orange; }
+  28% { box-shadow: 0 0 14px yellow; }
+  42% { box-shadow: 0 0 16px green; }
+  56% { box-shadow: 0 0 18px blue; }
+  70% { box-shadow: 0 0 16px indigo; }
+  84% { box-shadow: 0 0 14px violet; }
+  100% { box-shadow: 0 0 12px red; }
+}
+
+@keyframes rainbowTextGlow {
+  0% { text-shadow: 0 0 8px red; }
+  14% { text-shadow: 0 0 8px orange; }
+  28% { text-shadow: 0 0 8px yellow; }
+  42% { text-shadow: 0 0 8px green; }
+  56% { text-shadow: 0 0 8px blue; }
+  70% { text-shadow: 0 0 8px indigo; }
+  84% { text-shadow: 0 0 8px violet; }
+  100% { text-shadow: 0 0 8px red; }
+}
 </style>
-cl

@@ -1,3 +1,4 @@
+<!-- Header.vue -->
 <template>
   <header>
     <nav class="navbar">
@@ -77,12 +78,12 @@
           </button>
         </li>
 
+        <!-- CV Button (Desktop) -->
         <li>
           <a :href="cvUrl" target="_blank" class="cv-button">📄 View My CV</a>
         </li>
       </ul>
       <!-- ====================== END NAVBAR LINKS ======================= -->
-
 
       <!-- ====================== MOBILE CONTROLS ======================= -->
       <div class="mobile-controls">
@@ -162,7 +163,7 @@
             :class="{ active: activeSection === 'skills' }"
             ref="menuButton2"
         >
-          Skills
+          Skils
         </a>
         <a
             href="#education-experience"
@@ -192,6 +193,10 @@
           Contact
         </a>
       </div>
+      <!-- Mobile CV Button -->
+      <div class="mobile-cv-container">
+        <a :href="cvUrl" target="_blank" class="cv-button">📄 View My CV</a>
+      </div>
     </div>
 
     <!-- Background Blur Overlay -->
@@ -215,7 +220,7 @@ export default {
       cvUrl: `/SarveshMina.pdf`,
       activeSection: "",
       isDarkMode: false, // Tracks current mode
-      isToggling: false,  // Tracks if toggling animation is active
+      isToggling: false, // Tracks if toggling animation is active
       focusTrapHandler: null, // For accessibility focus trapping
     };
   },
@@ -303,7 +308,7 @@ export default {
       // Animate Background Blur fading in
       tl.to(this.$refs.backgroundBlur, {
         opacity: 1,
-        duration: 0.3, // Reduced from 0.6s to 0.3s
+        duration: 0.1,
         ease: "power3.out",
       });
 
@@ -313,17 +318,17 @@ export default {
           {
             y: 0,
             opacity: 1,
-            duration: 0.3, // Reduced from 0.6s to 0.3s
+            duration: 0.1,
             ease: "power3.out",
           },
-          "-=0.2" // Overlap with background blur animation
+          "-=0.2"
       );
 
       // Animate Close Button
       tl.fromTo(
           this.$refs.closeButton,
           { opacity: 0, scale: 0 },
-          { opacity: 1, scale: 1, duration: 0.25, ease: "power3.out" } // Reduced from 0.5s to 0.25s
+          { opacity: 1, scale: 1, duration: 0.25, ease: "power3.out" }
       );
 
       // Animate Each Menu Button with a bounce effect
@@ -334,65 +339,58 @@ export default {
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: 0.3, // Reduced from 0.6s to 0.3s
-            stagger: 0.05,  // Reduced stagger from 0.1s to 0.05s
+            duration: 0.1,
+            stagger: 0.05,
             ease: "bounce.out",
           }
       ).then(() => {
-        // Set focus to the first menu button after animation
         this.$refs.menuButton1.focus();
       });
     },
     reverseMenuButtons() {
-      // Create a GSAP timeline
       const tl = gsap.timeline();
 
-      // Animate Each Menu Button sliding up and fading out
       tl.to(this.$refs.menuButtons.children, {
         opacity: 0,
         y: -30,
         scale: 0.8,
-        duration: 0.2, // Reduced from 0.3s to 0.2s
-        stagger: 0.05,  // Reduced stagger from 0.1s to 0.05s
+        duration: 0.1,
+        stagger: 0.05,
         ease: "power3.in",
       });
 
-      // Animate Close Button
       tl.to(this.$refs.closeButton, {
         opacity: 0,
         scale: 0,
-        duration: 0.2, // Reduced from 0.3s to 0.2s
+        duration: 0.1,
         ease: "power3.in",
       });
 
-      // Animate Menu Overlay sliding out to the top
       tl.to(
           this.$refs.menuOverlay,
           {
             y: -100,
             opacity: 0,
-            duration: 0.3, // Reduced from 0.6s to 0.3s
+            duration: 0.3,
             ease: "power3.in",
           },
-          "-=0.3" // Overlap with menu overlay animation
+          "-=0.3"
       );
 
-      // Animate Background Blur fading out
-      tl.to(this.$refs.backgroundBlur, {
-        opacity: 0,
-        duration: 0.3, // Reduced from 0.6s to 0.3s
-        ease: "power3.in",
-      }, "-=0.3"); // Overlap with menu overlay animation
+      tl.to(
+          this.$refs.backgroundBlur,
+          {
+            opacity: 0,
+            duration: 0.3,
+            ease: "power3.in",
+          },
+          "-=0.3"
+      );
 
       tl.then(() => {
-        // Deactivate menu overlay for pointer events after animation
         this.$refs.menuOverlay.classList.remove("active");
         this.$refs.backgroundBlur.classList.remove("active");
-
-        // Stop trapping focus
         this.stopFocusTrap();
-
-        // Return focus to the burger menu after animation
         this.$refs.burgerMenu.focus();
       });
     },
@@ -402,18 +400,18 @@ export default {
       }
     },
     startFocusTrap() {
-      const focusableElements = this.$refs.menuOverlay.querySelectorAll('a, button');
+      const focusableElements = this.$refs.menuOverlay.querySelectorAll("a, button");
       const firstElement = focusableElements[0];
       const lastElement = focusableElements[focusableElements.length - 1];
 
       const handleTab = (e) => {
-        if (e.key === 'Tab') {
-          if (e.shiftKey) { // Shift + Tab
+        if (e.key === "Tab") {
+          if (e.shiftKey) {
             if (document.activeElement === firstElement) {
               e.preventDefault();
               lastElement.focus();
             }
-          } else { // Tab
+          } else {
             if (document.activeElement === lastElement) {
               e.preventDefault();
               firstElement.focus();
@@ -422,11 +420,11 @@ export default {
         }
       };
 
-      document.addEventListener('keydown', handleTab);
+      document.addEventListener("keydown", handleTab);
       this.focusTrapHandler = handleTab;
     },
     stopFocusTrap() {
-      document.removeEventListener('keydown', this.focusTrapHandler);
+      document.removeEventListener("keydown", this.focusTrapHandler);
     },
   },
   mounted() {
@@ -434,39 +432,31 @@ export default {
     document.addEventListener("click", this.handleOutsideClick);
     document.addEventListener("keydown", this.handleKeyDown);
 
-    // Check for stored dark mode preference
     const storedMode = localStorage.getItem("darkMode");
     if (storedMode === "true") {
       this.isDarkMode = true;
       document.body.classList.add("dark-mode");
     }
 
-    // GSAP Animations for Header without ScrollTrigger
-    // Animate navigation links except dark mode toggle and close button
-    gsap.from(
-        "header .navbar ul li:not(.dark-mode-toggle-container):not(.close-button)",
-        {
-          opacity: 0,
-          y: -20,
-          duration: 0.3, // Reduced from 0.5s to 0.3s
-          stagger: 0.05,  // Reduced from 0.1s to 0.05s
-          ease: "power3.out",
-        }
-    );
-
-    // Animate logo
-    gsap.from("header .logo h1", {
+    gsap.from("header .navbar ul li:not(.dark-mode-toggle-container):not(.close-button)", {
       opacity: 0,
-      x: -50,
-      duration: 0.3, // Reduced from 1s to 0.3s
+      y: -20,
+      duration: 0.1,
+      stagger: 0.05,
       ease: "power3.out",
     });
 
-    // Animate burger menu
+    gsap.from("header .logo h1", {
+      opacity: 0,
+      x: -50,
+      duration: 0.1,
+      ease: "power3.out",
+    });
+
     gsap.from("header .burger", {
       opacity: 0,
       x: 50,
-      duration: 0.3, // Reduced from 1s to 0.3s
+      duration: 0.1,
       ease: "power3.out",
     });
   },
@@ -474,7 +464,70 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
     document.removeEventListener("click", this.handleOutsideClick);
     document.removeEventListener("keydown", this.handleKeyDown);
-    document.removeEventListener('keydown', this.focusTrapHandler);
+    document.removeEventListener("keydown", this.focusTrapHandler);
   },
 };
 </script>
+
+<style scoped>
+/* CV Button Styling for Header (Same design as LandingPage's button but without scaling) */
+.cv-button {
+  display: inline-block;
+  padding: 0.5rem 1rem; /* Adjust padding as needed to match header size */
+  border: 2px solid var(--primary-color);
+  border-radius: 25px;
+  background: transparent;
+  color: var(--primary-color);
+  font-size: 1rem;
+  font-family: "Source Code Pro", monospace;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.cv-button:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+  box-shadow: 0 0 8px var(--primary-color);
+  /* No scaling here to keep the button size the same */
+}
+
+body.dark-mode .cv-button:hover {
+  color: black;
+}
+
+/* Mobile CV Button Container */
+.mobile-cv-container {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* ---------------------------------------------------------------------------
+   NEW: Menu Overlay Button Styling
+   Apply similar styling to the overlay menu buttons so they appear as rounded,
+   bold, button-like links with a hover glow effect.
+--------------------------------------------------------------------------- */
+.menu-button {
+  display: inline-block;
+  padding: 0.5rem 1rem; /* Adjust padding as needed */
+  border: 2px solid var(--primary-color);
+  border-radius: 25px;
+  background: var(--primary-color) ;
+  color: var(--secondary-color);
+  font-size: 1rem;
+  font-family: "Source Code Pro", monospace;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  margin: 0.5rem; /* Optional: adds spacing between menu buttons */
+}
+
+.menu-button:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+  box-shadow: 0 0 8px var(--primary-color);
+  /* No scaling here */
+}
+
+/* (Other Header styles remain as before) */
+</style>

@@ -30,7 +30,6 @@
         </div>
       </div>
     </div>
-
     <!-- Tooltip for Hover Effects -->
     <div
         v-if="tooltip.visible"
@@ -103,34 +102,7 @@ export default {
     }
   },
   mounted() {
-    // Remove existing GSAP ScrollTrigger animations if using the directive
-    /*
-    gsap.from(".skill-category", {
-      scrollTrigger: {
-        trigger: ".skills-section",
-        start: "top 80%",
-        toggleActions: "play none none none",
-      },
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      stagger: 0.3,
-      ease: "power3.out",
-    });
-
-    gsap.from(".skill-item", {
-      scrollTrigger: {
-        trigger: ".skill-item",
-        start: "top 90%",
-        toggleActions: "play none none none",
-      },
-      opacity: 0,
-      scale: 0.8,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: "power3.out",
-    });
-    */
+    // If using a v-scroll-up directive, GSAP animations can be removed here.
   }
 };
 </script>
@@ -145,15 +117,16 @@ export default {
   font-family: 'Source Code Pro', monospace;
 }
 
+
+
 .skills-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
   justify-items: center;
-  font-family: 'Source Code Pro', monospace;
 }
 
-/* Updated to use var(--card-bg-color) */
+/* Skill Category with Gradient Border (no orange) */
 .skill-category {
   background: var(--card-bg-color);
   backdrop-filter: blur(10px);
@@ -162,22 +135,32 @@ export default {
   width: 100%;
   max-width: 450px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  font-family: 'Source Code Pro', monospace;
 }
-
+.skill-category::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(to bottom, #00bcd4, #673ab7); /* teal to deep purple */
+  border-radius: 10px 0 0 10px;
+}
 .skill-category:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* Skill Header */
 .skill-header h3 {
   margin: 0 0 1rem 0;
   font-size: 1.6rem;
   color: var(--primary-color);
-  font-family: 'Source Code Pro', monospace;
 }
 
+/* Skills Grid */
 .skills-grid {
   display: flex;
   flex-wrap: wrap;
@@ -185,6 +168,7 @@ export default {
   gap: 1rem;
 }
 
+/* Skill Item */
 .skill-item {
   display: flex;
   flex-direction: column;
@@ -195,39 +179,57 @@ export default {
   background-color: rgba(0, 0, 0, 0.02);
   text-decoration: none;
   color: inherit;
-  transition: transform 0.3s, background-color 0.3s;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
-
 .skill-item:hover {
   transform: scale(1.1);
   background-color: rgba(0, 0, 0, 0.05);
 }
 
+/* Skill Icon */
 .skill-icon {
   color: var(--primary-color);
   margin-bottom: 0.5rem;
+  transition: transform 0.3s ease;
+}
+.skill-item:hover .skill-icon {
+  transform: scale(1.2);
 }
 
+/* Skill Name */
 .skill-name {
   font-size: 1rem;
-  font-family: 'Source Code Pro', monospace;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
 }
-
 .skill-item:hover .skill-name {
   color: var(--link-hover-color);
 }
 
-/* Tooltip */
+/* Tooltip with fade and scale */
 .tooltip {
-  position: absolute;
+  position: fixed;
   background: rgba(0, 0, 0, 0.8);
-  color: white;
+  color: #fff;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   font-size: 0.9rem;
   pointer-events: none;
-  transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 1000;
+}
+.tooltip-enter-active,
+.tooltip-leave-active {
+  transition: opacity 0.2s, transform 0.2s;
+}
+.tooltip-enter-from,
+.tooltip-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.tooltip-enter-to,
+.tooltip-leave-from {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* Responsive */
