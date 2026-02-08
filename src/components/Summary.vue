@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style scoped>
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6rem 2rem 2rem;text-align:center;gap:0}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6rem 2rem 2rem;text-align:center;gap:0;position:relative}
 .hero-container{display:flex;align-items:center;justify-content:center;max-width:1200px;gap:3.5rem;margin-bottom:1.5rem;width:100%;padding:0 2rem}
 .profile-image{
   width:240px;height:240px;object-fit:cover;border-radius:50%;
@@ -122,11 +122,11 @@ export default {
   .social-icons{gap:1.2rem;margin-bottom:.8rem}
   .social-icons a{font-size:1.5rem}
   .cv-button-hero{padding:.55rem 1.4rem;font-size:.85rem}
-  /* Scroll down: relative on mobile so it doesn't overlap skills */
-  .scroll-down{position:relative;bottom:auto;left:auto;transform:none;margin-top:1.5rem;
+  /* Scroll down: absolute within hero so it sits at the bottom of the viewport */
+  .scroll-down{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);
     animation:bounceMobile 2s infinite}
 }
-@keyframes bounceMobile{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@keyframes bounceMobile{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
 
 /* Small phones (max 480px) */
 @media(max-width:480px){
