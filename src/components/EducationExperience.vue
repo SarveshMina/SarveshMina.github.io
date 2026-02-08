@@ -1,7 +1,7 @@
 <template>
   <section id="education-experience">
     <h2>Education & Experience</h2>
-    <h3 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h3>
+    <h3 class="section-title"><i class="fas fa-book-open"></i> Education</h3>
     <div class="edu-exp-container">
       <div class="glass edu-card" v-for="edu in educationList" :key="edu.degree">
         <div class="card-header">
@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <h3 class="section-title" style="margin-top:3rem"><i class="fas fa-briefcase"></i> Experience</h3>
+    <h3 class="section-title" style="margin-top:3rem"><i class="fas fa-laptop-code"></i> Experience</h3>
     <div class="edu-exp-container">
       <div class="glass exp-card" v-for="exp in experienceList" :key="exp.title">
         <div class="card-header">
