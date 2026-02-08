@@ -10,6 +10,7 @@ const AdminSkills = () => import('../views/admin/AdminSkills.vue')
 const AdminEducation = () => import('../views/admin/AdminEducation.vue')
 const AdminExport = () => import('../views/admin/AdminExport.vue')
 const AdminAnalytics = () => import('../views/admin/AdminAnalytics.vue')
+const NotFound = () => import('../views/NotFound.vue')
 
 const routes = [
   {
@@ -38,7 +39,8 @@ const routes = [
   },
   {
     path: '/:pathMatch(.*)*',
-    redirect: '/',
+    name: 'NotFound',
+    component: NotFound,
   },
 ]
 
