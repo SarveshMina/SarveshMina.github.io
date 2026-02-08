@@ -6,19 +6,13 @@
         class="back-to-top"
         @click="scrollToTop"
         aria-label="Back to Top"
-        v-scroll-up
     >
-      ⬆
+      <i class="fas fa-chevron-up"></i>
     </button>
   </transition>
 </template>
 
 <script>
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
-
 export default {
   name: "BackToTop",
   data() {
@@ -52,21 +46,6 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
-
-    // Existing GSAP Animations (now handled by directive)
-    /*
-    gsap.from(".back-to-top", {
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".back-to-top",
-        start: "top bottom", // When the button enters the viewport
-        toggleActions: "play none none reverse",
-      }
-    });
-    */
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
@@ -75,54 +54,26 @@ export default {
 </script>
 
 <style scoped>
-/* Fade transition */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
+.fade-enter-active,.fade-leave-active{transition:opacity .4s ease}
+.fade-enter-from,.fade-leave-to{opacity:0}
 
-/* Back to Top Button Styles */
-.back-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 50px; /* Equal width and height for a perfect circle */
-  height: 50px;
-  background: black;
-  color: white;
-  border: none;
-  border-radius: 50%; /* Ensures it's a circle */
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  z-index: 1000;
+.back-to-top{
+  position:fixed;bottom:1.5rem;right:1.5rem;
+  width:42px;height:42px;border-radius:50%;
+  background:var(--btn-bg);border:1.5px solid var(--btn-border);
+  color:var(--text);font-size:1rem;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;backdrop-filter:blur(10px);
+  transition:all .3s;z-index:100;
+  box-shadow:var(--glass-shadow);
 }
+.back-to-top:hover{background:var(--btn-hover-bg);border-color:var(--text);transform:scale(1.1)}
+.back-to-top:active{transform:scale(.95)}
 
-/* Hover Animation */
-.back-to-top:hover {
-  background: #555;
-  transform: scale(1.1);
+@media(max-width:768px){
+  .back-to-top{bottom:1.2rem;right:1.2rem;width:38px;height:38px;font-size:.9rem}
 }
-
-/* Click Effect */
-.back-to-top:active {
-  transform: scale(0.9);
-}
-
-/* Mobile Optimization */
-@media (max-width: 768px) {
-  .back-to-top {
-    bottom: 15px;
-    right: 15px;
-    width: 45px;
-    height: 45px;
-    font-size: 1.2rem;
-  }
+@media(max-width:480px){
+  .back-to-top{bottom:1rem;right:1rem;width:36px;height:36px;font-size:.85rem}
 }
 </style>
