@@ -294,6 +294,10 @@ export default {
 /* iPad Air / iPad (max 1024px) */
 @media(max-width:1024px){
   .projects-container{grid-template-columns:repeat(2,1fr);gap:1.2rem}
+  /* Don't fade siblings on tablets/mobile */
+  .projects-container.has-expanded .project-card:not(.expanded){
+    opacity:1;transform:none;pointer-events:auto;
+  }
 }
 
 /* iPad Mini (max 834px) */
