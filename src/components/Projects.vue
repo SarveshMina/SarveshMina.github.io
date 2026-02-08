@@ -46,6 +46,8 @@
               controls
               muted
               loop
+              playsinline
+              webkit-playsinline
               :ref="'video-' + index"
               @play="trackAction(project.slug, 'video')"
             ></video>
