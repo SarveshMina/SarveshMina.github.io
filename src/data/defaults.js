@@ -143,10 +143,26 @@ export const defaultExperience = [
   {
     active: true,
     order: 0,
+    title: "Assistant Engineer \u2013 Software & Electrical Engineering",
+    company: "Foster + Partners",
+    location: "London / Southampton, UK",
+    duration: "September 2024 \u2013 Present",
+    points: [
+      "Working within the Specialist Modelling Group (SMG), contributing to BIM automation, computational design tools, and electrical engineering workflows across live architectural projects.",
+      "Developing and maintaining Revit plugins using pyRevit and C#, automating repetitive documentation tasks and improving model accuracy across multidisciplinary teams.",
+      "Building custom Dynamo scripts and Python-based tools to streamline parameter management, data extraction, and design validation for complex building systems.",
+      "Assisting in the production of electrical layout drawings, panel schedules, and lighting plans in coordination with senior electrical engineers using Revit MEP.",
+      "Supporting integration between design tools (Revit, Rhino, Grasshopper) and internal data systems, helping bridge the gap between architectural intent and engineering delivery.",
+      "Gaining hands-on exposure to real-world construction documentation, coordination workflows (Navisworks, BIM 360), and interdisciplinary design reviews.",
+    ],
+  },
+  {
+    active: true,
+    order: 1,
     title: "Tech Manager",
     company: "Google Developer Group Southampton",
     location: "Southampton, UK",
-    duration: "October 2024 \u2013 Present",
+    duration: "October 2024 – Present",
     points: [
       "Organized workshops on Google technologies.",
       "Hosted talks and panels with industry experts.",
@@ -156,7 +172,7 @@ export const defaultExperience = [
   },
   {
     active: true,
-    order: 1,
+    order: 2,
     title: "Head of Education",
     company: "Artificial Intelligence Society Southampton",
     location: "Southampton, UK",
@@ -171,7 +187,7 @@ export const defaultExperience = [
   },
   {
     active: true,
-    order: 2,
+    order: 3,
     title: "Head of Technology",
     company: "Fish on Toast",
     location: "Southampton, UK",
@@ -183,7 +199,7 @@ export const defaultExperience = [
   },
   {
     active: true,
-    order: 3,
+    order: 4,
     title: "Virtual Support Ambassador",
     company: "University of Southampton",
     location: "Southampton, UK",

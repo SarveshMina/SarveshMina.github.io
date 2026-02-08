@@ -119,6 +119,22 @@ export async function getRecentEvents(count = 50) {
   return snap.docs.map(d => ({ id: d.id, ...d.data() }))
 }
 
+export async function getAllEvents() {
+  if (!db) return []
+  await loadFirestore()
+  const eventsCol = fs.collection(db, 'analytics_events')
+  const q = fs.query(eventsCol, fs.orderBy('timestamp', 'asc'))
+  const snap = await fs.getDocs(q)
+  return snap.docs.map(d => {
+    const data = d.data()
+    return {
+      id: d.id,
+      ...data,
+      date: data.timestamp?.toDate ? data.timestamp.toDate() : null,
+    }
+  })
+}
+
 // --- Section observer for automatic tracking ---
 
 const trackedSections = new Set()
