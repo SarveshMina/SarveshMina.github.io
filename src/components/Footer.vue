@@ -1,27 +1,19 @@
-<!-- src/components/Footer.vue -->
 <template>
   <footer>
     <div class="footer-container">
       <div class="footer-left">
-        <h2 class="footer-title">Sarvesh Mina</h2>
+        <h2>Sarvesh Mina</h2>
         <p>To Be Software Engineer</p>
       </div>
       <div class="footer-right">
         <h3>Connect with me</h3>
-        <div class="social-icons">
-          <a href="mailto:minasarvesh@gmail.com" target="_blank" title="Email">
-            <font-awesome-icon :icon="['fas', 'envelope']" />
-          </a>
-          <a href="https://github.com/SarveshMina" target="_blank" title="GitHub">
-            <font-awesome-icon :icon="['fab', 'github']" />
-          </a>
-          <a href="https://linkedin.com/in/sarvesh-mina/" target="_blank" title="LinkedIn">
-            <font-awesome-icon :icon="['fab', 'linkedin']" />
-          </a>
+        <div class="footer-social">
+          <a href="mailto:minasarvesh@gmail.com"><i class="fas fa-envelope"></i></a>
+          <a href="https://github.com/SarveshMina" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://linkedin.com/in/sarvesh-mina/" target="_blank"><i class="fab fa-linkedin"></i></a>
         </div>
       </div>
     </div>
-
     <div class="footer-bottom">
       <p>&copy; 2025 Sarvesh Mina. All rights reserved.</p>
     </div>
@@ -29,99 +21,23 @@
 </template>
 
 <script>
-export default {
-  name: "Footer"
-};
+export default { name: 'Footer' }
 </script>
 
 <style scoped>
-/* Footer overall style with dark gradient and subtle blur */
-footer {
-  background: linear-gradient(135deg, #1a1a1a, #333333);
-  backdrop-filter: blur(5px);
-  padding: 2rem 1rem;
-  color: #f1f1f1;
-  transition: background 0.5s ease, color 0.5s ease;
-  font-family: 'Source Code Pro', monospace;
-}
+footer{padding:2rem;background:var(--footer-bg);border-top:1px solid var(--glass-border);transition:all .5s}
+.footer-container{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;flex-wrap:wrap;gap:1rem;padding-bottom:1rem;border-bottom:1px solid var(--glass-border)}
+.footer-left h2{font-size:1.8rem;margin-bottom:.3rem}
+.footer-left p{color:var(--text-dim);font-size:.9rem}
+.footer-right h3{font-size:1.3rem;margin-bottom:.5rem;text-align:right}
+.footer-social{display:flex;gap:1rem;justify-content:flex-end}
+.footer-social a{color:var(--text);font-size:1.5rem;transition:all .3s}
+.footer-social a:hover{color:var(--text-dim);transform:scale(1.2)}
+.footer-bottom{text-align:center;margin-top:1rem;color:var(--text-dim);font-size:.8rem}
 
-/* Footer Container */
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Left Side */
-.footer-left {
-  flex: 1;
-  min-width: 250px;
-  text-align: left;
-}
-
-.footer-title {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-
-}
-
-/* Right Side */
-.footer-right {
-  flex: 1;
-  min-width: 250px;
-  text-align: right;
-}
-
-.footer-right h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-/* Social Icons */
-.social-icons {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.social-icons a {
-  font-size: 1.8rem;
-  color: var(--primary-color);
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.social-icons a:hover {
-  transform: scale(1.2);
-  color: var(--primary-color);
-}
-
-/* Footer Bottom */
-.footer-bottom {
-  margin-top: 1rem;
-  text-align: center;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .footer-container {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
-  }
-  .footer-left,
-  .footer-right {
-    text-align: center;
-  }
-  .social-icons {
-    justify-content: center;
-  }
+@media(max-width:768px){
+  .footer-container{flex-direction:column;text-align:center}
+  .footer-right{text-align:center}
+  .footer-social{justify-content:center}
 }
 </style>

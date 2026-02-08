@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sarvesh Mina - Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+/* ========== LIGHT MODE (default) ========== */
+:root{
+  --bg:#ffffff;
+  --text:#000000;
+  --text-dim:#555555;
+  --glass-bg:rgba(0,0,0,.04);
+  --glass-border:rgba(0,0,0,.08);
+  --glass-hover:rgba(0,0,0,.08);
+  --btn-bg:rgba(0,0,0,.05);
+  --btn-border:rgba(0,0,0,.15);
+  --btn-hover-bg:rgba(0,0,0,.1);
+  --header-bg:rgba(255,255,255,.75);
+  --header-border:rgba(0,0,0,.06);
+  --card-shadow:0 4px 20px rgba(0,0,0,.04);
+  --card-hover-shadow:0 8px 30px rgba(0,0,0,.08);
+  --input-bg:rgba(0,0,0,.03);
+  --input-border:rgba(0,0,0,.1);
+  --input-focus:rgba(0,0,0,.25);
+  --footer-bg:rgba(0,0,0,.03);
+  --accent-bar:linear-gradient(to bottom,#000,#555);
+  --link-color:#000;
+  --link-hover:#555;
+}
+
+/* ========== DARK MODE ========== */
+body.dark-mode{
+  --bg:#000000;
+  --text:#ffffff;
+  --text-dim:#888888;
+  --glass-bg:rgba(255,255,255,.05);
+  --glass-border:rgba(255,255,255,.08);
+  --glass-hover:rgba(255,255,255,.08);
+  --btn-bg:rgba(255,255,255,.06);
+  --btn-border:rgba(255,255,255,.18);
+  --btn-hover-bg:rgba(255,255,255,.12);
+  --header-bg:rgba(0,0,0,.75);
+  --header-border:rgba(255,255,255,.06);
+  --card-shadow:0 4px 20px rgba(0,0,0,.3);
+  --card-hover-shadow:0 8px 30px rgba(0,0,0,.4);
+  --input-bg:rgba(255,255,255,.04);
+  --input-border:rgba(255,255,255,.1);
+  --input-focus:rgba(255,255,255,.25);
+  --footer-bg:rgba(255,255,255,.03);
+  --accent-bar:linear-gradient(to bottom,#fff,#888);
+  --link-color:#fff;
+  --link-hover:#aaa;
+}
+
+body{
+  font-family:'Source Code Pro',monospace;
+  background:var(--bg);
+  color:var(--text);
+  transition:background .4s ease,color .4s ease;
+}
+
+/* ========== GLASS UTILITY ========== */
+.glass{
+  background:var(--glass-bg);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);
+  border-radius:16px;
+  box-shadow:var(--card-shadow);
+  transition:all .3s ease;
+}
+.glass:hover{
+  background:var(--glass-hover);
+  box-shadow:var(--card-hover-shadow);
+  transform:translateY(-4px);
+}
+
+/* ========== HEADER ========== */
+header{
+  position:fixed;top:0;width:100%;z-index:1000;
+  padding:1rem 2rem;
+  background:var(--header-bg);
+  backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
+  border-bottom:1px solid var(--header-border);
+  transition:all .4s ease;
+}
+.navbar{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
+.logo h1{font-size:1.8rem;font-weight:700}
+.logo a{text-decoration:none;color:var(--text);transition:color .4s}
+nav ul{list-style:none;display:flex;gap:1.5rem;align-items:center}
+nav ul li a{
+  color:var(--text-dim);text-decoration:none;font-weight:500;font-size:.9rem;
+  padding:.4rem .8rem;border-radius:20px;transition:all .3s;
+}
+nav ul li a:hover,nav ul li a.active{color:var(--text);background:var(--glass-bg)}
+
+/* Dark mode toggle */
+.dark-toggle{
+  background:none;border:2px solid var(--btn-border);border-radius:50%;
+  width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:1.1rem;color:var(--text);transition:all .3s;
+}
+.dark-toggle:hover{background:var(--btn-hover-bg)}
+
+/* CV button in nav */
+.cv-btn{
+  padding:.5rem 1.2rem;border:2px solid var(--btn-border);border-radius:25px;
+  color:var(--text);text-decoration:none;font-weight:600;font-size:.85rem;transition:all .3s;
+}
+.cv-btn:hover{background:var(--btn-hover-bg);border-color:var(--text)}
+
+/* ========== HERO ========== */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:8rem 2rem 4rem;text-align:center;
+}
+.hero-container{display:flex;align-items:center;justify-content:center;max-width:1000px;gap:3rem;margin-bottom:2rem}
+.profile-image{
+  width:220px;height:220px;object-fit:cover;border-radius:50%;
+  border:4px solid var(--glass-border);
+  box-shadow:var(--card-shadow);transition:transform .3s;
+}
+.profile-image:hover{transform:scale(1.05)}
+.hero-text{text-align:left;max-width:550px}
+.hero-text h2{font-size:2.5rem;margin-bottom:1rem}
+.hero-text p{font-size:1.05rem;line-height:1.7;color:var(--text-dim)}
+
+.socials-section{text-align:center;margin-top:2rem}
+.socials-section h3{font-size:1.5rem;margin-bottom:1rem}
+.social-icons{display:flex;gap:1.5rem;justify-content:center;margin-bottom:1.5rem}
+.social-icons a{color:var(--text);font-size:1.8rem;transition:all .3s}
+.social-icons a:hover{color:var(--text-dim);transform:scale(1.2)}
+
+.cv-button-hero{
+  display:inline-block;padding:.75rem 2rem;
+  border:2px solid var(--btn-border);border-radius:30px;
+  color:var(--text);text-decoration:none;font-weight:700;font-size:1rem;transition:all .3s;
+}
+.cv-button-hero:hover{background:var(--btn-hover-bg);border-color:var(--text);transform:scale(1.03)}
+
+.scroll-down{margin-top:3rem;cursor:pointer;color:var(--text-dim);display:flex;flex-direction:column;align-items:center;animation:bounce 2s infinite}
+.scroll-down i{font-size:1.5rem}
+.scroll-down span{font-size:.8rem;margin-top:.3rem}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* ========== SECTIONS ========== */
+section{padding:5rem 2rem;transition:background .4s,color .4s}
+section h2{text-align:center;font-size:2.3rem;margin-bottom:2rem}
+.section-title{text-align:center;font-size:1.8rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:.6rem;justify-content:center}
+.section-title i{font-size:1.5rem;color:var(--text-dim)}
+
+/* ========== SKILLS ========== */
+.skills-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto}
+.skill-category{padding:2rem;position:relative;overflow:hidden}
+.skill-category::before{
+  content:'';position:absolute;top:0;left:0;width:5px;height:100%;
+  background:var(--accent-bar);border-radius:16px 0 0 16px;
+}
+.skill-category h3{font-size:1.4rem;margin-bottom:1.2rem}
+.skills-grid{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+.skill-item{
+  display:flex;flex-direction:column;align-items:center;padding:.8rem;
+  border-radius:12px;text-decoration:none;color:var(--text);
+  transition:all .3s;background:var(--btn-bg);
+}
+.skill-item:hover{transform:scale(1.1);background:var(--btn-hover-bg)}
+.skill-item i{font-size:2.5rem;margin-bottom:.4rem;color:var(--text)}
+.skill-item span{font-size:.85rem}
+
+/* ========== EDUCATION & EXPERIENCE ========== */
+.edu-exp-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;flex-wrap:wrap;gap:.5rem}
+.card-header h3{font-size:1.3rem}
+.date{font-size:.85rem;color:var(--text-dim)}
+.institution,.company{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.4rem}
+.card-details p{margin:.4rem 0;font-size:.9rem;color:var(--text-dim);line-height:1.6}
+.edu-card,.exp-card{padding:2rem}
+
+/* ========== PROJECTS ========== */
+.projects-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto}
+.project-card{padding:1.5rem;display:flex;flex-direction:column}
+.project-card h3{font-size:1.3rem;margin-bottom:.3rem}
+.project-card .date{display:block;margin-bottom:.8rem}
+.project-description{font-size:.9rem;line-height:1.6;color:var(--text-dim);margin-bottom:1rem;flex:1}
+.project-links{display:flex;gap:.6rem;flex-wrap:wrap}
+.project-btn{
+  padding:.5rem 1.2rem;border-radius:25px;
+  font-family:'Source Code Pro',monospace;font-size:.85rem;font-weight:600;
+  cursor:pointer;text-decoration:none;transition:all .3s;
+  border:1.5px solid var(--btn-border);background:var(--btn-bg);color:var(--text);
+}
+.project-btn:hover{background:var(--btn-hover-bg);border-color:var(--text);transform:scale(1.03)}
+
+/* ========== CONTACT ========== */
+.contact-container{display:flex;gap:2rem;max-width:1000px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.contact-info{flex:1;min-width:250px;display:flex;flex-direction:column;gap:1rem}
+.info-card{padding:1rem 1.5rem}
+.info-card a{color:var(--link-color);text-decoration:none;transition:color .3s}
+.info-card a:hover{color:var(--link-hover)}
+.contact-form{flex:1;min-width:300px;padding:2rem;display:flex;flex-direction:column;gap:1rem}
+.contact-form input,.contact-form textarea{
+  background:var(--input-bg);border:1px solid var(--input-border);border-radius:12px;
+  padding:.8rem 1rem;color:var(--text);font-family:'Source Code Pro',monospace;
+  font-size:.9rem;outline:none;transition:border-color .3s;
+}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--text-dim)}
+.contact-form input:focus,.contact-form textarea:focus{border-color:var(--input-focus)}
+.contact-form textarea{resize:vertical;min-height:120px}
+.send-btn{
+  align-self:flex-end;padding:.6rem 2rem;border-radius:25px;
+  border:2px solid var(--btn-border);background:var(--btn-bg);color:var(--text);
+  font-family:'Source Code Pro',monospace;font-size:.9rem;font-weight:700;
+  cursor:pointer;transition:all .3s;
+}
+.send-btn:hover{background:var(--btn-hover-bg);border-color:var(--text)}
+
+/* ========== FOOTER ========== */
+footer{padding:2rem;background:var(--footer-bg);border-top:1px solid var(--glass-border);transition:all .4s}
+.footer-container{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;flex-wrap:wrap;gap:1rem;padding-bottom:1rem;border-bottom:1px solid var(--glass-border)}
+.footer-left h2{font-size:1.8rem;margin-bottom:.3rem}
+.footer-left p{color:var(--text-dim);font-size:.9rem}
+.footer-right h3{font-size:1.3rem;margin-bottom:.5rem;text-align:right}
+.footer-social{display:flex;gap:1rem;justify-content:flex-end}
+.footer-social a{color:var(--text);font-size:1.5rem;transition:all .3s}
+.footer-social a:hover{color:var(--text-dim);transform:scale(1.2)}
+.footer-bottom{text-align:center;margin-top:1rem;color:var(--text-dim);font-size:.8rem}
+
+/* ========== RESPONSIVE ========== */
+@media(max-width:768px){
+  nav ul{display:none}
+  .hero-container{flex-direction:column;text-align:center}
+  .hero-text{text-align:center}
+  .hero-text h2{font-size:2rem}
+  .profile-image{width:160px;height:160px}
+  .edu-exp-container{grid-template-columns:1fr}
+  .projects-container{grid-template-columns:1fr}
+  .contact-container{flex-direction:column}
+  .footer-container{flex-direction:column;text-align:center}
+  .footer-right{text-align:center}
+  .footer-social{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="logo"><h1><a href="#">Sarvesh Mina</a></h1></div>
+    <nav>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education-experience">Education & Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><button class="dark-toggle" onclick="document.body.classList.toggle('dark-mode');localStorage.setItem('darkMode',document.body.classList.contains('dark-mode'))" aria-label="Toggle Dark Mode"><i class="fas fa-adjust"></i></button></li>
+        <li><a href="/SarveshMina.pdf" target="_blank" class="cv-btn">View My CV</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="summary">
+  <div class="hero-container">
+    <img src="/imgs/profile.jpg" alt="Sarvesh Mina" class="profile-image" onerror="this.style.background='var(--glass-bg)'">
+    <div class="hero-text">
+      <h2>Welcome to My Portfolio</h2>
+      <p>Ambitious and dedicated Computer Science student with a strong foundation in Cloud Technologies, Game Development, and Frontend Development. Passionate about leveraging technology to solve real-world challenges and advance innovation in software development and AI.</p>
+    </div>
+  </div>
+  <div class="socials-section">
+    <h3>Explore my socials</h3>
+    <div class="social-icons">
+      <a href="mailto:minasarvesh@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://github.com/SarveshMina" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/sarvesh-mina/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <a href="/SarveshMina.pdf" target="_blank" class="cv-button-hero">View My CV</a>
+  </div>
+  <div class="scroll-down" onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'})">
+    <i class="fas fa-chevron-down"></i><span>Scroll Down</span>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skills-container">
+    <div class="skill-category glass">
+      <h3>Programming Languages</h3>
+      <div class="skills-grid">
+        <a href="https://www.java.com/" target="_blank" class="skill-item"><i class="fab fa-java"></i><span>Java</span></a>
+        <a href="https://www.python.org/" target="_blank" class="skill-item"><i class="fab fa-python"></i><span>Python</span></a>
+        <a href="https://isocpp.org/" target="_blank" class="skill-item"><i class="fas fa-code"></i><span>C++</span></a>
+      </div>
+    </div>
+    <div class="skill-category glass">
+      <h3>Frontend Development</h3>
+      <div class="skills-grid">
+        <a href="#" class="skill-item"><i class="fab fa-html5"></i><span>HTML5</span></a>
+        <a href="#" class="skill-item"><i class="fab fa-css3-alt"></i><span>CSS3</span></a>
+        <a href="#" class="skill-item"><i class="fab fa-js"></i><span>JavaScript</span></a>
+        <a href="#" class="skill-item"><i class="fab fa-js"></i><span>TypeScript</span></a>
+        <a href="#" class="skill-item"><i class="fab fa-vuejs"></i><span>Vue.js</span></a>
+        <a href="#" class="skill-item"><i class="fab fa-react"></i><span>React</span></a>
+      </div>
+    </div>
+    <div class="skill-category glass">
+      <h3>DevOps & Tools</h3>
+      <div class="skills-grid">
+        <a href="#" class="skill-item"><i class="fab fa-git"></i><span>Git</span></a>
+        <a href="#" class="skill-item"><i class="fab fa-github"></i><span>GitHub</span></a>
+        <a href="#" class="skill-item"><i class="fab fa-docker"></i><span>Docker</span></a>
+        <a href="#" class="skill-item"><i class="fab fa-aws"></i><span>AWS</span></a>
+        <a href="#" class="skill-item"><i class="fas fa-laptop-code"></i><span>VS Code</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education-experience">
+  <h2>Education & Experience</h2>
+  <h3 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h3>
+  <div class="edu-exp-container">
+    <div class="edu-card glass">
+      <div class="card-header"><h3>MEng Computer Science with Year in Industry</h3><span class="date">Sep 2022 - Jun 2027</span></div>
+      <p class="institution">University of Southampton</p>
+      <p><strong>Expected Grade:</strong> 1:1</p>
+      <p style="color:var(--text-dim);font-size:.9rem;line-height:1.6"><strong>Modules:</strong> Machine Learning Technologies, Cloud Application Development, Research Project, Engineering Management, Computational Biology and Security of Cyber Physical Systems.</p>
+    </div>
+    <div class="edu-card glass">
+      <div class="card-header"><h3>A-Levels</h3><span class="date">2019 - 2020</span></div>
+      <p class="institution">Podar International School, Aurangabad, India</p>
+      <p><strong>Grades:</strong> Mathematics (A), Computer Science (A), Physics (A)</p>
+    </div>
+  </div>
+  <h3 class="section-title" style="margin-top:3rem"><i class="fas fa-briefcase"></i> Experience</h3>
+  <div class="edu-exp-container">
+    <div class="exp-card glass">
+      <div class="card-header"><h3>Tech Manager</h3><span class="date">Oct 2024 - Present</span></div>
+      <p class="company"><strong>Google Developer Group Southampton</strong> | Southampton, UK</p>
+      <div class="card-details"><p>Organized workshops on Google technologies.</p><p>Hosted talks and panels with industry experts.</p><p>Led a team to run technical operations smoothly.</p><p>Maintained the society's digital infrastructure.</p></div>
+    </div>
+    <div class="exp-card glass">
+      <div class="card-header"><h3>Head of Education</h3><span class="date">Jul 2023 - Sep 2024</span></div>
+      <p class="company"><strong>AI Society Southampton</strong> | Southampton, UK</p>
+      <div class="card-details"><p>Led AI and coding workshops for students.</p><p>Coached hackathon teams, boosting their confidence.</p><p>Expanded educational offerings, increasing attendance.</p><p>Delivered presentations on AI and programming.</p><p>Engaged with industry professionals for mentorship.</p></div>
+    </div>
+    <div class="exp-card glass">
+      <div class="card-header"><h3>Head of Technology</h3><span class="date">Sep 2024 - Present</span></div>
+      <p class="company"><strong>Fish on Toast</strong> | Southampton, UK</p>
+      <div class="card-details"><p>Managed website operations and provided technical support.</p><p>Collaborated with teams to enhance user experience.</p></div>
+    </div>
+    <div class="exp-card glass">
+      <div class="card-header"><h3>Virtual Support Ambassador</h3><span class="date">Sep 2024 - Present</span></div>
+      <p class="company"><strong>University of Southampton</strong> | Southampton, UK</p>
+      <div class="card-details"><p>Managed CRM communications and Gecko system integrations.</p><p>Provided troubleshooting support and coordinated with admissions teams.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="projects-container">
+    <div class="project-card glass">
+      <div class="card-header"><h3>Calendify - A Group Calendar App</h3><span class="date">Oct 2024 - Jan 2025</span></div>
+      <p class="project-description">A collaborative event scheduling app using Vue.js and Azure. Features include user authentication, event management, dynamic calendar views, and real-time notifications.</p>
+      <div class="project-links">
+        <a href="https://sarveshmina.github.io/CAD-gwc-frontend/" target="_blank" class="project-btn">Live Demo</a>
+        <a href="https://github.com/SarveshMina/CAD-gwc-frontend" target="_blank" class="project-btn">Source Code</a>
+        <button class="project-btn">View Details</button>
+      </div>
+    </div>
+    <div class="project-card glass">
+      <div class="card-header"><h3>Cube Runner 3D</h3><span class="date">Apr 2022 - Oct 2022</span></div>
+      <p class="project-description">An endless 3D runner game built with Unity and C#. Features procedural level generation, adaptive AI difficulty, and smooth performance optimizations.</p>
+      <div class="project-links">
+        <a href="https://sarveshmina.github.io/games/cube_runner_3d/" target="_blank" class="project-btn">Play Game</a>
+        <a href="https://github.com/SarveshMina/Cube_Runner_3D" target="_blank" class="project-btn">Source Code</a>
+        <button class="project-btn">View Details</button>
+      </div>
+    </div>
+    <div class="project-card glass">
+      <div class="card-header"><h3>Runway Redeclaration Tool</h3><span class="date">Oct 2023 - Mar 2023</span></div>
+      <p class="project-description">Developed a tool to modernize aviation safety protocols. Implemented TODA and ASDA calculations for flight safety, designed a user-friendly interface, and integrated mathematical models.</p>
+      <div class="project-links">
+        <a href="https://github.com/bryanvullo/RunwayRedeclaration" target="_blank" class="project-btn">Source Code</a>
+        <button class="project-btn">View Details</button>
+      </div>
+    </div>
+    <div class="project-card glass">
+      <div class="card-header"><h3>TetrECS - A Tetris-Based Game</h3><span class="date">Jan 2025 - Present</span></div>
+      <p class="project-description">A fast-paced Java-based Tetris game with improved mechanics. Enhanced with new features and multiplayer support under development.</p>
+      <div class="project-links">
+        <a href="https://github.com/SarveshMina/TetrECS" target="_blank" class="project-btn">Source Code</a>
+        <button class="project-btn">View Details</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="contact-container">
+    <div class="contact-info">
+      <div class="info-card glass"><p><strong>Email:</strong> <a href="mailto:minasarvesh@gmail.com">minasarvesh@gmail.com</a></p></div>
+      <div class="info-card glass"><p><strong>GitHub:</strong> <a href="https://github.com/SarveshMina" target="_blank">github.com/SarveshMina</a></p></div>
+      <div class="info-card glass"><p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/sarvesh-mina/" target="_blank">linkedin.com/in/sarvesh-mina</a></p></div>
+      <div class="info-card glass"><p><strong>Portfolio:</strong> <a href="https://sarveshmina.github.io/" target="_blank">sarveshmina.github.io</a></p></div>
+    </div>
+    <form class="contact-form glass" onsubmit="event.preventDefault()">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit" class="send-btn">Send</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-left"><h2>Sarvesh Mina</h2><p>To Be Software Engineer</p></div>
+    <div class="footer-right"><h3>Connect with me</h3><div class="footer-social">
+      <a href="mailto:minasarvesh@gmail.com"><i class="fas fa-envelope"></i></a>
+      <a href="https://github.com/SarveshMina" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/sarvesh-mina/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2025 Sarvesh Mina. All rights reserved.</p></div>
+</footer>
+
+<script>
+// Persist dark mode
+if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode');
+</script>
+</body>
+</html>

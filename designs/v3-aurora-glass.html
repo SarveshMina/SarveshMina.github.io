@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sarvesh Mina | Aurora Glass Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;color:#1a1a2e;min-height:100vh;
+background:linear-gradient(135deg,#667eea 0%,#764ba2 25%,#f093fb 50%,#4facfe 75%,#00f2fe 100%);
+background-size:400% 400%;animation:aurora 15s ease infinite;background-attachment:fixed}
+@keyframes aurora{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+/* Glass utility */
+.glass{background:rgba(255,255,255,.2);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.3);border-radius:20px}
+.glass-dark{background:rgba(26,26,46,.3);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.15);border-radius:20px}
+
+/* Nav */
+nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:100;padding:.8rem 2rem;display:flex;gap:2rem;align-items:center;
+background:rgba(255,255,255,.15);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border:1px solid rgba(255,255,255,.25);border-radius:50px}
+.nav-logo{font-weight:800;font-size:1.1rem;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.2)}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,.85);text-decoration:none;font-size:.85rem;font-weight:500;transition:all .3s;padding:.4rem .8rem;border-radius:20px}
+.nav-links a:hover{background:rgba(255,255,255,.2);color:#fff}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 2rem 2rem;text-align:center}
+.hero-card{padding:4rem;max-width:700px}
+.hero-card .avatar{width:140px;height:140px;border-radius:50%;border:4px solid rgba(255,255,255,.4);box-shadow:0 8px 32px rgba(0,0,0,.15);margin:0 auto 2rem;overflow:hidden;background:rgba(255,255,255,.3)}
+.hero-card .avatar span{font-size:4rem;line-height:140px;color:#fff}
+.hero-card h1{font-size:3rem;font-weight:800;color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.15);margin-bottom:.5rem}
+.hero-card .subtitle{font-size:1.1rem;color:rgba(255,255,255,.8);font-weight:300;margin-bottom:2rem}
+.hero-card p{color:rgba(255,255,255,.75);font-size:.95rem;line-height:1.8;margin-bottom:2rem}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-glass{padding:.8rem 2rem;border-radius:50px;font-family:'Poppins',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .3s}
+.btn-glass.primary{background:rgba(255,255,255,.3);color:#fff;border:1px solid rgba(255,255,255,.4)}
+.btn-glass.primary:hover{background:rgba(255,255,255,.5);transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.15)}
+.btn-glass.secondary{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3)}
+.btn-glass.secondary:hover{background:rgba(255,255,255,.15)}
+.hero-socials{display:flex;gap:1.2rem;justify-content:center;margin-top:2rem}
+.hero-socials a{color:rgba(255,255,255,.7);font-size:1.4rem;transition:all .3s}
+.hero-socials a:hover{color:#fff;transform:scale(1.2);text-shadow:0 0 20px rgba(255,255,255,.5)}
+
+/* Sections */
+.section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
+.section-title{font-size:2.2rem;font-weight:800;color:#fff;text-align:center;margin-bottom:3rem;text-shadow:0 2px 15px rgba(0,0,0,.15)}
+.section-title span{display:block;font-size:.85rem;font-weight:400;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:3px;margin-bottom:.5rem}
+
+/* Skills */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.skill-card{padding:2rem}
+.skill-card h3{color:#fff;font-size:1rem;font-weight:700;margin-bottom:1.2rem;display:flex;align-items:center;gap:.5rem}
+.skill-card h3 i{font-size:1.2rem;opacity:.7}
+.skill-items{display:flex;flex-wrap:wrap;gap:.5rem}
+.skill-item{padding:.5rem 1.2rem;background:rgba(255,255,255,.15);border-radius:50px;font-size:.8rem;color:#fff;border:1px solid rgba(255,255,255,.1);transition:all .3s}
+.skill-item:hover{background:rgba(255,255,255,.3);transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,.1)}
+
+/* Experience */
+.exp-container{display:flex;flex-direction:column;gap:1.5rem}
+.exp-card{padding:2rem;display:grid;grid-template-columns:200px 1fr;gap:2rem;transition:transform .3s}
+.exp-card:hover{transform:translateX(5px)}
+.exp-card .left h3{color:#fff;font-size:1rem;font-weight:700;margin-bottom:.3rem}
+.exp-card .left .period{font-family:'Space Mono',monospace;font-size:.75rem;color:rgba(255,255,255,.5)}
+.exp-card .right .company{color:rgba(255,255,255,.8);font-weight:600;margin-bottom:.8rem;font-size:.95rem}
+.exp-card .right ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.exp-card .right li{color:rgba(255,255,255,.7);font-size:.85rem;padding-left:1rem;position:relative}
+.exp-card .right li::before{content:"\2022";position:absolute;left:0;color:rgba(255,255,255,.4)}
+
+/* Projects */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.project-card{padding:0;overflow:hidden;transition:all .3s}
+.project-card:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.project-gradient{height:8px;background:linear-gradient(90deg,#667eea,#764ba2,#f093fb)}
+.project-body{padding:2rem}
+.project-body h3{color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:.3rem}
+.project-body .period{font-family:'Space Mono',monospace;font-size:.75rem;color:rgba(255,255,255,.5);margin-bottom:1rem}
+.project-body p{color:rgba(255,255,255,.7);font-size:.85rem;line-height:1.7;margin-bottom:1.2rem}
+.project-body .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem}
+.project-body .tags span{font-size:.7rem;padding:.3rem .8rem;background:rgba(255,255,255,.1);border-radius:50px;color:rgba(255,255,255,.7)}
+.project-body .links{display:flex;gap:.6rem}
+.project-body .links a{font-size:.8rem;padding:.4rem 1.2rem;border-radius:50px;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.25);transition:all .3s;font-weight:500}
+.project-body .links a:hover{background:rgba(255,255,255,.2)}
+
+/* Education */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:1.5rem}
+.edu-card{padding:2.5rem;transition:transform .3s}
+.edu-card:hover{transform:translateY(-5px)}
+.edu-card h3{color:#fff;font-size:1.05rem;font-weight:700;margin-bottom:.5rem}
+.edu-card .school{color:rgba(255,255,255,.7);font-size:.9rem;margin-bottom:.3rem}
+.edu-card .period{font-family:'Space Mono',monospace;font-size:.75rem;color:rgba(255,255,255,.5);margin-bottom:1rem}
+.edu-card .grade{color:#fff;font-weight:600;font-size:.9rem;margin-bottom:.5rem}
+.edu-card .modules{color:rgba(255,255,255,.6);font-size:.85rem;line-height:1.6}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:900px;margin:0 auto}
+.contact-info-glass{padding:2.5rem;display:flex;flex-direction:column;gap:1.2rem}
+.contact-info-glass h3{color:#fff;font-size:1.5rem;font-weight:700;margin-bottom:1rem}
+.contact-info-glass a{display:flex;align-items:center;gap:.8rem;color:rgba(255,255,255,.8);text-decoration:none;font-size:.9rem;padding:.6rem;border-radius:10px;transition:all .2s}
+.contact-info-glass a:hover{background:rgba(255,255,255,.1);color:#fff}
+.contact-info-glass a i{width:20px;text-align:center;font-size:1.1rem}
+.contact-form-glass{padding:2.5rem;display:flex;flex-direction:column;gap:1rem}
+.contact-form-glass input,.contact-form-glass textarea{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:1rem;color:#fff;font-family:'Poppins',sans-serif;font-size:.9rem;outline:none;transition:all .3s}
+.contact-form-glass input::placeholder,.contact-form-glass textarea::placeholder{color:rgba(255,255,255,.4)}
+.contact-form-glass input:focus,.contact-form-glass textarea:focus{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.15)}
+.contact-form-glass textarea{min-height:120px;resize:vertical}
+.contact-form-glass button{align-self:flex-end;padding:.8rem 2rem;border-radius:50px;background:rgba(255,255,255,.3);color:#fff;border:1px solid rgba(255,255,255,.3);font-family:'Poppins',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .3s}
+.contact-form-glass button:hover{background:rgba(255,255,255,.5);transform:translateY(-2px)}
+
+/* Footer */
+footer{text-align:center;padding:3rem 2rem;color:rgba(255,255,255,.5);font-size:.8rem}
+
+@media(max-width:768px){
+  nav{padding:.6rem 1.2rem;gap:1rem}
+  .nav-links{display:none}
+  .hero-card h1{font-size:2.2rem}
+  .hero-card{padding:2.5rem}
+  .exp-card{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr}
+  .edu-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">SM</span>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="about">
+  <div class="hero-card glass">
+    <div class="avatar"><span>SM</span></div>
+    <h1>Sarvesh Mina</h1>
+    <div class="subtitle">Computer Science Student &bull; Developer &bull; Innovator</div>
+    <p>Ambitious and dedicated Computer Science student with a strong foundation in Cloud Technologies, Game Development, and Frontend Development. Passionate about leveraging technology to solve real-world challenges.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-glass primary">View Projects</a>
+      <a href="#contact" class="btn-glass secondary">Say Hello</a>
+    </div>
+    <div class="hero-socials">
+      <a href="mailto:minasarvesh@gmail.com"><i class="fas fa-envelope"></i></a>
+      <a href="https://github.com/SarveshMina" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/sarvesh-mina/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="skills">
+  <h2 class="section-title"><span>What I Know</span>Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card glass">
+      <h3><i class="fas fa-code"></i> Programming Languages</h3>
+      <div class="skill-items">
+        <span class="skill-item">Java</span>
+        <span class="skill-item">Python</span>
+        <span class="skill-item">C++</span>
+      </div>
+    </div>
+    <div class="skill-card glass">
+      <h3><i class="fas fa-palette"></i> Frontend Development</h3>
+      <div class="skill-items">
+        <span class="skill-item">HTML5</span>
+        <span class="skill-item">CSS3</span>
+        <span class="skill-item">JavaScript</span>
+        <span class="skill-item">TypeScript</span>
+        <span class="skill-item">Vue.js</span>
+        <span class="skill-item">React</span>
+      </div>
+    </div>
+    <div class="skill-card glass">
+      <h3><i class="fas fa-server"></i> DevOps & Tools</h3>
+      <div class="skill-items">
+        <span class="skill-item">Git</span>
+        <span class="skill-item">GitHub</span>
+        <span class="skill-item">Docker</span>
+        <span class="skill-item">AWS</span>
+        <span class="skill-item">VS Code</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="experience">
+  <h2 class="section-title"><span>Where I've Been</span>Experience</h2>
+  <div class="exp-container">
+    <div class="exp-card glass">
+      <div class="left">
+        <h3>Tech Manager</h3>
+        <div class="period">Oct 2024 - Present</div>
+      </div>
+      <div class="right">
+        <div class="company">Google Developer Group Southampton</div>
+        <ul>
+          <li>Organized workshops on Google technologies</li>
+          <li>Hosted talks and panels with industry experts</li>
+          <li>Led a team to run technical operations smoothly</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-card glass">
+      <div class="left">
+        <h3>Head of Education</h3>
+        <div class="period">Jul 2023 - Sep 2024</div>
+      </div>
+      <div class="right">
+        <div class="company">AI Society Southampton</div>
+        <ul>
+          <li>Led AI and coding workshops for students</li>
+          <li>Coached hackathon teams, boosting their confidence</li>
+          <li>Expanded educational offerings, increasing attendance</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-card glass">
+      <div class="left">
+        <h3>Head of Technology</h3>
+        <div class="period">Sep 2024 - Present</div>
+      </div>
+      <div class="right">
+        <div class="company">Fish on Toast</div>
+        <ul>
+          <li>Managed website operations and provided technical support</li>
+          <li>Collaborated with teams to enhance user experience</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-card glass">
+      <div class="left">
+        <h3>Virtual Support</h3>
+        <div class="period">Sep 2024 - Present</div>
+      </div>
+      <div class="right">
+        <div class="company">University of Southampton</div>
+        <ul>
+          <li>Managed CRM communications and Gecko system integrations</li>
+          <li>Provided troubleshooting support and coordinated with admissions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="projects">
+  <h2 class="section-title"><span>What I've Built</span>Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card glass-dark">
+      <div class="project-gradient"></div>
+      <div class="project-body">
+        <h3>Calendify</h3>
+        <div class="period">Oct 2024 - Jan 2025</div>
+        <p>A collaborative event scheduling app using Vue.js and Azure with user authentication and real-time notifications.</p>
+        <div class="tags"><span>Vue.js</span><span>Azure</span><span>JavaScript</span></div>
+        <div class="links">
+          <a href="https://sarveshmina.github.io/CAD-gwc-frontend/" target="_blank">Live Demo</a>
+          <a href="https://github.com/SarveshMina/CAD-gwc-frontend" target="_blank">Source</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-card glass-dark">
+      <div class="project-gradient"></div>
+      <div class="project-body">
+        <h3>Cube Runner 3D</h3>
+        <div class="period">Apr 2022 - Oct 2022</div>
+        <p>An endless 3D runner game built with Unity and C#. Features procedural level generation and adaptive AI difficulty.</p>
+        <div class="tags"><span>Unity</span><span>C#</span><span>AI</span></div>
+        <div class="links">
+          <a href="https://sarveshmina.github.io/games/cube_runner_3d/" target="_blank">Play Game</a>
+          <a href="https://github.com/SarveshMina/Cube_Runner_3D" target="_blank">Source</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-card glass-dark">
+      <div class="project-gradient"></div>
+      <div class="project-body">
+        <h3>Runway Redeclaration Tool</h3>
+        <div class="period">Oct 2023 - Mar 2023</div>
+        <p>A tool to modernize aviation safety protocols with TODA and ASDA calculations and mathematical models.</p>
+        <div class="tags"><span>Java</span><span>Math Modeling</span><span>UI/UX</span></div>
+        <div class="links">
+          <a href="https://github.com/bryanvullo/RunwayRedeclaration" target="_blank">Source</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-card glass-dark">
+      <div class="project-gradient"></div>
+      <div class="project-body">
+        <h3>TetrECS</h3>
+        <div class="period">Jan 2025 - Present</div>
+        <p>A fast-paced Java-based Tetris game with improved mechanics and multiplayer support under development.</p>
+        <div class="tags"><span>Java</span><span>Game Dev</span><span>JavaFX</span></div>
+        <div class="links">
+          <a href="https://github.com/SarveshMina/TetrECS" target="_blank">Source</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="education">
+  <h2 class="section-title"><span>Where I Studied</span>Education</h2>
+  <div class="edu-grid">
+    <div class="edu-card glass">
+      <h3>MEng Computer Science with Year in Industry</h3>
+      <div class="school">University of Southampton</div>
+      <div class="period">Sep 2022 - Jun 2027</div>
+      <div class="grade">Expected 1:1</div>
+      <div class="modules">Machine Learning Technologies, Cloud Application Development, Research Project, Engineering Management, Computational Biology and Security of Cyber Physical Systems.</div>
+    </div>
+    <div class="edu-card glass">
+      <h3>A-Levels</h3>
+      <div class="school">Podar International School, India</div>
+      <div class="period">2019 - 2020</div>
+      <div class="grade">Mathematics (A), Computer Science (A), Physics (A)</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <h2 class="section-title"><span>Get in Touch</span>Contact</h2>
+  <div class="contact-grid">
+    <div class="contact-info-glass glass">
+      <h3>Let's Connect</h3>
+      <a href="mailto:minasarvesh@gmail.com"><i class="fas fa-envelope"></i> minasarvesh@gmail.com</a>
+      <a href="https://github.com/SarveshMina" target="_blank"><i class="fab fa-github"></i> github.com/SarveshMina</a>
+      <a href="https://linkedin.com/in/sarvesh-mina/" target="_blank"><i class="fab fa-linkedin"></i> linkedin.com/in/sarvesh-mina</a>
+      <a href="https://sarveshmina.github.io/" target="_blank"><i class="fas fa-globe"></i> sarveshmina.github.io</a>
+    </div>
+    <form class="contact-form-glass glass" onsubmit="event.preventDefault()">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Sarvesh Mina &bull; Aurora Glass Theme</p>
+</footer>
+
+</body>
+</html>

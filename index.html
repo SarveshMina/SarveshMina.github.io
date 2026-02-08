@@ -16,13 +16,21 @@
     <meta name="author" content="Sarvesh Mina" />
     <!-- Favicon -->
     <link rel="icon" href="/main.png" />
-    <!-- AOS CSS -->
-    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- GitHub Pages SPA redirect handler -->
+    <script>
+      (function(){
+        var q = window.location.search;
+        if (q && q.startsWith('?/')) {
+          var decoded = q.slice(2).split('&').map(function(s){
+            return s.replace(/~and~/g,'&');
+          }).join('?');
+          window.history.replaceState(null, null, '/' + decoded + window.location.hash);
+        }
+      })();
+    </script>
 </head>
 <body>
 <div id="app"></div>
-<!-- AOS JS -->
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script type="module" src="/src/main.js"></script>
 </body>
 </html>

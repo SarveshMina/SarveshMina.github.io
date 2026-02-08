@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills Section - Compare v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#f5f5f5;
+  --text:#111;
+  --text-dim:#666;
+  --glass-bg:rgba(255,255,255,.45);
+  --glass-border:rgba(255,255,255,.6);
+  --glass-shadow:0 8px 32px rgba(0,0,0,.06);
+  --glass-hover-bg:rgba(255,255,255,.6);
+  --glass-hover-shadow:0 12px 40px rgba(0,0,0,.1);
+  --glass-shine:linear-gradient(135deg,rgba(255,255,255,.4) 0%,rgba(255,255,255,0) 50%);
+  --btn-bg:rgba(255,255,255,.3);
+  --btn-border:rgba(0,0,0,.12);
+  --btn-hover-bg:rgba(0,0,0,.06);
+  --pill-bg:rgba(0,0,0,.04);
+  --pill-border:rgba(0,0,0,.08);
+  --divider:rgba(0,0,0,.08);
+}
+body.dark-mode{
+  --bg:#0a0a0a;
+  --text:#eee;
+  --text-dim:#888;
+  --glass-bg:rgba(255,255,255,.06);
+  --glass-border:rgba(255,255,255,.1);
+  --glass-shadow:0 8px 32px rgba(0,0,0,.4);
+  --glass-hover-bg:rgba(255,255,255,.1);
+  --glass-hover-shadow:0 12px 40px rgba(0,0,0,.5);
+  --glass-shine:linear-gradient(135deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,0) 50%);
+  --btn-bg:rgba(255,255,255,.06);
+  --btn-border:rgba(255,255,255,.15);
+  --btn-hover-bg:rgba(255,255,255,.12);
+  --pill-bg:rgba(255,255,255,.06);
+  --pill-border:rgba(255,255,255,.1);
+  --divider:rgba(255,255,255,.08);
+}
+body{font-family:'Source Code Pro',monospace;background:var(--bg);color:var(--text);transition:all .5s;padding:1rem}
+
+/* Toggle */
+.toggle-bar{position:fixed;top:0;left:0;right:0;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:100;
+background:var(--glass-bg);backdrop-filter:blur(30px);border-bottom:1px solid var(--glass-border)}
+.toggle-bar h1{font-size:1.2rem}
+.dark-toggle{background:var(--btn-bg);border:1.5px solid var(--btn-border);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text);transition:all .3s}
+.dark-toggle:hover{background:var(--btn-hover-bg);transform:rotate(180deg)}
+
+/* Version label */
+.version{margin:5rem 0 1.5rem;padding:0 1rem}
+.version h2{font-size:1.5rem;margin-bottom:.3rem}
+.version p{color:var(--text-dim);font-size:.85rem}
+.version hr{border:none;border-top:1px solid var(--divider);margin-top:.8rem}
+
+/* Shared section heading */
+.section-heading{font-size:1.6rem;font-weight:700;text-align:center;margin-bottom:2rem;letter-spacing:-.02em}
+
+/* ======================= VERSION A: Flat pills - no cards at all ======================= */
+.vA .skills-section{max-width:900px;margin:0 auto;text-align:center}
+.vA .cat-group{margin-bottom:2rem}
+.vA .cat-label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--text-dim);margin-bottom:.8rem;display:block}
+.vA .pills{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
+.vA .pill{
+  padding:.5rem 1.2rem;border-radius:50px;font-size:.85rem;font-weight:500;
+  color:var(--text);background:var(--pill-bg);border:1px solid var(--pill-border);
+  transition:all .3s;cursor:default;display:inline-flex;align-items:center;gap:.5rem;
+}
+.vA .pill i{font-size:.9rem;opacity:.6}
+.vA .pill:hover{background:var(--btn-hover-bg);border-color:var(--text);transform:translateY(-2px)}
+
+/* ======================= VERSION B: Single glass card, all skills inside ======================= */
+.vB .skills-section{max-width:900px;margin:0 auto}
+.vB .skills-card{
+  background:var(--glass-bg);backdrop-filter:blur(25px) saturate(180%);-webkit-backdrop-filter:blur(25px) saturate(180%);
+  border:1px solid var(--glass-border);border-radius:20px;box-shadow:var(--glass-shadow);
+  padding:2.5rem;position:relative;overflow:hidden;
+}
+.vB .skills-card::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:var(--glass-shine);border-radius:20px 20px 0 0;pointer-events:none}
+.vB .cat-group{margin-bottom:1.8rem}
+.vB .cat-group:last-child{margin-bottom:0}
+.vB .cat-label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--text-dim);margin-bottom:.8rem;display:block}
+.vB .chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.vB .chip{
+  display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.1rem;border-radius:50px;
+  font-size:.85rem;font-weight:500;color:var(--text);background:var(--pill-bg);
+  border:1px solid var(--pill-border);transition:all .3s;cursor:default;
+}
+.vB .chip i{font-size:.9rem;opacity:.6}
+.vB .chip:hover{background:var(--btn-hover-bg);border-color:var(--text);transform:translateY(-2px)}
+.vB .cat-divider{border:none;border-top:1px solid var(--divider);margin:1.5rem 0 0}
+
+/* ======================= VERSION C: Inline flow - heading then pills inline ======================= */
+.vC .skills-section{max-width:900px;margin:0 auto}
+.vC .flow-row{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin-bottom:1.2rem}
+.vC .flow-label{font-size:.85rem;font-weight:700;color:var(--text);margin-right:.3rem;white-space:nowrap}
+.vC .flow-pill{
+  padding:.4rem 1rem;border-radius:50px;font-size:.82rem;font-weight:500;
+  color:var(--text);background:var(--pill-bg);border:1px solid var(--pill-border);
+  transition:all .3s;cursor:default;display:inline-flex;align-items:center;gap:.4rem;
+}
+.vC .flow-pill i{font-size:.85rem;opacity:.5}
+.vC .flow-pill:hover{background:var(--btn-hover-bg);border-color:var(--text);transform:translateY(-2px)}
+
+/* ======================= VERSION D: Masonry icon tiles ======================= */
+.vD .skills-section{max-width:1000px;margin:0 auto}
+.vD .tiles{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center}
+.vD .tile{
+  display:flex;align-items:center;gap:.6rem;padding:.7rem 1.2rem;border-radius:16px;
+  background:var(--glass-bg);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid var(--glass-border);box-shadow:var(--glass-shadow);
+  transition:all .35s;cursor:default;position:relative;overflow:hidden;
+}
+.vD .tile::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:var(--glass-shine);pointer-events:none;border-radius:16px 16px 0 0}
+.vD .tile:hover{background:var(--glass-hover-bg);box-shadow:var(--glass-hover-shadow);transform:translateY(-3px)}
+.vD .tile i{font-size:1.4rem;opacity:.7}
+.vD .tile:hover i{opacity:1}
+.vD .tile span{font-size:.85rem;font-weight:500}
+
+/* ======================= VERSION E: Columns with underline headings ======================= */
+.vE .skills-section{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
+.vE .col{text-align:center}
+.vE .col-title{font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding-bottom:.6rem;border-bottom:2px solid var(--text);margin-bottom:1.2rem;display:inline-block}
+.vE .col-items{display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.vE .col-item{
+  display:flex;align-items:center;gap:.5rem;font-size:.88rem;font-weight:500;
+  color:var(--text);cursor:default;transition:all .2s;padding:.3rem .6rem;border-radius:10px;
+}
+.vE .col-item i{font-size:1.1rem;opacity:.5}
+.vE .col-item:hover{background:var(--pill-bg)}
+.vE .col-item:hover i{opacity:1}
+
+@media(max-width:768px){
+  .vE .skills-section{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="toggle-bar">
+  <h1>Skills Section - Compare v2</h1>
+  <button class="dark-toggle" onclick="document.body.classList.toggle('dark-mode');localStorage.setItem('darkMode',document.body.classList.contains('dark-mode'))"><i class="fas fa-adjust"></i></button>
+</div>
+
+<!-- =================== VERSION A: Flat pills, no card containers =================== -->
+<div class="version"><h2>Version A - Grouped Pills (no cards)</h2><p>Category labels above, no card containers, just floating pills</p><hr></div>
+<section class="vA">
+  <div class="skills-section">
+    <h2 class="section-heading">Skills</h2>
+    <div class="cat-group">
+      <span class="cat-label">Programming Languages</span>
+      <div class="pills">
+        <span class="pill"><i class="fab fa-java"></i>Java</span>
+        <span class="pill"><i class="fab fa-python"></i>Python</span>
+        <span class="pill"><i class="fas fa-code"></i>C++</span>
+      </div>
+    </div>
+    <div class="cat-group">
+      <span class="cat-label">Frontend Development</span>
+      <div class="pills">
+        <span class="pill"><i class="fab fa-html5"></i>HTML5</span>
+        <span class="pill"><i class="fab fa-css3-alt"></i>CSS3</span>
+        <span class="pill"><i class="fab fa-js"></i>JavaScript</span>
+        <span class="pill"><i class="fab fa-js"></i>TypeScript</span>
+        <span class="pill"><i class="fab fa-vuejs"></i>Vue.js</span>
+        <span class="pill"><i class="fab fa-react"></i>React</span>
+      </div>
+    </div>
+    <div class="cat-group">
+      <span class="cat-label">DevOps & Tools</span>
+      <div class="pills">
+        <span class="pill"><i class="fab fa-git"></i>Git</span>
+        <span class="pill"><i class="fab fa-github"></i>GitHub</span>
+        <span class="pill"><i class="fab fa-docker"></i>Docker</span>
+        <span class="pill"><i class="fab fa-aws"></i>AWS</span>
+        <span class="pill"><i class="fas fa-laptop-code"></i>VS Code</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== VERSION B: One single glass card =================== -->
+<div class="version"><h2>Version B - Single Glass Card</h2><p>Everything in one frosted card, categories separated by subtle dividers</p><hr></div>
+<section class="vB">
+  <div class="skills-section">
+    <h2 class="section-heading">Skills</h2>
+    <div class="skills-card">
+      <div class="cat-group">
+        <span class="cat-label">Programming Languages</span>
+        <div class="chips">
+          <span class="chip"><i class="fab fa-java"></i>Java</span>
+          <span class="chip"><i class="fab fa-python"></i>Python</span>
+          <span class="chip"><i class="fas fa-code"></i>C++</span>
+        </div>
+        <hr class="cat-divider">
+      </div>
+      <div class="cat-group">
+        <span class="cat-label">Frontend Development</span>
+        <div class="chips">
+          <span class="chip"><i class="fab fa-html5"></i>HTML5</span>
+          <span class="chip"><i class="fab fa-css3-alt"></i>CSS3</span>
+          <span class="chip"><i class="fab fa-js"></i>JavaScript</span>
+          <span class="chip"><i class="fab fa-js"></i>TypeScript</span>
+          <span class="chip"><i class="fab fa-vuejs"></i>Vue.js</span>
+          <span class="chip"><i class="fab fa-react"></i>React</span>
+        </div>
+        <hr class="cat-divider">
+      </div>
+      <div class="cat-group">
+        <span class="cat-label">DevOps & Tools</span>
+        <div class="chips">
+          <span class="chip"><i class="fab fa-git"></i>Git</span>
+          <span class="chip"><i class="fab fa-github"></i>GitHub</span>
+          <span class="chip"><i class="fab fa-docker"></i>Docker</span>
+          <span class="chip"><i class="fab fa-aws"></i>AWS</span>
+          <span class="chip"><i class="fas fa-laptop-code"></i>VS Code</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== VERSION C: Inline flow =================== -->
+<div class="version"><h2>Version C - Inline Flow</h2><p>Category name inline with pills, compact and readable</p><hr></div>
+<section class="vC">
+  <div class="skills-section">
+    <h2 class="section-heading">Skills</h2>
+    <div class="flow-row">
+      <span class="flow-label">Languages //</span>
+      <span class="flow-pill"><i class="fab fa-java"></i>Java</span>
+      <span class="flow-pill"><i class="fab fa-python"></i>Python</span>
+      <span class="flow-pill"><i class="fas fa-code"></i>C++</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-label">Frontend //</span>
+      <span class="flow-pill"><i class="fab fa-html5"></i>HTML5</span>
+      <span class="flow-pill"><i class="fab fa-css3-alt"></i>CSS3</span>
+      <span class="flow-pill"><i class="fab fa-js"></i>JavaScript</span>
+      <span class="flow-pill"><i class="fab fa-js"></i>TypeScript</span>
+      <span class="flow-pill"><i class="fab fa-vuejs"></i>Vue.js</span>
+      <span class="flow-pill"><i class="fab fa-react"></i>React</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-label">DevOps //</span>
+      <span class="flow-pill"><i class="fab fa-git"></i>Git</span>
+      <span class="flow-pill"><i class="fab fa-github"></i>GitHub</span>
+      <span class="flow-pill"><i class="fab fa-docker"></i>Docker</span>
+      <span class="flow-pill"><i class="fab fa-aws"></i>AWS</span>
+      <span class="flow-pill"><i class="fas fa-laptop-code"></i>VS Code</span>
+    </div>
+  </div>
+</section>
+
+<!-- =================== VERSION D: Individual glass tiles (no grouping cards) =================== -->
+<div class="version"><h2>Version D - Glass Tiles</h2><p>Each skill is its own small frosted glass tile, no category containers</p><hr></div>
+<section class="vD">
+  <div class="skills-section">
+    <h2 class="section-heading">Skills</h2>
+    <div class="tiles">
+      <div class="tile"><i class="fab fa-java"></i><span>Java</span></div>
+      <div class="tile"><i class="fab fa-python"></i><span>Python</span></div>
+      <div class="tile"><i class="fas fa-code"></i><span>C++</span></div>
+      <div class="tile"><i class="fab fa-html5"></i><span>HTML5</span></div>
+      <div class="tile"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
+      <div class="tile"><i class="fab fa-js"></i><span>JavaScript</span></div>
+      <div class="tile"><i class="fab fa-js"></i><span>TypeScript</span></div>
+      <div class="tile"><i class="fab fa-vuejs"></i><span>Vue.js</span></div>
+      <div class="tile"><i class="fab fa-react"></i><span>React</span></div>
+      <div class="tile"><i class="fab fa-git"></i><span>Git</span></div>
+      <div class="tile"><i class="fab fa-github"></i><span>GitHub</span></div>
+      <div class="tile"><i class="fab fa-docker"></i><span>Docker</span></div>
+      <div class="tile"><i class="fab fa-aws"></i><span>AWS</span></div>
+      <div class="tile"><i class="fas fa-laptop-code"></i><span>VS Code</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== VERSION E: Three columns, no cards =================== -->
+<div class="version"><h2>Version E - Clean Columns</h2><p>Three columns with underlined headings, no card borders, just text</p><hr></div>
+<section class="vE">
+  <div class="skills-section">
+    <div class="col">
+      <span class="col-title">Languages</span>
+      <div class="col-items">
+        <span class="col-item"><i class="fab fa-java"></i>Java</span>
+        <span class="col-item"><i class="fab fa-python"></i>Python</span>
+        <span class="col-item"><i class="fas fa-code"></i>C++</span>
+      </div>
+    </div>
+    <div class="col">
+      <span class="col-title">Frontend</span>
+      <div class="col-items">
+        <span class="col-item"><i class="fab fa-html5"></i>HTML5</span>
+        <span class="col-item"><i class="fab fa-css3-alt"></i>CSS3</span>
+        <span class="col-item"><i class="fab fa-js"></i>JavaScript</span>
+        <span class="col-item"><i class="fab fa-js"></i>TypeScript</span>
+        <span class="col-item"><i class="fab fa-vuejs"></i>Vue.js</span>
+        <span class="col-item"><i class="fab fa-react"></i>React</span>
+      </div>
+    </div>
+    <div class="col">
+      <span class="col-title">DevOps</span>
+      <div class="col-items">
+        <span class="col-item"><i class="fab fa-git"></i>Git</span>
+        <span class="col-item"><i class="fab fa-github"></i>GitHub</span>
+        <span class="col-item"><i class="fab fa-docker"></i>Docker</span>
+        <span class="col-item"><i class="fab fa-aws"></i>AWS</span>
+        <span class="col-item"><i class="fas fa-laptop-code"></i>VS Code</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="height:3rem"></div>
+
+<script>if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');</script>
+</body>
+</html>

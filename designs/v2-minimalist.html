@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sarvesh Mina | Minimalist Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#111;--white:#fafafa;--gray:#666;--light-gray:#e8e8e8;--accent:#000;--bg:#ffffff}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--black);font-family:'Inter',sans-serif;line-height:1.7}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 4rem;display:flex;justify-content:space-between;align-items:center;
+background:rgba(255,255,255,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--light-gray)}
+.logo{font-size:1.1rem;font-weight:900;letter-spacing:-1px}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--black)}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;align-items:center;padding:0 4rem}
+.hero-content{max-width:750px}
+.hero h1{font-size:5rem;font-weight:900;letter-spacing:-3px;line-height:1;margin-bottom:2rem}
+.hero h1 span{display:block;color:var(--gray);font-weight:300;font-size:1.5rem;letter-spacing:0;margin-bottom:1rem}
+.hero p{font-size:1.1rem;color:var(--gray);max-width:500px;margin-bottom:3rem}
+.hero-links{display:flex;gap:1rem}
+.hero-links a{padding:.8rem 2rem;font-size:.85rem;font-weight:600;text-decoration:none;transition:all .2s}
+.btn-primary{background:var(--black);color:var(--white);border:2px solid var(--black)}
+.btn-primary:hover{background:transparent;color:var(--black)}
+.btn-secondary{background:transparent;color:var(--black);border:2px solid var(--light-gray)}
+.btn-secondary:hover{border-color:var(--black)}
+.social-row{display:flex;gap:1.5rem;margin-top:3rem}
+.social-row a{color:var(--gray);font-size:1.3rem;transition:color .2s}
+.social-row a:hover{color:var(--black)}
+
+/* Section */
+.section{padding:8rem 4rem;border-top:1px solid var(--light-gray)}
+.section-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4rem;max-width:1200px;margin-left:auto;margin-right:auto}
+.section-title{font-size:3rem;font-weight:900;letter-spacing:-2px}
+.section-count{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--gray)}
+
+/* Skills */
+.skills-container{max-width:1200px;margin:0 auto}
+.skill-group{margin-bottom:3rem}
+.skill-group h3{font-size:.75rem;text-transform:uppercase;letter-spacing:3px;color:var(--gray);margin-bottom:1.5rem;font-weight:500}
+.skill-pills{display:flex;flex-wrap:wrap;gap:.6rem}
+.pill{padding:.5rem 1.5rem;border:1px solid var(--light-gray);font-size:.85rem;font-weight:500;transition:all .2s;cursor:default}
+.pill:hover{border-color:var(--black);background:var(--black);color:var(--white)}
+
+/* Experience */
+.exp-list{max-width:1200px;margin:0 auto}
+.exp-item{display:grid;grid-template-columns:300px 1fr;gap:4rem;padding:3rem 0;border-bottom:1px solid var(--light-gray)}
+.exp-item:last-child{border-bottom:none}
+.exp-meta h3{font-size:1.1rem;font-weight:700;margin-bottom:.3rem}
+.exp-meta .company{color:var(--gray);font-size:.9rem}
+.exp-meta .period{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--gray);margin-top:.5rem}
+.exp-details ul{list-style:none}
+.exp-details li{position:relative;padding-left:1.5rem;margin-bottom:.5rem;color:var(--gray);font-size:.9rem}
+.exp-details li::before{content:"";position:absolute;left:0;top:.6rem;width:6px;height:6px;background:var(--black);border-radius:50%}
+
+/* Projects */
+.projects-container{max-width:1200px;margin:0 auto}
+.project-item{display:grid;grid-template-columns:1fr 1fr;gap:4rem;padding:4rem 0;border-bottom:1px solid var(--light-gray);align-items:center}
+.project-item:last-child{border-bottom:none}
+.project-item:nth-child(even){direction:rtl}
+.project-item:nth-child(even) > *{direction:ltr}
+.project-num{font-family:'JetBrains Mono',monospace;font-size:6rem;font-weight:900;color:var(--light-gray);line-height:1}
+.project-info h3{font-size:1.5rem;font-weight:700;margin-bottom:.5rem}
+.project-info .period{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--gray);margin-bottom:1rem}
+.project-info p{color:var(--gray);font-size:.9rem;margin-bottom:1.5rem;line-height:1.7}
+.project-info .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}
+.project-info .tags span{font-size:.75rem;padding:.3rem .8rem;background:var(--light-gray);font-weight:500}
+.project-links{display:flex;gap:.8rem}
+.project-links a{font-size:.8rem;font-weight:600;text-decoration:none;padding:.5rem 1.2rem;border:1.5px solid var(--black);color:var(--black);transition:all .2s}
+.project-links a:hover{background:var(--black);color:var(--white)}
+
+/* Education */
+.edu-container{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.edu-card{padding:2.5rem;border:1px solid var(--light-gray);transition:border-color .2s}
+.edu-card:hover{border-color:var(--black)}
+.edu-card h3{font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+.edu-card .school{color:var(--gray);font-size:.9rem;margin-bottom:.3rem}
+.edu-card .period{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--gray);margin-bottom:1rem}
+.edu-card .grade{font-weight:600;font-size:.9rem;margin-bottom:.5rem}
+.edu-card .modules{font-size:.85rem;color:var(--gray);line-height:1.6}
+
+/* Contact */
+.contact-container{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem}
+.contact-left h3{font-size:2.5rem;font-weight:900;letter-spacing:-1px;margin-bottom:1rem}
+.contact-left p{color:var(--gray);margin-bottom:2rem}
+.contact-links-min{display:flex;flex-direction:column;gap:.8rem}
+.contact-links-min a{color:var(--black);text-decoration:none;font-size:.9rem;display:flex;align-items:center;gap:.8rem;transition:color .2s}
+.contact-links-min a:hover{color:var(--gray)}
+.contact-links-min a i{width:20px;color:var(--gray)}
+.contact-form-min{display:flex;flex-direction:column;gap:1rem}
+.contact-form-min input,.contact-form-min textarea{border:1px solid var(--light-gray);padding:1rem;font-family:'Inter',sans-serif;font-size:.9rem;transition:border-color .2s;outline:none;background:transparent}
+.contact-form-min input:focus,.contact-form-min textarea:focus{border-color:var(--black)}
+.contact-form-min textarea{min-height:120px;resize:vertical}
+.contact-form-min button{align-self:flex-start;padding:.8rem 2.5rem;background:var(--black);color:var(--white);border:2px solid var(--black);font-family:'Inter',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
+.contact-form-min button:hover{background:transparent;color:var(--black)}
+
+/* Footer */
+footer{padding:3rem 4rem;border-top:1px solid var(--light-gray);display:flex;justify-content:space-between;font-size:.8rem;color:var(--gray)}
+
+@media(max-width:768px){
+  .hero h1{font-size:3rem}
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .section{padding:4rem 1.5rem}
+  .hero{padding:0 1.5rem}
+  .exp-item{grid-template-columns:1fr;gap:1rem}
+  .project-item{grid-template-columns:1fr}
+  .project-item:nth-child(even){direction:ltr}
+  .edu-container,.contact-container{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Sarvesh Mina</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="about">
+  <div class="hero-content">
+    <h1>
+      <span>Computer Science Student</span>
+      Sarvesh<br>Mina.
+    </h1>
+    <p>Ambitious and dedicated Computer Science student with a strong foundation in Cloud Technologies, Game Development, and Frontend Development.</p>
+    <div class="hero-links">
+      <a href="#projects" class="btn-primary">View Work</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+    </div>
+    <div class="social-row">
+      <a href="mailto:minasarvesh@gmail.com"><i class="fas fa-envelope"></i></a>
+      <a href="https://github.com/SarveshMina" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/sarvesh-mina/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="skills">
+  <div class="section-header">
+    <h2 class="section-title">Skills</h2>
+    <span class="section-count">14 technologies</span>
+  </div>
+  <div class="skills-container">
+    <div class="skill-group">
+      <h3>Programming Languages</h3>
+      <div class="skill-pills">
+        <span class="pill">Java</span>
+        <span class="pill">Python</span>
+        <span class="pill">C++</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Frontend Development</h3>
+      <div class="skill-pills">
+        <span class="pill">HTML5</span>
+        <span class="pill">CSS3</span>
+        <span class="pill">JavaScript</span>
+        <span class="pill">TypeScript</span>
+        <span class="pill">Vue.js</span>
+        <span class="pill">React</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>DevOps & Tools</h3>
+      <div class="skill-pills">
+        <span class="pill">Git</span>
+        <span class="pill">GitHub</span>
+        <span class="pill">Docker</span>
+        <span class="pill">AWS</span>
+        <span class="pill">VS Code</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="experience">
+  <div class="section-header">
+    <h2 class="section-title">Experience</h2>
+    <span class="section-count">04 roles</span>
+  </div>
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-meta">
+        <h3>Tech Manager</h3>
+        <div class="company">Google Developer Group Southampton</div>
+        <div class="period">Oct 2024 - Present</div>
+      </div>
+      <div class="exp-details">
+        <ul>
+          <li>Organized workshops on Google technologies</li>
+          <li>Hosted talks and panels with industry experts</li>
+          <li>Led a team to run technical operations smoothly</li>
+          <li>Maintained the society's digital infrastructure</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <h3>Head of Education</h3>
+        <div class="company">AI Society Southampton</div>
+        <div class="period">Jul 2023 - Sep 2024</div>
+      </div>
+      <div class="exp-details">
+        <ul>
+          <li>Led AI and coding workshops for students</li>
+          <li>Coached hackathon teams, boosting their confidence</li>
+          <li>Expanded educational offerings, increasing attendance</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <h3>Head of Technology</h3>
+        <div class="company">Fish on Toast</div>
+        <div class="period">Sep 2024 - Present</div>
+      </div>
+      <div class="exp-details">
+        <ul>
+          <li>Managed website operations and provided technical support</li>
+          <li>Collaborated with teams to enhance user experience</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <h3>Virtual Support Ambassador</h3>
+        <div class="company">University of Southampton</div>
+        <div class="period">Sep 2024 - Present</div>
+      </div>
+      <div class="exp-details">
+        <ul>
+          <li>Managed CRM communications and Gecko system integrations</li>
+          <li>Provided troubleshooting support and coordinated with admissions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="projects">
+  <div class="section-header">
+    <h2 class="section-title">Projects</h2>
+    <span class="section-count">04 projects</span>
+  </div>
+  <div class="projects-container">
+    <div class="project-item">
+      <div class="project-num">01</div>
+      <div class="project-info">
+        <h3>Calendify</h3>
+        <div class="period">Oct 2024 - Jan 2025</div>
+        <p>A collaborative event scheduling app using Vue.js and Azure. Features user authentication, event management, dynamic calendar views, and real-time notifications.</p>
+        <div class="tags"><span>Vue.js</span><span>Azure</span><span>JavaScript</span></div>
+        <div class="project-links">
+          <a href="https://sarveshmina.github.io/CAD-gwc-frontend/" target="_blank">Live Demo</a>
+          <a href="https://github.com/SarveshMina/CAD-gwc-frontend" target="_blank">Source</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-item">
+      <div class="project-num">02</div>
+      <div class="project-info">
+        <h3>Cube Runner 3D</h3>
+        <div class="period">Apr 2022 - Oct 2022</div>
+        <p>An endless 3D runner game built with Unity and C#. Features procedural level generation, adaptive AI difficulty, and smooth performance optimizations.</p>
+        <div class="tags"><span>Unity</span><span>C#</span><span>AI</span></div>
+        <div class="project-links">
+          <a href="https://sarveshmina.github.io/games/cube_runner_3d/" target="_blank">Play Game</a>
+          <a href="https://github.com/SarveshMina/Cube_Runner_3D" target="_blank">Source</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-item">
+      <div class="project-num">03</div>
+      <div class="project-info">
+        <h3>Runway Redeclaration Tool</h3>
+        <div class="period">Oct 2023 - Mar 2023</div>
+        <p>A tool to modernize aviation safety protocols. Implemented TODA and ASDA calculations for flight safety with a user-friendly interface.</p>
+        <div class="tags"><span>Java</span><span>Math Modeling</span><span>UI/UX</span></div>
+        <div class="project-links">
+          <a href="https://github.com/bryanvullo/RunwayRedeclaration" target="_blank">Source</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-item">
+      <div class="project-num">04</div>
+      <div class="project-info">
+        <h3>TetrECS</h3>
+        <div class="period">Jan 2025 - Present</div>
+        <p>A fast-paced Java-based Tetris game with improved mechanics. Enhanced with new features and multiplayer support under development.</p>
+        <div class="tags"><span>Java</span><span>Game Dev</span><span>JavaFX</span></div>
+        <div class="project-links">
+          <a href="https://github.com/SarveshMina/TetrECS" target="_blank">Source</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="education">
+  <div class="section-header">
+    <h2 class="section-title">Education</h2>
+  </div>
+  <div class="edu-container">
+    <div class="edu-card">
+      <h3>MEng Computer Science with Year in Industry</h3>
+      <div class="school">University of Southampton</div>
+      <div class="period">Sep 2022 - Jun 2027</div>
+      <div class="grade">Expected 1:1</div>
+      <div class="modules">Machine Learning Technologies, Cloud Application Development, Research Project, Engineering Management, Computational Biology and Security of Cyber Physical Systems.</div>
+    </div>
+    <div class="edu-card">
+      <h3>A-Levels</h3>
+      <div class="school">Podar International School, Aurangabad, India</div>
+      <div class="period">2019 - 2020</div>
+      <div class="grade">Mathematics (A), Computer Science (A), Physics (A)</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="section-header">
+    <h2 class="section-title">Contact</h2>
+  </div>
+  <div class="contact-container">
+    <div class="contact-left">
+      <h3>Let's work together.</h3>
+      <p>Feel free to reach out for collaborations or just a friendly chat.</p>
+      <div class="contact-links-min">
+        <a href="mailto:minasarvesh@gmail.com"><i class="fas fa-envelope"></i> minasarvesh@gmail.com</a>
+        <a href="https://github.com/SarveshMina" target="_blank"><i class="fab fa-github"></i> github.com/SarveshMina</a>
+        <a href="https://linkedin.com/in/sarvesh-mina/" target="_blank"><i class="fab fa-linkedin"></i> linkedin.com/in/sarvesh-mina</a>
+      </div>
+    </div>
+    <form class="contact-form-min" onsubmit="event.preventDefault()">
+      <input type="text" placeholder="Name" required>
+      <input type="email" placeholder="Email" required>
+      <textarea placeholder="Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <span>&copy; 2025 Sarvesh Mina</span>
+  <span>Designed with precision</span>
+</footer>
+
+</body>
+</html>

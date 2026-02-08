@@ -1,6 +1,7 @@
 // src/main.js
 import { createApp } from 'vue'
 import App from './App.vue'
+import router from './router'
 import './style.css' // Import global styles
 
 // Import Font Awesome
@@ -26,6 +27,7 @@ library.add(
 )
 
 const app = createApp(App)
+app.use(router)
 
 // Register FontAwesomeIcon component globally
 app.component('font-awesome-icon', FontAwesomeIcon)

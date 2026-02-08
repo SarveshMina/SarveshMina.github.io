@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sarvesh Mina | Bento Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f0f0f;--card:#1a1a1a;--card-hover:#222;--border:#2a2a2a;--text:#e0e0e0;--dim:#888;--accent:#8b5cf6;--accent2:#06b6d4;--accent3:#f59e0b;--accent4:#ef4444;--accent5:#10b981;--radius:16px}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;
+background:rgba(15,15,15,.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-size:1.2rem;font-weight:700;color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{color:var(--dim);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+
+/* Bento Grid */
+.bento-section{padding:5rem 1.5rem 3rem;max-width:1300px;margin:0 auto}
+.bento-grid{display:grid;gap:1rem}
+
+/* Hero Bento */
+.bento-hero{grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto}
+.bento-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:all .3s;overflow:hidden;position:relative}
+.bento-card:hover{background:var(--card-hover);border-color:#3a3a3a;transform:translateY(-2px)}
+
+/* Hero main card */
+.card-intro{grid-column:1;grid-row:1/3}
+.card-intro h1{font-size:3rem;font-weight:700;margin-bottom:.5rem;line-height:1.1}
+.card-intro h1 span{color:var(--accent)}
+.card-intro .subtitle{color:var(--dim);font-size:1rem;margin-bottom:1.5rem;font-weight:400}
+.card-intro p{color:var(--dim);font-size:.9rem;line-height:1.7;margin-bottom:2rem}
+.card-intro .btn-row{display:flex;gap:.8rem;flex-wrap:wrap}
+.card-intro .btn{padding:.6rem 1.5rem;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:600;text-decoration:none;transition:all .2s;cursor:pointer}
+.btn-primary{background:var(--accent);color:#fff;border:none}
+.btn-primary:hover{background:#7c3aed;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Social card */
+.card-social{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.5rem}
+.card-social a{display:flex;align-items:center;justify-content:center;width:50px;height:50px;border-radius:12px;background:rgba(255,255,255,.05);color:var(--dim);font-size:1.3rem;transition:all .3s;text-decoration:none}
+.card-social a:hover{background:var(--accent);color:#fff;transform:scale(1.1)}
+
+/* Status card */
+.card-status{display:flex;flex-direction:column;justify-content:center;gap:.8rem}
+.status-row{display:flex;align-items:center;gap:.8rem}
+.status-dot{width:10px;height:10px;border-radius:50%;background:var(--accent5);box-shadow:0 0 10px var(--accent5);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.status-row span{font-size:.85rem;color:var(--dim)}
+.status-location{font-size:.8rem;color:var(--dim);display:flex;align-items:center;gap:.5rem}
+.status-location i{color:var(--accent4)}
+
+/* Skills Section */
+.bento-skills{grid-template-columns:repeat(3,1fr)}
+.card-skill{padding:1.5rem}
+.card-skill .label{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--dim);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.card-skill .label .dot{width:8px;height:8px;border-radius:50%}
+.card-skill .label .dot.purple{background:var(--accent)}
+.card-skill .label .dot.cyan{background:var(--accent2)}
+.card-skill .label .dot.amber{background:var(--accent3)}
+.skill-chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{padding:.4rem 1rem;border-radius:8px;font-size:.8rem;font-weight:500;background:rgba(255,255,255,.05);border:1px solid var(--border);transition:all .2s;cursor:default}
+.chip:hover{border-color:var(--accent);color:var(--accent);background:rgba(139,92,246,.05)}
+
+/* Experience Section */
+.section-header{display:flex;justify-content:space-between;align-items:center;margin:3rem 0 1rem;padding:0 .5rem}
+.section-header h2{font-size:1.5rem;font-weight:700}
+.section-header span{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--dim)}
+
+.bento-exp{grid-template-columns:1fr 1fr}
+.card-exp .role{font-weight:700;font-size:1rem;margin-bottom:.2rem;color:var(--text)}
+.card-exp .org{color:var(--accent);font-size:.85rem;font-weight:500;margin-bottom:.2rem}
+.card-exp .period{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--dim);margin-bottom:1rem}
+.card-exp ul{list-style:none}
+.card-exp li{position:relative;padding-left:1rem;margin-bottom:.4rem;font-size:.85rem;color:var(--dim)}
+.card-exp li::before{content:"";position:absolute;left:0;top:.5rem;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+
+/* Projects Section */
+.bento-projects{grid-template-columns:repeat(2,1fr);grid-auto-rows:auto}
+.card-project{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.project-accent{height:4px}
+.project-accent.v1{background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.project-accent.v2{background:linear-gradient(90deg,var(--accent2),var(--accent5))}
+.project-accent.v3{background:linear-gradient(90deg,var(--accent3),var(--accent4))}
+.project-accent.v4{background:linear-gradient(90deg,var(--accent4),var(--accent))}
+.project-content{padding:2rem;flex:1;display:flex;flex-direction:column}
+.project-content h3{font-size:1.1rem;font-weight:700;margin-bottom:.3rem}
+.project-content .period{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--dim);margin-bottom:1rem}
+.project-content p{font-size:.85rem;color:var(--dim);line-height:1.7;margin-bottom:1rem;flex:1}
+.project-content .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.project-content .tags span{font-size:.7rem;padding:.3rem .7rem;border-radius:6px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--dim)}
+.project-content .links{display:flex;gap:.6rem}
+.project-content .links a{font-size:.8rem;padding:.4rem 1rem;border-radius:8px;text-decoration:none;border:1px solid var(--border);color:var(--text);font-weight:500;transition:all .2s}
+.project-content .links a:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Education */
+.bento-edu{grid-template-columns:3fr 2fr}
+.card-edu h3{font-size:1.05rem;font-weight:700;margin-bottom:.5rem}
+.card-edu .school{color:var(--accent2);font-size:.9rem;font-weight:500;margin-bottom:.2rem}
+.card-edu .period{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--dim);margin-bottom:1rem}
+.card-edu .grade{font-weight:600;font-size:.9rem;margin-bottom:.5rem;color:var(--accent5)}
+.card-edu .modules{font-size:.85rem;color:var(--dim);line-height:1.6}
+
+/* Contact */
+.bento-contact{grid-template-columns:1fr 1.5fr}
+.card-contact-info{display:flex;flex-direction:column;justify-content:center;gap:1.5rem}
+.card-contact-info h3{font-size:1.5rem;font-weight:700;margin-bottom:.5rem}
+.card-contact-info p{color:var(--dim);font-size:.9rem}
+.info-link{display:flex;align-items:center;gap:.8rem;color:var(--text);text-decoration:none;font-size:.85rem;transition:color .2s}
+.info-link:hover{color:var(--accent)}
+.info-link i{width:20px;text-align:center;color:var(--dim);font-size:1rem}
+.card-contact-form{display:flex;flex-direction:column;gap:.8rem}
+.card-contact-form input,.card-contact-form textarea{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:.8rem 1rem;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s}
+.card-contact-form input:focus,.card-contact-form textarea:focus{border-color:var(--accent)}
+.card-contact-form input::placeholder,.card-contact-form textarea::placeholder{color:#555}
+.card-contact-form textarea{min-height:100px;resize:vertical}
+.card-contact-form button{align-self:flex-end;padding:.7rem 2rem;border-radius:10px;background:var(--accent);color:#fff;border:none;font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
+.card-contact-form button:hover{background:#7c3aed;transform:translateY(-2px)}
+
+/* Footer */
+footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);color:var(--dim);font-size:.8rem;max-width:1300px;margin:0 auto}
+
+@media(max-width:1024px){
+  .bento-hero,.bento-skills,.bento-exp,.bento-projects,.bento-edu,.bento-contact{grid-template-columns:1fr}
+  .card-intro{grid-column:1;grid-row:auto}
+  .card-intro h1{font-size:2.2rem}
+}
+@media(max-width:768px){
+  nav{padding:.8rem 1.2rem}
+  .nav-links{display:none}
+  .bento-section{padding:4rem 1rem 2rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">SM</span>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="bento-section" id="hero">
+  <!-- Hero Grid -->
+  <div class="bento-grid bento-hero">
+    <div class="bento-card card-intro">
+      <h1>Hi, I'm <span>Sarvesh</span></h1>
+      <div class="subtitle">Computer Science Student &bull; Developer &bull; Innovator</div>
+      <p>Ambitious and dedicated Computer Science student with a strong foundation in Cloud Technologies, Game Development, and Frontend Development. Passionate about leveraging technology to solve real-world challenges and advance innovation in software development and AI.</p>
+      <div class="btn-row">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+      </div>
+    </div>
+    <div class="bento-card card-social">
+      <a href="mailto:minasarvesh@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://github.com/SarveshMina" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/sarvesh-mina/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <div class="bento-card card-status">
+      <div class="status-row">
+        <span class="status-dot"></span>
+        <span>Available for opportunities</span>
+      </div>
+      <div class="status-location">
+        <i class="fas fa-map-marker-alt"></i> Southampton, UK
+      </div>
+      <div class="status-location">
+        <i class="fas fa-graduation-cap"></i> MEng CS @ UoS
+      </div>
+    </div>
+  </div>
+
+  <!-- Skills -->
+  <div class="section-header" id="skills">
+    <h2>Skills</h2>
+    <span>14 technologies</span>
+  </div>
+  <div class="bento-grid bento-skills">
+    <div class="bento-card card-skill">
+      <div class="label"><span class="dot purple"></span> Programming Languages</div>
+      <div class="skill-chips">
+        <span class="chip">Java</span>
+        <span class="chip">Python</span>
+        <span class="chip">C++</span>
+      </div>
+    </div>
+    <div class="bento-card card-skill">
+      <div class="label"><span class="dot cyan"></span> Frontend Development</div>
+      <div class="skill-chips">
+        <span class="chip">HTML5</span>
+        <span class="chip">CSS3</span>
+        <span class="chip">JavaScript</span>
+        <span class="chip">TypeScript</span>
+        <span class="chip">Vue.js</span>
+        <span class="chip">React</span>
+      </div>
+    </div>
+    <div class="bento-card card-skill">
+      <div class="label"><span class="dot amber"></span> DevOps & Tools</div>
+      <div class="skill-chips">
+        <span class="chip">Git</span>
+        <span class="chip">GitHub</span>
+        <span class="chip">Docker</span>
+        <span class="chip">AWS</span>
+        <span class="chip">VS Code</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Experience -->
+  <div class="section-header" id="experience">
+    <h2>Experience</h2>
+    <span>4 roles</span>
+  </div>
+  <div class="bento-grid bento-exp">
+    <div class="bento-card card-exp">
+      <div class="role">Tech Manager</div>
+      <div class="org">Google Developer Group Southampton</div>
+      <div class="period">Oct 2024 - Present</div>
+      <ul>
+        <li>Organized workshops on Google technologies</li>
+        <li>Hosted talks and panels with industry experts</li>
+        <li>Led a team to run technical operations smoothly</li>
+        <li>Maintained the society's digital infrastructure</li>
+      </ul>
+    </div>
+    <div class="bento-card card-exp">
+      <div class="role">Head of Education</div>
+      <div class="org">AI Society Southampton</div>
+      <div class="period">Jul 2023 - Sep 2024</div>
+      <ul>
+        <li>Led AI and coding workshops for students</li>
+        <li>Coached hackathon teams, boosting their confidence</li>
+        <li>Expanded educational offerings, increasing attendance</li>
+        <li>Delivered presentations on AI and programming</li>
+      </ul>
+    </div>
+    <div class="bento-card card-exp">
+      <div class="role">Head of Technology</div>
+      <div class="org">Fish on Toast</div>
+      <div class="period">Sep 2024 - Present</div>
+      <ul>
+        <li>Managed website operations and provided technical support</li>
+        <li>Collaborated with teams to enhance user experience</li>
+      </ul>
+    </div>
+    <div class="bento-card card-exp">
+      <div class="role">Virtual Support Ambassador</div>
+      <div class="org">University of Southampton</div>
+      <div class="period">Sep 2024 - Present</div>
+      <ul>
+        <li>Managed CRM communications and Gecko system integrations</li>
+        <li>Provided troubleshooting support and coordinated with admissions</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Projects -->
+  <div class="section-header" id="projects">
+    <h2>Projects</h2>
+    <span>4 builds</span>
+  </div>
+  <div class="bento-grid bento-projects">
+    <div class="bento-card card-project">
+      <div class="project-accent v1"></div>
+      <div class="project-content">
+        <h3>Calendify</h3>
+        <div class="period">Oct 2024 - Jan 2025</div>
+        <p>A collaborative event scheduling app using Vue.js and Azure. Features user authentication, event management, dynamic calendar views, and real-time notifications.</p>
+        <div class="tags"><span>Vue.js</span><span>Azure</span><span>JavaScript</span><span>Auth</span></div>
+        <div class="links">
+          <a href="https://sarveshmina.github.io/CAD-gwc-frontend/" target="_blank">Live Demo</a>
+          <a href="https://github.com/SarveshMina/CAD-gwc-frontend" target="_blank">Source</a>
+        </div>
+      </div>
+    </div>
+    <div class="bento-card card-project">
+      <div class="project-accent v2"></div>
+      <div class="project-content">
+        <h3>Cube Runner 3D</h3>
+        <div class="period">Apr 2022 - Oct 2022</div>
+        <p>An endless 3D runner game built with Unity and C#. Features procedural level generation, adaptive AI difficulty, and smooth performance optimizations.</p>
+        <div class="tags"><span>Unity</span><span>C#</span><span>AI</span><span>Procedural Gen</span></div>
+        <div class="links">
+          <a href="https://sarveshmina.github.io/games/cube_runner_3d/" target="_blank">Play Game</a>
+          <a href="https://github.com/SarveshMina/Cube_Runner_3D" target="_blank">Source</a>
+        </div>
+      </div>
+    </div>
+    <div class="bento-card card-project">
+      <div class="project-accent v3"></div>
+      <div class="project-content">
+        <h3>Runway Redeclaration Tool</h3>
+        <div class="period">Oct 2023 - Mar 2023</div>
+        <p>A tool to modernize aviation safety protocols. Implemented TODA and ASDA calculations for flight safety with mathematical models.</p>
+        <div class="tags"><span>Java</span><span>Math Modeling</span><span>UI/UX</span></div>
+        <div class="links">
+          <a href="https://github.com/bryanvullo/RunwayRedeclaration" target="_blank">Source</a>
+        </div>
+      </div>
+    </div>
+    <div class="bento-card card-project">
+      <div class="project-accent v4"></div>
+      <div class="project-content">
+        <h3>TetrECS</h3>
+        <div class="period">Jan 2025 - Present</div>
+        <p>A fast-paced Java-based Tetris game with improved mechanics. Enhanced with new features and multiplayer support under development.</p>
+        <div class="tags"><span>Java</span><span>Game Dev</span><span>Multiplayer</span><span>JavaFX</span></div>
+        <div class="links">
+          <a href="https://github.com/SarveshMina/TetrECS" target="_blank">Source</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Education -->
+  <div class="section-header" id="education">
+    <h2>Education</h2>
+  </div>
+  <div class="bento-grid bento-edu">
+    <div class="bento-card card-edu">
+      <h3>MEng Computer Science with Year in Industry</h3>
+      <div class="school">University of Southampton</div>
+      <div class="period">Sep 2022 - Jun 2027</div>
+      <div class="grade">Expected 1:1</div>
+      <div class="modules">Machine Learning Technologies, Cloud Application Development, Research Project, Engineering Management, Computational Biology and Security of Cyber Physical Systems.</div>
+    </div>
+    <div class="bento-card card-edu">
+      <h3>A-Levels</h3>
+      <div class="school">Podar International School, India</div>
+      <div class="period">2019 - 2020</div>
+      <div class="grade">Mathematics (A), Computer Science (A), Physics (A)</div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="section-header" id="contact">
+    <h2>Contact</h2>
+  </div>
+  <div class="bento-grid bento-contact">
+    <div class="bento-card card-contact-info">
+      <div>
+        <h3>Let's Build Together</h3>
+        <p>Open to collaborations, freelance work, and new opportunities.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.8rem">
+        <a href="mailto:minasarvesh@gmail.com" class="info-link"><i class="fas fa-envelope"></i> minasarvesh@gmail.com</a>
+        <a href="https://github.com/SarveshMina" target="_blank" class="info-link"><i class="fab fa-github"></i> github.com/SarveshMina</a>
+        <a href="https://linkedin.com/in/sarvesh-mina/" target="_blank" class="info-link"><i class="fab fa-linkedin"></i> linkedin.com/in/sarvesh-mina</a>
+      </div>
+    </div>
+    <form class="bento-card card-contact-form" onsubmit="event.preventDefault()">
+      <input type="text" placeholder="Name" required>
+      <input type="email" placeholder="Email" required>
+      <textarea placeholder="Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 Sarvesh Mina &bull; Bento Grid Design</p>
+</footer>
+
+</body>
+</html>

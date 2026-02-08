@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sarvesh Mina | Cyberpunk Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--neon-blue:#00f0ff;--neon-pink:#ff00de;--neon-purple:#b829dd;--dark:#0a0a12;--darker:#06060c;--card:#12121f;--text:#e0e0f0}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--text);font-family:'Share Tech Mono',monospace;overflow-x:hidden}
+
+/* Scanlines overlay */
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;
+background:repeating-linear-gradient(0deg,rgba(0,0,0,.03) 0px,rgba(0,0,0,.03) 1px,transparent 1px,transparent 2px)}
+
+/* Grid background */
+.grid-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;
+background-image:linear-gradient(rgba(0,240,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,240,255,.03) 1px,transparent 1px);
+background-size:60px 60px}
+
+/* Navigation */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:flex;justify-content:space-between;align-items:center;
+background:rgba(10,10,18,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,240,255,.15)}
+.logo{font-family:'Orbitron',sans-serif;font-size:1.5rem;font-weight:900;
+background:linear-gradient(90deg,var(--neon-blue),var(--neon-pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--text);text-decoration:none;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;position:relative;padding:.5rem 0;transition:color .3s}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--neon-blue);transition:width .3s;box-shadow:0 0 10px var(--neon-blue)}
+.nav-links a:hover{color:var(--neon-blue)}
+.nav-links a:hover::after{width:100%}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;padding:6rem 3rem 3rem}
+.hero-content{max-width:900px;text-align:center}
+.hero-glitch{font-family:'Orbitron',sans-serif;font-size:4rem;font-weight:900;margin-bottom:1rem;position:relative;
+text-shadow:0 0 20px rgba(0,240,255,.5),0 0 60px rgba(0,240,255,.2)}
+.hero-glitch span{background:linear-gradient(90deg,var(--neon-blue),var(--neon-pink),var(--neon-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:1.1rem;color:rgba(224,224,240,.7);max-width:600px;margin:0 auto 2rem;line-height:1.8}
+.hero-sub .cursor{display:inline-block;width:2px;height:1.2em;background:var(--neon-blue);vertical-align:text-bottom;animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+
+.hero-buttons{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap}
+.btn-neon{padding:.8rem 2rem;border:2px solid var(--neon-blue);color:var(--neon-blue);background:transparent;font-family:'Share Tech Mono',monospace;font-size:.9rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:all .3s;position:relative}
+.btn-neon:hover{background:var(--neon-blue);color:var(--dark);box-shadow:0 0 30px rgba(0,240,255,.4),inset 0 0 30px rgba(0,240,255,.1)}
+.btn-neon.pink{border-color:var(--neon-pink);color:var(--neon-pink)}
+.btn-neon.pink:hover{background:var(--neon-pink);color:var(--dark);box-shadow:0 0 30px rgba(255,0,222,.4)}
+
+.social-bar{display:flex;gap:1.5rem;justify-content:center;margin-top:2.5rem}
+.social-bar a{color:var(--text);font-size:1.5rem;transition:all .3s;position:relative}
+.social-bar a:hover{color:var(--neon-blue);text-shadow:0 0 20px var(--neon-blue);transform:translateY(-3px)}
+
+/* Section Titles */
+.section{padding:6rem 3rem;position:relative;z-index:1}
+.section-title{font-family:'Orbitron',sans-serif;font-size:2.5rem;text-align:center;margin-bottom:3rem;position:relative}
+.section-title::before{content:'//';color:var(--neon-pink);margin-right:.5rem}
+.section-title::after{content:'';display:block;width:80px;height:3px;background:linear-gradient(90deg,var(--neon-blue),var(--neon-pink));margin:1rem auto 0;box-shadow:0 0 15px var(--neon-blue)}
+
+/* Skills */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;max-width:1200px;margin:0 auto}
+.skill-category{background:var(--card);border:1px solid rgba(0,240,255,.1);padding:2rem;position:relative;overflow:hidden;transition:all .3s}
+.skill-category::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--neon-blue),var(--neon-pink))}
+.skill-category:hover{border-color:rgba(0,240,255,.3);box-shadow:0 0 30px rgba(0,240,255,.05)}
+.skill-category h3{font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--neon-blue);margin-bottom:1.5rem;letter-spacing:2px}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.6rem}
+.skill-tag{padding:.4rem 1rem;border:1px solid rgba(0,240,255,.2);font-size:.8rem;color:rgba(224,224,240,.8);transition:all .3s;background:rgba(0,240,255,.03)}
+.skill-tag:hover{border-color:var(--neon-blue);color:var(--neon-blue);box-shadow:0 0 15px rgba(0,240,255,.15)}
+
+/* Experience Timeline */
+.timeline{max-width:800px;margin:0 auto;position:relative;padding-left:40px}
+.timeline::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--neon-blue),var(--neon-pink),transparent)}
+.timeline-item{position:relative;margin-bottom:3rem;padding-left:30px}
+.timeline-item::before{content:'';position:absolute;left:-32px;top:6px;width:14px;height:14px;border:2px solid var(--neon-blue);background:var(--dark);box-shadow:0 0 15px rgba(0,240,255,.3);transform:rotate(45deg)}
+.timeline-item h3{font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--neon-blue);margin-bottom:.3rem}
+.timeline-item .company{color:var(--neon-pink);font-size:.9rem;margin-bottom:.3rem}
+.timeline-item .duration{color:rgba(224,224,240,.4);font-size:.8rem;margin-bottom:.8rem}
+.timeline-item ul{list-style:none;padding:0}
+.timeline-item li{position:relative;padding-left:1.2rem;margin-bottom:.4rem;font-size:.85rem;color:rgba(224,224,240,.7)}
+.timeline-item li::before{content:'>';position:absolute;left:0;color:var(--neon-blue)}
+
+/* Projects */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:2rem;max-width:1200px;margin:0 auto}
+.project-card{background:var(--card);border:1px solid rgba(0,240,255,.08);overflow:hidden;transition:all .4s;position:relative}
+.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--neon-blue),var(--neon-pink));transform:scaleX(0);transition:transform .4s;transform-origin:left}
+.project-card:hover::before{transform:scaleX(1)}
+.project-card:hover{border-color:rgba(0,240,255,.2);transform:translateY(-5px);box-shadow:0 10px 40px rgba(0,240,255,.07)}
+.project-header{padding:1.5rem 1.5rem 0}
+.project-header h3{font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--neon-blue);margin-bottom:.3rem}
+.project-header .duration{color:rgba(224,224,240,.4);font-size:.75rem}
+.project-body{padding:1rem 1.5rem}
+.project-body p{font-size:.85rem;line-height:1.7;color:rgba(224,224,240,.7)}
+.project-footer{padding:1rem 1.5rem 1.5rem;display:flex;gap:.8rem;flex-wrap:wrap}
+.project-footer .btn-neon{padding:.4rem 1rem;font-size:.75rem;letter-spacing:1px}
+.project-tags{padding:0 1.5rem 1.5rem;display:flex;flex-wrap:wrap;gap:.4rem}
+.project-tags span{font-size:.7rem;padding:.2rem .6rem;border:1px solid rgba(184,41,221,.2);color:var(--neon-purple)}
+
+/* Education */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:2rem;max-width:1000px;margin:0 auto}
+.edu-card{background:var(--card);border:1px solid rgba(255,0,222,.1);padding:2rem;position:relative}
+.edu-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--neon-pink),var(--neon-purple))}
+.edu-card h3{font-family:'Orbitron',sans-serif;font-size:.95rem;color:var(--neon-pink);margin-bottom:.5rem}
+.edu-card .institution{font-size:.9rem;color:rgba(224,224,240,.6);margin-bottom:.3rem}
+.edu-card .duration{font-size:.8rem;color:rgba(224,224,240,.4);margin-bottom:.8rem}
+.edu-card .details{font-size:.85rem;color:rgba(224,224,240,.6);line-height:1.6}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:900px;margin:0 auto}
+.contact-info{display:flex;flex-direction:column;gap:1.2rem}
+.contact-link{display:flex;align-items:center;gap:1rem;padding:1rem 1.5rem;background:var(--card);border:1px solid rgba(0,240,255,.08);text-decoration:none;color:var(--text);transition:all .3s}
+.contact-link:hover{border-color:var(--neon-blue);box-shadow:0 0 20px rgba(0,240,255,.07)}
+.contact-link i{color:var(--neon-blue);font-size:1.2rem;width:24px;text-align:center}
+.contact-form-cyber{display:flex;flex-direction:column;gap:1rem}
+.contact-form-cyber input,.contact-form-cyber textarea{background:var(--card);border:1px solid rgba(0,240,255,.1);color:var(--text);padding:1rem;font-family:'Share Tech Mono',monospace;font-size:.9rem;transition:border-color .3s;outline:none;resize:vertical}
+.contact-form-cyber input:focus,.contact-form-cyber textarea:focus{border-color:var(--neon-blue);box-shadow:0 0 15px rgba(0,240,255,.07)}
+.contact-form-cyber textarea{min-height:120px}
+
+/* Footer */
+footer{text-align:center;padding:3rem;border-top:1px solid rgba(0,240,255,.08);color:rgba(224,224,240,.3);font-size:.8rem;position:relative;z-index:1}
+
+/* Responsive */
+@media(max-width:768px){
+  .hero-glitch{font-size:2.5rem}
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .section{padding:4rem 1.5rem}
+  .contact-grid{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr}
+  .edu-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<nav>
+  <div class="logo">SM://</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="about">
+  <div class="hero-content">
+    <h1 class="hero-glitch"><span>SARVESH MINA</span></h1>
+    <p class="hero-sub">
+      &gt; Ambitious Computer Science student specializing in Cloud Technologies, Game Development, and Frontend Development. Passionate about leveraging technology to solve real-world challenges and advance innovation in software development and AI.<span class="cursor"></span>
+    </p>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn-neon">View Projects</a>
+      <a href="#contact" class="btn-neon pink">Contact Me</a>
+    </div>
+    <div class="social-bar">
+      <a href="mailto:minasarvesh@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://github.com/SarveshMina" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/sarvesh-mina/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section class="section" id="skills">
+  <h2 class="section-title">SKILLS</h2>
+  <div class="skills-grid">
+    <div class="skill-category">
+      <h3>&lt;PROGRAMMING_LANGUAGES/&gt;</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">C++</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h3>&lt;FRONTEND_DEV/&gt;</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">Vue.js</span>
+        <span class="skill-tag">React</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h3>&lt;DEVOPS_TOOLS/&gt;</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">GitHub</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">AWS</span>
+        <span class="skill-tag">VS Code</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section class="section" id="experience">
+  <h2 class="section-title">EXPERIENCE</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <h3>Tech Manager</h3>
+      <div class="company">Google Developer Group Southampton</div>
+      <div class="duration">October 2024 - Present</div>
+      <ul>
+        <li>Organized workshops on Google technologies</li>
+        <li>Hosted talks and panels with industry experts</li>
+        <li>Led a team to run technical operations smoothly</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <h3>Head of Education</h3>
+      <div class="company">Artificial Intelligence Society Southampton</div>
+      <div class="duration">July 2023 - September 2024</div>
+      <ul>
+        <li>Led AI and coding workshops for students</li>
+        <li>Coached hackathon teams, boosting their confidence</li>
+        <li>Expanded educational offerings, increasing attendance</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <h3>Head of Technology</h3>
+      <div class="company">Fish on Toast</div>
+      <div class="duration">September 2024 - Present</div>
+      <ul>
+        <li>Managed website operations and provided technical support</li>
+        <li>Collaborated with teams to enhance user experience</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <h3>Virtual Support Ambassador</h3>
+      <div class="company">University of Southampton</div>
+      <div class="duration">September 2024 - Present</div>
+      <ul>
+        <li>Managed CRM communications and Gecko system integrations</li>
+        <li>Provided troubleshooting support and coordinated with admissions teams</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="section" id="projects">
+  <h2 class="section-title">PROJECTS</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-header">
+        <h3>CALENDIFY</h3>
+        <div class="duration">Oct 2024 - Jan 2025</div>
+      </div>
+      <div class="project-body">
+        <p>A collaborative event scheduling app using Vue.js and Azure. Features user authentication, event management, dynamic calendar views, and real-time notifications.</p>
+      </div>
+      <div class="project-tags">
+        <span>Vue.js</span><span>Azure</span><span>JavaScript</span><span>Authentication</span>
+      </div>
+      <div class="project-footer">
+        <a href="https://sarveshmina.github.io/CAD-gwc-frontend/" target="_blank" class="btn-neon">Live Demo</a>
+        <a href="https://github.com/SarveshMina/CAD-gwc-frontend" target="_blank" class="btn-neon pink">Source</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-header">
+        <h3>CUBE RUNNER 3D</h3>
+        <div class="duration">Apr 2022 - Oct 2022</div>
+      </div>
+      <div class="project-body">
+        <p>An endless 3D runner game built with Unity and C#. Features procedural level generation, adaptive AI difficulty, and smooth performance optimizations.</p>
+      </div>
+      <div class="project-tags">
+        <span>Unity</span><span>C#</span><span>Procedural Generation</span><span>AI</span>
+      </div>
+      <div class="project-footer">
+        <a href="https://sarveshmina.github.io/games/cube_runner_3d/" target="_blank" class="btn-neon">Play Game</a>
+        <a href="https://github.com/SarveshMina/Cube_Runner_3D" target="_blank" class="btn-neon pink">Source</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-header">
+        <h3>RUNWAY REDECLARATION TOOL</h3>
+        <div class="duration">Oct 2023 - March 2023</div>
+      </div>
+      <div class="project-body">
+        <p>A tool to modernize aviation safety protocols. Implemented TODA and ASDA calculations, designed a user-friendly interface, and integrated mathematical models.</p>
+      </div>
+      <div class="project-tags">
+        <span>Java</span><span>Mathematical Modeling</span><span>UI/UX</span>
+      </div>
+      <div class="project-footer">
+        <a href="https://github.com/bryanvullo/RunwayRedeclaration" target="_blank" class="btn-neon pink">Source</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-header">
+        <h3>TETRECS</h3>
+        <div class="duration">Jan 2025 - Present</div>
+      </div>
+      <div class="project-body">
+        <p>A fast-paced Java-based Tetris game with improved mechanics. Enhanced with new features and multiplayer support under development.</p>
+      </div>
+      <div class="project-tags">
+        <span>Java</span><span>Game Dev</span><span>Multiplayer</span><span>JavaFX</span>
+      </div>
+      <div class="project-footer">
+        <a href="https://github.com/SarveshMina/TetrECS" target="_blank" class="btn-neon pink">Source</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section class="section" id="education">
+  <h2 class="section-title">EDUCATION</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <h3>MEng Computer Science with Year in Industry</h3>
+      <div class="institution">University of Southampton</div>
+      <div class="duration">September 2022 - June 2027</div>
+      <div class="details">Expected 1:1 | Machine Learning Technologies, Cloud Application Development, Research Project, Engineering Management, Computational Biology and Security of Cyber Physical Systems.</div>
+    </div>
+    <div class="edu-card">
+      <h3>A-Levels</h3>
+      <div class="institution">Podar International School, Aurangabad, India</div>
+      <div class="duration">2019 - 2020</div>
+      <div class="details">Mathematics (A), Computer Science (A), Physics (A)</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="section" id="contact">
+  <h2 class="section-title">CONTACT</h2>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <a href="mailto:minasarvesh@gmail.com" class="contact-link">
+        <i class="fas fa-envelope"></i> minasarvesh@gmail.com
+      </a>
+      <a href="https://github.com/SarveshMina" target="_blank" class="contact-link">
+        <i class="fab fa-github"></i> github.com/SarveshMina
+      </a>
+      <a href="https://linkedin.com/in/sarvesh-mina/" target="_blank" class="contact-link">
+        <i class="fab fa-linkedin"></i> linkedin.com/in/sarvesh-mina
+      </a>
+      <a href="https://sarveshmina.github.io/" target="_blank" class="contact-link">
+        <i class="fas fa-globe"></i> sarveshmina.github.io
+      </a>
+    </div>
+    <form class="contact-form-cyber" onsubmit="event.preventDefault()">
+      <input type="text" placeholder="> enter_name" required>
+      <input type="email" placeholder="> enter_email" required>
+      <textarea placeholder="> enter_message" required></textarea>
+      <button type="submit" class="btn-neon">TRANSMIT</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Sarvesh Mina // All rights reserved // Built with raw HTML</p>
+</footer>
+
+</body>
+</html>

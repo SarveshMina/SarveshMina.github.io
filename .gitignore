@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Claude
+.claude/
+
+# Firebase config (contains API keys)
+src/firebase.js
