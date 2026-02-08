@@ -1,11 +1,15 @@
-import { db } from '../firebase'
-import {
-  doc, setDoc, getDoc, updateDoc, increment,
-  collection, addDoc, query, orderBy, limit, getDocs, serverTimestamp,
-} from 'firebase/firestore'
+import { db } from '#firebase-config'
 
-const COUNTERS_DOC = doc(db, 'analytics', 'counters')
-const EVENTS_COL = collection(db, 'analytics_events')
+let firestoreReady = null
+let fs = {}
+
+function loadFirestore() {
+  if (!db) return Promise.resolve()
+  if (!firestoreReady) {
+    firestoreReady = import('firebase/firestore').then(mod => { fs = mod })
+  }
+  return firestoreReady
+}
 
 function getSessionId() {
   let id = sessionStorage.getItem('analytics_session')
@@ -25,10 +29,15 @@ function isNewVisitor() {
   return false
 }
 
+let countersReady = null
+
 async function ensureCountersDoc() {
-  const snap = await getDoc(COUNTERS_DOC)
+  if (!db) return
+  await loadFirestore()
+  const countersDoc = fs.doc(db, 'analytics', 'counters')
+  const snap = await fs.getDoc(countersDoc)
   if (!snap.exists()) {
-    await setDoc(COUNTERS_DOC, {
+    await fs.setDoc(countersDoc, {
       pageViews: 0,
       uniqueVisitors: 0,
       sections: {},
@@ -37,28 +46,33 @@ async function ensureCountersDoc() {
   }
 }
 
-let countersReady = null
 function initCounters() {
   if (!countersReady) countersReady = ensureCountersDoc()
   return countersReady
 }
 
 async function incrementCounter(field, amount = 1) {
+  if (!db) return
   try {
+    await loadFirestore()
     await initCounters()
-    await updateDoc(COUNTERS_DOC, { [field]: increment(amount) })
+    const countersDoc = fs.doc(db, 'analytics', 'counters')
+    await fs.updateDoc(countersDoc, { [field]: fs.increment(amount) })
   } catch (e) {
     console.warn('Analytics: increment failed', e)
   }
 }
 
 async function logEvent(type, data = {}) {
+  if (!db) return
   try {
-    await addDoc(EVENTS_COL, {
+    await loadFirestore()
+    const eventsCol = fs.collection(db, 'analytics_events')
+    await fs.addDoc(eventsCol, {
       type,
       ...data,
       sessionId: getSessionId(),
-      timestamp: serverTimestamp(),
+      timestamp: fs.serverTimestamp(),
     })
   } catch (e) {
     console.warn('Analytics: event log failed', e)
@@ -88,14 +102,20 @@ export async function trackProjectAction(slug, action) {
 // --- Dashboard data fetchers ---
 
 export async function getCounters() {
+  if (!db) return { pageViews: 0, uniqueVisitors: 0, sections: {}, projectActions: {} }
+  await loadFirestore()
   await initCounters()
-  const snap = await getDoc(COUNTERS_DOC)
+  const countersDoc = fs.doc(db, 'analytics', 'counters')
+  const snap = await fs.getDoc(countersDoc)
   return snap.exists() ? snap.data() : { pageViews: 0, uniqueVisitors: 0, sections: {}, projectActions: {} }
 }
 
 export async function getRecentEvents(count = 50) {
-  const q = query(EVENTS_COL, orderBy('timestamp', 'desc'), limit(count))
-  const snap = await getDocs(q)
+  if (!db) return []
+  await loadFirestore()
+  const eventsCol = fs.collection(db, 'analytics_events')
+  const q = fs.query(eventsCol, fs.orderBy('timestamp', 'desc'), fs.limit(count))
+  const snap = await fs.getDocs(q)
   return snap.docs.map(d => ({ id: d.id, ...d.data() }))
 }
 
