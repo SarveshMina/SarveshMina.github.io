@@ -103,25 +103,25 @@ export default {
 /* iPad Mini / small tablets (max 834px) */
 @media(max-width:834px){
   .hero{padding:6rem 1.5rem 2rem;min-height:100vh;min-height:100dvh}
-  .hero-container{flex-direction:column;text-align:center;gap:1.5rem;padding:0 1rem}
+  .hero-container{flex-direction:column;text-align:center;gap:2rem;padding:0 1rem}
   .hero-text{text-align:center;max-width:100%}
-  .hero-text h2{font-size:2rem}
-  .hero-text p{font-size:.95rem}
-  .profile-image{width:160px;height:160px}
+  .hero-text h2{font-size:2.2rem}
+  .hero-text p{font-size:1.05rem}
+  .profile-image{width:180px;height:180px}
 }
 
 /* Phones (max 768px) */
 @media(max-width:768px){
-  .hero{padding:5rem 1.2rem 2rem;min-height:100vh;min-height:100dvh}
-  .hero-container{gap:1.2rem;padding:0}
-  .hero-text h2{font-size:1.8rem}
-  .hero-text p{font-size:.9rem;line-height:1.6}
-  .profile-image{width:140px;height:140px}
-  .socials-section{margin-top:1rem}
-  .socials-section h3{font-size:1.1rem;margin-bottom:.5rem}
-  .social-icons{gap:1.2rem;margin-bottom:.8rem}
-  .social-icons a{font-size:1.5rem}
-  .cv-button-hero{padding:.55rem 1.4rem;font-size:.85rem}
+  .hero{padding:5rem 1.5rem 2rem;min-height:100vh;min-height:100dvh}
+  .hero-container{gap:1.8rem;padding:0}
+  .hero-text h2{font-size:2rem}
+  .hero-text p{font-size:1rem;line-height:1.7}
+  .profile-image{width:170px;height:170px}
+  .socials-section{margin-top:1.5rem}
+  .socials-section h3{font-size:1.3rem;margin-bottom:.6rem}
+  .social-icons{gap:1.5rem;margin-bottom:1rem}
+  .social-icons a{font-size:1.8rem}
+  .cv-button-hero{padding:.65rem 1.8rem;font-size:.95rem}
   /* Scroll down: absolute within hero so it sits at the bottom of the viewport */
   .scroll-down{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);
     animation:bounceMobile 2s infinite}
@@ -130,21 +130,21 @@ export default {
 
 /* Small phones (max 480px) */
 @media(max-width:480px){
-  .hero{padding:4.5rem 1rem 1.5rem;min-height:100vh;min-height:100dvh}
-  .hero-text h2{font-size:1.6rem}
-  .hero-text p{font-size:.85rem}
-  .profile-image{width:120px;height:120px;border-width:3px}
-  .socials-section h3{font-size:1rem}
-  .social-icons a{font-size:1.3rem}
-  .social-icons{gap:1rem}
-  .cv-button-hero{padding:.5rem 1.2rem;font-size:.8rem}
+  .hero{padding:4.5rem 1.2rem 1.5rem;min-height:100vh;min-height:100dvh}
+  .hero-text h2{font-size:1.8rem}
+  .hero-text p{font-size:.95rem}
+  .profile-image{width:150px;height:150px;border-width:3px}
+  .socials-section h3{font-size:1.2rem}
+  .social-icons a{font-size:1.6rem}
+  .social-icons{gap:1.2rem}
+  .cv-button-hero{padding:.6rem 1.5rem;font-size:.9rem}
 }
 
 /* Very small phones (max 360px) */
 @media(max-width:360px){
-  .hero{padding:4rem .8rem 1.5rem;min-height:100vh;min-height:100dvh}
-  .hero-text h2{font-size:1.4rem}
-  .hero-text p{font-size:.82rem}
-  .profile-image{width:100px;height:100px}
+  .hero{padding:4rem 1rem 1.5rem;min-height:100vh;min-height:100dvh}
+  .hero-text h2{font-size:1.6rem}
+  .hero-text p{font-size:.9rem}
+  .profile-image{width:130px;height:130px}
 }
 </style>
