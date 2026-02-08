@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&amp;display=swap');
+    text { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 30px; fill: #ffffff; }
+    rect { fill: #6c63ff; rx: 12; }
+  </style>
+  <rect width="64" height="64" rx="12"/>
+  <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle">SM</text>
+</svg>
