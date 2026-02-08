@@ -148,12 +148,12 @@ export const defaultExperience = [
     location: "London / Southampton, UK",
     duration: "September 2024 \u2013 Present",
     points: [
-      "Working within the Specialist Modelling Group (SMG), contributing to BIM automation, computational design tools, and electrical engineering workflows across live architectural projects.",
-      "Developing and maintaining Revit plugins using pyRevit and C#, automating repetitive documentation tasks and improving model accuracy across multidisciplinary teams.",
-      "Building custom Dynamo scripts and Python-based tools to streamline parameter management, data extraction, and design validation for complex building systems.",
-      "Assisting in the production of electrical layout drawings, panel schedules, and lighting plans in coordination with senior electrical engineers using Revit MEP.",
-      "Supporting integration between design tools (Revit, Rhino, Grasshopper) and internal data systems, helping bridge the gap between architectural intent and engineering delivery.",
-      "Gaining hands-on exposure to real-world construction documentation, coordination workflows (Navisworks, BIM 360), and interdisciplinary design reviews.",
+      "Developed internal software tools and automation to support BIM-driven architectural projects.",
+      "Automated Revit workflows using pyRevit and Dynamo scripting, improving drawing speed, consistency, and QA/QC.",
+      "Designed data-driven workflows integrating engineering data with Revit models to reduce manual errors.",
+      "Produced and coordinated electrical layouts, schedules, and technical drawings within Revit.",
+      "Supported the design and coordination of building electrical and ICT systems on large-scale projects.",
+      "Collaborated with multidisciplinary teams to ensure designs met project standards, compliance, and delivery timelines.",
     ],
   },
   {
