@@ -13,7 +13,7 @@
           <h3>{{ project.title }}</h3>
           <span class="date">{{ project.duration }}</span>
         </div>
-        <p class="project-description">{{ project.description }}</p>
+        <p class="project-description" v-if="expandedIndex !== index">{{ project.description }}</p>
         <div class="project-links" v-if="expandedIndex !== index">
           <a
             v-if="project.liveDemo"
