@@ -1,5 +1,7 @@
 export const defaultProjects = [
   {
+    active: true,
+    order: 0,
     slug: "calendify",
     title: "Calendify \u2013 A Group Calendar App",
     duration: "Oct 2024 \u2013 Jan 2025",
@@ -24,6 +26,8 @@ export const defaultProjects = [
     buttonText: "Live Demo",
   },
   {
+    active: true,
+    order: 1,
     slug: "cuberun3d",
     title: "Cube Runner 3D",
     duration: "Apr 2022 \u2013 Oct 2022",
@@ -44,6 +48,8 @@ export const defaultProjects = [
     buttonText: "Play Game",
   },
   {
+    active: true,
+    order: 2,
     slug: "runwayrt",
     title: "Runway Redeclaration Tool",
     duration: "Oct 2023 \u2013 March 2023",
@@ -63,6 +69,8 @@ export const defaultProjects = [
     buttonText: "Download JAR",
   },
   {
+    active: true,
+    order: 3,
     slug: "tetrecs",
     title: "TetrECS \u2013 A Tetris-Based Game",
     duration: "Jan 2025 \u2013 Present",
@@ -112,6 +120,8 @@ export const defaultSkills = [
 
 export const defaultEducation = [
   {
+    active: true,
+    order: 0,
     degree: "MEng Computer Science with Year in Industry",
     institution: "University of Southampton",
     duration: "September 2022 \u2013 June 2027",
@@ -120,6 +130,8 @@ export const defaultEducation = [
       "Machine Learning Technologies, Cloud Application Development, Research Project, Engineering Management, Computational Biology and Security of Cyber Physical Systems.",
   },
   {
+    active: true,
+    order: 1,
     degree: "A-Levels",
     institution: "Podar International School, Aurangabad, India",
     duration: "2019 \u2013 2020",
@@ -129,6 +141,8 @@ export const defaultEducation = [
 
 export const defaultExperience = [
   {
+    active: true,
+    order: 0,
     title: "Tech Manager",
     company: "Google Developer Group Southampton",
     location: "Southampton, UK",
@@ -141,6 +155,8 @@ export const defaultExperience = [
     ],
   },
   {
+    active: true,
+    order: 1,
     title: "Head of Education",
     company: "Artificial Intelligence Society Southampton",
     location: "Southampton, UK",
@@ -154,6 +170,8 @@ export const defaultExperience = [
     ],
   },
   {
+    active: true,
+    order: 2,
     title: "Head of Technology",
     company: "Fish on Toast",
     location: "Southampton, UK",
@@ -164,6 +182,8 @@ export const defaultExperience = [
     ],
   },
   {
+    active: true,
+    order: 3,
     title: "Virtual Support Ambassador",
     company: "University of Southampton",
     location: "Southampton, UK",

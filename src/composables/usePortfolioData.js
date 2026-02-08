@@ -31,10 +31,30 @@ function save(key, data) {
   localStorage.setItem(key, JSON.stringify(data))
 }
 
-export function getProjects() { return getWithFallback(STORAGE_KEYS.projects, defaultProjects) }
+function ensureFields(items) {
+  return items.map((item, i) => ({
+    active: true,
+    order: i,
+    ...item,
+  }))
+}
+
+function activeAndSorted(items) {
+  return ensureFields(items)
+    .filter(item => item.active !== false)
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+}
+
+// Public getters — filtered (active only) and sorted by order
+export function getProjects() { return activeAndSorted(getWithFallback(STORAGE_KEYS.projects, defaultProjects)) }
 export function getSkills() { return getWithFallback(STORAGE_KEYS.skills, defaultSkills) }
-export function getEducation() { return getWithFallback(STORAGE_KEYS.education, defaultEducation) }
-export function getExperience() { return getWithFallback(STORAGE_KEYS.experience, defaultExperience) }
+export function getEducation() { return activeAndSorted(getWithFallback(STORAGE_KEYS.education, defaultEducation)) }
+export function getExperience() { return activeAndSorted(getWithFallback(STORAGE_KEYS.experience, defaultExperience)) }
+
+// Admin getters — all items with active/order fields ensured
+export function getAllProjects() { return ensureFields(getWithFallback(STORAGE_KEYS.projects, defaultProjects)).sort((a, b) => a.order - b.order) }
+export function getAllEducation() { return ensureFields(getWithFallback(STORAGE_KEYS.education, defaultEducation)).sort((a, b) => a.order - b.order) }
+export function getAllExperience() { return ensureFields(getWithFallback(STORAGE_KEYS.experience, defaultExperience)).sort((a, b) => a.order - b.order) }
 
 export function saveProjects(data) { save(STORAGE_KEYS.projects, data) }
 export function saveSkills(data) { save(STORAGE_KEYS.skills, data) }
@@ -47,10 +67,10 @@ export function resetAll() {
 
 export function exportAll() {
   return JSON.stringify({
-    projects: getProjects(),
+    projects: getAllProjects(),
     skills: getSkills(),
-    education: getEducation(),
-    experience: getExperience(),
+    education: getAllEducation(),
+    experience: getAllExperience(),
     exportedAt: new Date().toISOString()
   }, null, 2)
 }

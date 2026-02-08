@@ -6,16 +6,32 @@
     <!-- Education Section -->
     <section class="section-block">
       <div class="section-header">
-        <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+        <h2><i class="fas fa-book-open"></i> Education</h2>
         <button @click="addEducation" class="add-btn">
           <i class="fas fa-plus"></i> Add
         </button>
       </div>
 
-      <div v-for="(edu, idx) in education" :key="'edu-'+idx" class="editor-card">
+      <div v-for="(edu, idx) in education" :key="'edu-'+idx" class="editor-card" :class="{ inactive: !edu.active }">
         <div class="card-top">
-          <h3>{{ edu.degree || 'New Entry' }}</h3>
-          <button @click="removeEducation(idx)" class="delete-btn"><i class="fas fa-trash"></i></button>
+          <div class="card-top-left">
+            <div class="order-controls">
+              <button @click="moveUp(education, idx)" :disabled="idx === 0" class="order-btn" title="Move up">
+                <i class="fas fa-chevron-up"></i>
+              </button>
+              <button @click="moveDown(education, idx)" :disabled="idx === education.length - 1" class="order-btn" title="Move down">
+                <i class="fas fa-chevron-down"></i>
+              </button>
+            </div>
+            <h3>{{ edu.degree || 'New Entry' }}</h3>
+          </div>
+          <div class="card-top-right">
+            <button @click="edu.active = !edu.active" class="toggle-btn" :class="{ active: edu.active }" :title="edu.active ? 'Active — click to hide' : 'Hidden — click to show'">
+              <i :class="edu.active ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
+              {{ edu.active ? 'Active' : 'Hidden' }}
+            </button>
+            <button @click="removeEducation(idx)" class="delete-btn"><i class="fas fa-trash"></i></button>
+          </div>
         </div>
         <div class="form-row">
           <div class="form-group">
@@ -51,16 +67,32 @@
     <!-- Experience Section -->
     <section class="section-block">
       <div class="section-header">
-        <h2><i class="fas fa-briefcase"></i> Experience</h2>
+        <h2><i class="fas fa-laptop-code"></i> Experience</h2>
         <button @click="addExperience" class="add-btn">
           <i class="fas fa-plus"></i> Add
         </button>
       </div>
 
-      <div v-for="(exp, idx) in experience" :key="'exp-'+idx" class="editor-card">
+      <div v-for="(exp, idx) in experience" :key="'exp-'+idx" class="editor-card" :class="{ inactive: !exp.active }">
         <div class="card-top">
-          <h3>{{ exp.title || 'New Entry' }}</h3>
-          <button @click="removeExperience(idx)" class="delete-btn"><i class="fas fa-trash"></i></button>
+          <div class="card-top-left">
+            <div class="order-controls">
+              <button @click="moveUp(experience, idx)" :disabled="idx === 0" class="order-btn" title="Move up">
+                <i class="fas fa-chevron-up"></i>
+              </button>
+              <button @click="moveDown(experience, idx)" :disabled="idx === experience.length - 1" class="order-btn" title="Move down">
+                <i class="fas fa-chevron-down"></i>
+              </button>
+            </div>
+            <h3>{{ exp.title || 'New Entry' }}</h3>
+          </div>
+          <div class="card-top-right">
+            <button @click="exp.active = !exp.active" class="toggle-btn" :class="{ active: exp.active }" :title="exp.active ? 'Active — click to hide' : 'Hidden — click to show'">
+              <i :class="exp.active ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
+              {{ exp.active ? 'Active' : 'Hidden' }}
+            </button>
+            <button @click="removeExperience(idx)" class="delete-btn"><i class="fas fa-trash"></i></button>
+          </div>
         </div>
         <div class="form-row">
           <div class="form-group">
@@ -108,7 +140,7 @@
 
 <script>
 import {
-  getEducation, getExperience,
+  getAllEducation, getAllExperience,
   saveEducation, saveExperience,
   defaultEducation, defaultExperience
 } from '../../composables/usePortfolioData'
@@ -123,27 +155,46 @@ export default {
     }
   },
   created() {
-    this.education = getEducation()
-    this.experience = getExperience()
+    this.education = getAllEducation()
+    this.experience = getAllExperience()
   },
   methods: {
+    moveUp(list, idx) {
+      if (idx <= 0) return
+      const item = list.splice(idx, 1)[0]
+      list.splice(idx - 1, 0, item)
+      this.reindex(list)
+    },
+    moveDown(list, idx) {
+      if (idx >= list.length - 1) return
+      const item = list.splice(idx, 1)[0]
+      list.splice(idx + 1, 0, item)
+      this.reindex(list)
+    },
+    reindex(list) {
+      list.forEach((item, i) => { item.order = i })
+    },
     addEducation() {
-      this.education.push({ degree: '', institution: '', duration: '', grade: '', modules: '', grades: '' })
+      this.education.push({ active: true, order: this.education.length, degree: '', institution: '', duration: '', grade: '', modules: '', grades: '' })
     },
     removeEducation(idx) {
       if (confirm('Delete this education entry?')) {
         this.education.splice(idx, 1)
+        this.reindex(this.education)
       }
     },
     addExperience() {
-      this.experience.push({ title: '', company: '', location: '', duration: '', points: [''] })
+      this.experience.push({ active: true, order: this.experience.length, title: '', company: '', location: '', duration: '', points: [''] })
     },
     removeExperience(idx) {
       if (confirm('Delete this experience entry?')) {
         this.experience.splice(idx, 1)
+        this.reindex(this.experience)
       }
     },
     saveChanges() {
+      this.reindex(this.education)
+      this.reindex(this.experience)
       saveEducation(this.education)
       saveExperience(this.experience)
       this.saved = true
@@ -219,6 +270,12 @@ h1 {
   border-radius: 10px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
+  transition: opacity 0.3s;
+}
+
+.editor-card.inactive {
+  opacity: 0.5;
+  border-style: dashed;
 }
 
 .card-top {
@@ -226,12 +283,80 @@ h1 {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+  gap: 0.5rem;
 }
 
-.card-top h3 {
+.card-top-left {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.card-top-left h3 {
   margin: 0;
   font-size: 1.2rem;
   color: var(--primary-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-top-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.order-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.order-btn {
+  background: none;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 4px;
+  color: var(--text-color, #333);
+  font-size: 0.65rem;
+  cursor: pointer;
+  padding: 0.15rem 0.35rem;
+  line-height: 1;
+  transition: all 0.2s;
+}
+
+.order-btn:hover:not(:disabled) {
+  background: #6c63ff;
+  color: #fff;
+  border-color: #6c63ff;
+}
+
+.order-btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid #e74c3c;
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.toggle-btn.active {
+  border-color: #27ae60;
+  background: rgba(46, 204, 113, 0.1);
+  color: #27ae60;
 }
 
 .delete-btn {
@@ -350,5 +475,6 @@ h1 {
 
 @media (max-width: 600px) {
   .form-row { grid-template-columns: 1fr; }
+  .card-top { flex-wrap: wrap; }
 }
 </style>

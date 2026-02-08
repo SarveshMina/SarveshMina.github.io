@@ -10,12 +10,28 @@
     <p v-if="saved" class="save-msg">Changes saved successfully.</p>
 
     <div class="project-list">
-      <div v-for="(project, index) in projects" :key="index" class="editor-card">
+      <div v-for="(project, index) in projects" :key="index" class="editor-card" :class="{ inactive: !project.active }">
         <div class="card-top">
-          <h3>{{ project.title || 'New Project' }}</h3>
-          <button @click="removeProject(index)" class="delete-btn" title="Delete">
-            <i class="fas fa-trash"></i>
-          </button>
+          <div class="card-top-left">
+            <div class="order-controls">
+              <button @click="moveUp(index)" :disabled="index === 0" class="order-btn" title="Move up">
+                <i class="fas fa-chevron-up"></i>
+              </button>
+              <button @click="moveDown(index)" :disabled="index === projects.length - 1" class="order-btn" title="Move down">
+                <i class="fas fa-chevron-down"></i>
+              </button>
+            </div>
+            <h3>{{ project.title || 'New Project' }}</h3>
+          </div>
+          <div class="card-top-right">
+            <button @click="project.active = !project.active" class="toggle-btn" :class="{ active: project.active }" :title="project.active ? 'Active — click to hide' : 'Hidden — click to show'">
+              <i :class="project.active ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
+              {{ project.active ? 'Active' : 'Hidden' }}
+            </button>
+            <button @click="removeProject(index)" class="delete-btn" title="Delete">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
         </div>
 
         <div class="form-row">
@@ -96,7 +112,7 @@
 </template>
 
 <script>
-import { getProjects, saveProjects, defaultProjects } from '../../composables/usePortfolioData'
+import { getAllProjects, saveProjects, defaultProjects } from '../../composables/usePortfolioData'
 
 export default {
   name: 'AdminProjects',
@@ -107,11 +123,28 @@ export default {
     }
   },
   created() {
-    this.projects = getProjects()
+    this.projects = getAllProjects()
   },
   methods: {
+    moveUp(idx) {
+      if (idx <= 0) return
+      const item = this.projects.splice(idx, 1)[0]
+      this.projects.splice(idx - 1, 0, item)
+      this.reindex()
+    },
+    moveDown(idx) {
+      if (idx >= this.projects.length - 1) return
+      const item = this.projects.splice(idx, 1)[0]
+      this.projects.splice(idx + 1, 0, item)
+      this.reindex()
+    },
+    reindex() {
+      this.projects.forEach((item, i) => { item.order = i })
+    },
     addProject() {
       this.projects.push({
+        active: true,
+        order: this.projects.length,
         slug: '',
         title: '',
         duration: '',
@@ -129,12 +162,14 @@ export default {
     removeProject(index) {
       if (confirm('Delete this project?')) {
         this.projects.splice(index, 1)
+        this.reindex()
       }
     },
     updateSkills(index, value) {
       this.projects[index].skills = value.split(',').map(s => s.trim()).filter(Boolean)
     },
     saveChanges() {
+      this.reindex()
       saveProjects(this.projects)
       this.saved = true
       setTimeout(() => { this.saved = false }, 3000)
@@ -197,6 +232,12 @@ export default {
   border-radius: 10px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
+  transition: opacity 0.3s;
+}
+
+.editor-card.inactive {
+  opacity: 0.5;
+  border-style: dashed;
 }
 
 .card-top {
@@ -204,12 +245,80 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+  gap: 0.5rem;
 }
 
-.card-top h3 {
+.card-top-left {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.card-top-left h3 {
   margin: 0;
   font-size: 1.3rem;
   color: var(--primary-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-top-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.order-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.order-btn {
+  background: none;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 4px;
+  color: var(--text-color, #333);
+  font-size: 0.65rem;
+  cursor: pointer;
+  padding: 0.15rem 0.35rem;
+  line-height: 1;
+  transition: all 0.2s;
+}
+
+.order-btn:hover:not(:disabled) {
+  background: #6c63ff;
+  color: #fff;
+  border-color: #6c63ff;
+}
+
+.order-btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid #e74c3c;
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.toggle-btn.active {
+  border-color: #27ae60;
+  background: rgba(46, 204, 113, 0.1);
+  color: #27ae60;
 }
 
 .delete-btn {
@@ -309,8 +418,7 @@ export default {
 .reset-btn:hover { background: rgba(231, 76, 60, 0.1); }
 
 @media (max-width: 600px) {
-  .form-row {
-    grid-template-columns: 1fr;
-  }
+  .form-row { grid-template-columns: 1fr; }
+  .card-top { flex-wrap: wrap; }
 }
 </style>
