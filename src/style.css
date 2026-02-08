@@ -109,8 +109,43 @@ body.dark-mode .mouse-glow{
 }
 .mouse-glow.visible{opacity:1}
 
+/* ========== MOBILE MENU DARK MODE (global, not scoped) ========== */
+body.dark-mode .mobile-menu{background:rgba(10,10,10,.3)}
+
 /* ========== RESPONSIVE ========== */
-@media(max-width:768px){
+
+/* Tablet / iPad Pro (max 1194px) */
+@media(max-width:1194px){
+  section{padding:4rem 1.5rem}
+}
+
+/* iPad Air / iPad (max 1024px) */
+@media(max-width:1024px){
+  section{padding:4rem 1.5rem}
+  section h2{font-size:2rem;margin-bottom:1.5rem}
+  .section-title{font-size:1.6rem}
+  .mouse-glow{display:none}
+}
+
+/* iPad Mini / small tablets (max 834px) */
+@media(max-width:834px){
   .edu-exp-container{grid-template-columns:1fr}
   .projects-container{grid-template-columns:1fr}
 }
+
+/* Phones (max 768px) */
+@media(max-width:768px){
+  section{padding:3rem 1rem}
+  section h2{font-size:1.7rem;margin-bottom:1.2rem}
+  .section-title{font-size:1.3rem;margin-bottom:1rem}
+}
+
+/* Small phones (max 480px) */
+@media(max-width:480px){
+  section{padding:2.5rem .8rem}
+  section h2{font-size:1.5rem;margin-bottom:1rem}
+  .section-title{font-size:1.2rem}
+}
+
+/* Very small phones (max 360px) */
+@media(max-width:360px){}
