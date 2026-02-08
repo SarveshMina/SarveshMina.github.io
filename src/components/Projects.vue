@@ -255,7 +255,7 @@ export default {
 }
 .project-expand>div{overflow:hidden}
 .project-card.expanded .project-expand{
-  grid-template-rows:1fr;opacity:1;margin-top:1.5rem;
+  grid-template-rows:1fr;opacity:1;margin-top:1rem;
 }
 
 /* Staggered reveal of inner content */
@@ -269,10 +269,10 @@ export default {
 .project-card.expanded .expand-skills{opacity:1;transform:translateY(0);transition-delay:.35s}
 .project-card.expanded .expand-links{opacity:1;transform:translateY(0);transition-delay:.45s}
 
-.expand-video{width:100%;border-radius:14px;margin-bottom:1rem}
-.expand-details{font-size:.9rem;line-height:1.7;color:var(--text-dim);margin-bottom:1rem}
-.expand-skills-label{font-size:.85rem;font-weight:700;margin-bottom:.5rem}
-.expand-skills{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.2rem}
+.expand-video{width:100%;max-height:450px;object-fit:contain;border-radius:14px;margin-bottom:.8rem}
+.expand-details{font-size:.88rem;line-height:1.6;color:var(--text-dim);margin-bottom:.8rem}
+.expand-skills-label{font-size:.85rem;font-weight:700;margin-bottom:.4rem}
+.expand-skills{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.8rem}
 .expand-skill-chip{
   display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .9rem;border-radius:50px;
   font-size:.8rem;font-weight:500;color:var(--text);
