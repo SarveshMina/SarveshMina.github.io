@@ -93,7 +93,25 @@ export default {
 .success-msg{color:#4caf50;font-size:.85rem;text-align:right}
 .error-msg{color:#ff6347;font-size:.85rem;text-align:right}
 
+/* iPad Mini (max 834px) */
+@media(max-width:834px){
+  .contact-container{flex-direction:column;gap:1.5rem}
+  .contact-info{min-width:auto}
+  .contact-form{min-width:auto}
+}
+
+/* Phones (max 768px) */
 @media(max-width:768px){
-  .contact-container{flex-direction:column}
+  .contact-container{gap:1rem}
+  .info-card{padding:.8rem 1rem;border-radius:14px}
+  .contact-form{padding:1.3rem;border-radius:16px}
+  .send-btn{padding:.5rem 1.5rem;font-size:.85rem}
+}
+
+/* Small phones (max 480px) */
+@media(max-width:480px){
+  .info-card{padding:.7rem .9rem;border-radius:12px}
+  .contact-form{padding:1rem;border-radius:14px}
+  .contact-form input,.contact-form textarea{padding:.7rem .9rem;font-size:.85rem;border-radius:12px}
 }
 </style>

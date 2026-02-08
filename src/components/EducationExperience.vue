@@ -55,7 +55,30 @@ export default {
 .institution,.company{font-size:1rem;font-weight:600;margin-bottom:.4rem}
 .card-details p{margin:.4rem 0;font-size:.9rem;color:var(--text-dim);line-height:1.6}
 
-@media(max-width:768px){
+/* iPad Air / iPad (max 1024px) */
+@media(max-width:1024px){
+  .edu-exp-container{grid-template-columns:repeat(2,1fr);gap:1.2rem}
+}
+
+/* iPad Mini (max 834px) */
+@media(max-width:834px){
   .edu-exp-container{grid-template-columns:1fr}
+}
+
+/* Phones (max 768px) */
+@media(max-width:768px){
+  .edu-card,.exp-card{padding:1.3rem}
+  .card-header{flex-direction:column;align-items:flex-start;gap:.2rem}
+  .card-header h3{font-size:1.05rem}
+  .date{font-size:.8rem}
+  .institution,.company{font-size:.88rem}
+  .card-details p{font-size:.85rem}
+}
+
+/* Small phones (max 480px) */
+@media(max-width:480px){
+  .edu-card,.exp-card{padding:1rem;border-radius:14px}
+  .card-header h3{font-size:1rem}
+  .institution,.company{font-size:.85rem}
 }
 </style>

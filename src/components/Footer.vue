@@ -35,9 +35,24 @@ footer{padding:2rem;background:var(--footer-bg);border-top:1px solid var(--glass
 .footer-social a:hover{color:var(--text-dim);transform:scale(1.2)}
 .footer-bottom{text-align:center;margin-top:1rem;color:var(--text-dim);font-size:.8rem}
 
-@media(max-width:768px){
+/* iPad Mini (max 834px) */
+@media(max-width:834px){
   .footer-container{flex-direction:column;text-align:center}
   .footer-right{text-align:center}
+  .footer-right h3{text-align:center}
   .footer-social{justify-content:center}
+}
+
+/* Phones (max 768px) */
+@media(max-width:768px){
+  .footer-left h2{font-size:1.3rem}
+  .footer-right h3{font-size:1rem}
+}
+
+/* Small phones (max 480px) */
+@media(max-width:480px){
+  .footer-left h2{font-size:1.2rem}
+  .footer-left p{font-size:.8rem}
+  .footer-bottom p{font-size:.75rem}
 }
 </style>

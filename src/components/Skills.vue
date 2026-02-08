@@ -62,4 +62,26 @@ export default {
 .skills-tiles:has(.skill-tile:hover) .skill-tile:hover{
   opacity:1;transform:translateY(-5px) scale(1.12);
 }
+
+/* Phones (max 768px) */
+@media(max-width:768px){
+  .skills-tiles{gap:.5rem;padding:0 .5rem}
+  .skill-tile{padding:.5rem .9rem;border-radius:12px}
+  .skill-tile i{font-size:1.1rem}
+  .skill-tile span{font-size:.8rem}
+}
+
+/* Small phones (max 480px) */
+@media(max-width:480px){
+  .skills-tiles{gap:.4rem}
+  .skill-tile{padding:.45rem .7rem;border-radius:10px}
+  .skill-tile i{font-size:1rem}
+  .skill-tile span{font-size:.72rem}
+}
+
+/* Very small phones (max 360px) */
+@media(max-width:360px){
+  .skill-tile{padding:.4rem .6rem}
+  .skill-tile span{font-size:.7rem}
+}
 </style>

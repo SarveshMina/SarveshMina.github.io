@@ -291,7 +291,31 @@ export default {
   transition:all .5s cubic-bezier(.4,0,.2,1);
 }
 
-@media(max-width:768px){
+/* iPad Air / iPad (max 1024px) */
+@media(max-width:1024px){
+  .projects-container{grid-template-columns:repeat(2,1fr);gap:1.2rem}
+}
+
+/* iPad Mini (max 834px) */
+@media(max-width:834px){
   .projects-container{grid-template-columns:1fr}
+}
+
+/* Phones (max 768px) */
+@media(max-width:768px){
+  .project-card{padding:1.2rem}
+  .project-card h3{font-size:1.05rem}
+  .project-description{font-size:.85rem}
+  .project-links{gap:.4rem}
+  .project-btn{padding:.4rem .9rem;font-size:.8rem}
+  .expand-close{width:32px;height:32px;font-size:1.1rem;top:.8rem;right:.8rem}
+}
+
+/* Small phones (max 480px) */
+@media(max-width:480px){
+  .project-card{padding:1rem;border-radius:14px}
+  .project-card h3{font-size:1rem}
+  .project-description{font-size:.82rem}
+  .project-btn{padding:.35rem .8rem;font-size:.78rem}
 }
 </style>
