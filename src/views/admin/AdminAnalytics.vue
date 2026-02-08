@@ -157,6 +157,7 @@ import { getCounters, getRecentEvents, getAllEvents } from '../../composables/us
 import { getProjects } from '../../composables/usePortfolioData'
 
 Chart.register(...registerables)
+Chart.defaults.font.family = "'DM Sans', sans-serif"
 
 export default {
   name: 'AdminAnalytics',
@@ -176,6 +177,7 @@ export default {
         { key: '12m', label: '12 Months' },
       ],
       charts: {},
+      themeObserver: null,
     }
   },
   computed: {
@@ -236,8 +238,17 @@ export default {
     this.projects = getProjects()
     await this.refresh()
   },
+  mounted() {
+    this.themeObserver = new MutationObserver(() => {
+      if (Object.keys(this.charts).length) {
+        this.renderAllCharts()
+      }
+    })
+    this.themeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] })
+  },
   beforeUnmount() {
     Object.values(this.charts).forEach(c => c.destroy())
+    if (this.themeObserver) this.themeObserver.disconnect()
   },
   methods: {
     countEventsSince(daysAgo, daysBack) {
@@ -283,9 +294,9 @@ export default {
       this.renderHourChart()
     },
     getChartColors() {
-      const root = getComputedStyle(document.documentElement)
-      const textColor = root.getPropertyValue('--text-color').trim() || '#e0e0e0'
-      const gridColor = 'rgba(128, 128, 128, 0.15)'
+      const isDark = document.body.classList.contains('dark-mode')
+      const textColor = isDark ? '#e0e0e0' : '#333'
+      const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)'
       return { textColor, gridColor }
     },
     destroyChart(name) {
@@ -503,6 +514,10 @@ export default {
 </script>
 
 <style scoped>
+.admin-analytics {
+  font-family: 'DM Sans', sans-serif;
+}
+
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -527,7 +542,7 @@ export default {
   border: 1px solid rgba(128, 128, 128, 0.3);
   border-radius: 6px;
   color: var(--text-color);
-  font-family: 'Source Code Pro', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.85rem;
   cursor: pointer;
   transition: border-color 0.2s;
@@ -670,7 +685,7 @@ export default {
   background: transparent;
   border: none;
   color: var(--accent-color);
-  font-family: 'Source Code Pro', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.75rem;
   cursor: pointer;
   transition: all 0.2s;
@@ -764,10 +779,32 @@ export default {
   padding: 2rem 0;
 }
 
-@media (max-width: 600px) {
-  .stats-grid { grid-template-columns: 1fr; }
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+  .stat-card { padding: 1rem; gap: 0.75rem; }
+  .stat-icon { width: 38px; height: 38px; font-size: 1.2rem; }
+  .stat-number { font-size: 1.4rem; }
+  .stat-label { font-size: 0.72rem; }
+  .panel { padding: 1rem; }
+  .panel h2 { font-size: 1.1rem; }
   .panel-header { flex-direction: column; align-items: flex-start; }
   .chart-container { height: 220px; }
   .chart-container.chart-short { height: 180px; }
+  .project-table { font-size: 0.8rem; }
+  .project-table th { padding: 0.5rem; font-size: 0.65rem; }
+  .project-table td { padding: 0.5rem; }
+  .project-table td:not(.project-name) { font-size: 0.9rem; }
+}
+
+@media (max-width: 480px) {
+  .page-header h1 { font-size: 1.5rem; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat-card { padding: 0.9rem; }
+  .stat-number { font-size: 1.3rem; }
+  .chart-container { height: 200px; }
+  .chart-container.chart-short { height: 160px; }
+  .tab-btn { padding: 0.3rem 0.6rem; font-size: 0.7rem; }
+  .activity-desc { font-size: 0.78rem; }
+  .activity-time { font-size: 0.68rem; }
 }
 </style>
