@@ -39,6 +39,7 @@
         </div>
         <div class="project-expand">
           <div>
+            <p class="expand-details">{{ project.details }}</p>
             <video
               v-if="project.video"
               class="expand-video"
@@ -49,7 +50,6 @@
               :ref="'video-' + index"
               @play="trackAction(project.slug, 'video')"
             ></video>
-            <p class="expand-details">{{ project.details }}</p>
             <p class="expand-skills-label">Skills Used:</p>
             <div class="expand-skills" :ref="'skills-' + index">
               <span
@@ -57,12 +57,6 @@
                 v-for="skill in project.skills"
                 :key="skill"
               ><i :class="getSkillIcon(skill)"></i>{{ skill }}</span>
-            </div>
-            <div class="expand-links">
-              <a v-if="project.liveDemo" :href="project.liveDemo" target="_blank" class="project-btn" rel="noopener noreferrer">{{ project.buttonText || 'Live Demo' }}</a>
-              <a v-if="project.repoFrontend" :href="project.repoFrontend" target="_blank" class="project-btn" rel="noopener noreferrer">Frontend Source</a>
-              <a v-if="project.repoBackend" :href="project.repoBackend" target="_blank" class="project-btn" rel="noopener noreferrer">Backend Source</a>
-              <a v-else-if="project.repo" :href="project.repo" target="_blank" class="project-btn" rel="noopener noreferrer">Source Code</a>
             </div>
           </div>
         </div>
@@ -234,15 +228,14 @@ export default {
 }
 
 /* Staggered reveal of inner content */
-.expand-video,.expand-details,.expand-skills-label,.expand-skills,.expand-links{
+.expand-details,.expand-video,.expand-skills-label,.expand-skills{
   opacity:0;transform:translateY(20px);
   transition:opacity .4s ease,transform .4s ease;
 }
-.project-card.expanded .expand-video{opacity:1;transform:translateY(0);transition-delay:.15s}
-.project-card.expanded .expand-details{opacity:1;transform:translateY(0);transition-delay:.25s}
+.project-card.expanded .expand-details{opacity:1;transform:translateY(0);transition-delay:.15s}
+.project-card.expanded .expand-video{opacity:1;transform:translateY(0);transition-delay:.25s}
 .project-card.expanded .expand-skills-label{opacity:1;transform:translateY(0);transition-delay:.3s}
 .project-card.expanded .expand-skills{opacity:1;transform:translateY(0);transition-delay:.35s}
-.project-card.expanded .expand-links{opacity:1;transform:translateY(0);transition-delay:.45s}
 
 .expand-video{width:100%;border-radius:14px;margin-bottom:1rem}
 .expand-details{font-size:.9rem;line-height:1.7;color:var(--text-dim);margin-bottom:1rem}
@@ -256,7 +249,6 @@ export default {
 }
 .expand-skill-chip i{font-size:.85rem;opacity:.6}
 .expand-skill-chip:hover{background:var(--btn-hover-bg);border-color:var(--text);transform:translateY(-3px) scale(1.05)}
-.expand-links{display:flex;flex-wrap:wrap;gap:.6rem}
 
 /* Close button inside expanded card */
 .expand-close{
