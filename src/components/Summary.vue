@@ -85,10 +85,66 @@ export default {
 .scroll-down span{font-size:.8rem;margin-top:.3rem}
 @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
 
-@media(max-width:768px){
-  .hero-container{flex-direction:column;text-align:center}
-  .hero-text{text-align:center}
+/* Tablet / iPad Pro (max 1194px) */
+@media(max-width:1194px){
+  .hero-container{gap:2.5rem;padding:0 1.5rem}
+  .hero-text h2{font-size:2.5rem}
+  .profile-image{width:200px;height:200px}
+}
+
+/* iPad Air / iPad (max 1024px) */
+@media(max-width:1024px){
+  .hero-container{gap:2rem}
+  .hero-text h2{font-size:2.3rem}
+  .profile-image{width:180px;height:180px}
+  .hero-text p{font-size:1rem}
+}
+
+/* iPad Mini / small tablets (max 834px) */
+@media(max-width:834px){
+  .hero{padding:6rem 1.5rem 2rem;min-height:100vh;min-height:100dvh}
+  .hero-container{flex-direction:column;text-align:center;gap:1.5rem;padding:0 1rem}
+  .hero-text{text-align:center;max-width:100%}
   .hero-text h2{font-size:2rem}
+  .hero-text p{font-size:.95rem}
   .profile-image{width:160px;height:160px}
+}
+
+/* Phones (max 768px) */
+@media(max-width:768px){
+  .hero{padding:5rem 1.2rem 2rem;min-height:100vh;min-height:100dvh}
+  .hero-container{gap:1.2rem;padding:0}
+  .hero-text h2{font-size:1.8rem}
+  .hero-text p{font-size:.9rem;line-height:1.6}
+  .profile-image{width:140px;height:140px}
+  .socials-section{margin-top:1rem}
+  .socials-section h3{font-size:1.1rem;margin-bottom:.5rem}
+  .social-icons{gap:1.2rem;margin-bottom:.8rem}
+  .social-icons a{font-size:1.5rem}
+  .cv-button-hero{padding:.55rem 1.4rem;font-size:.85rem}
+  /* Scroll down: relative on mobile so it doesn't overlap skills */
+  .scroll-down{position:relative;bottom:auto;left:auto;transform:none;margin-top:1.5rem;
+    animation:bounceMobile 2s infinite}
+}
+@keyframes bounceMobile{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* Small phones (max 480px) */
+@media(max-width:480px){
+  .hero{padding:4.5rem 1rem 1.5rem;min-height:100vh;min-height:100dvh}
+  .hero-text h2{font-size:1.6rem}
+  .hero-text p{font-size:.85rem}
+  .profile-image{width:120px;height:120px;border-width:3px}
+  .socials-section h3{font-size:1rem}
+  .social-icons a{font-size:1.3rem}
+  .social-icons{gap:1rem}
+  .cv-button-hero{padding:.5rem 1.2rem;font-size:.8rem}
+}
+
+/* Very small phones (max 360px) */
+@media(max-width:360px){
+  .hero{padding:4rem .8rem 1.5rem;min-height:100vh;min-height:100dvh}
+  .hero-text h2{font-size:1.4rem}
+  .hero-text p{font-size:.82rem}
+  .profile-image{width:100px;height:100px}
 }
 </style>
