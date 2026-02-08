@@ -162,7 +162,7 @@ export const defaultExperience = [
     title: "Tech Manager",
     company: "Google Developer Group Southampton",
     location: "Southampton, UK",
-    duration: "October 2024 – Present",
+    duration: "October 2024 – June 2025",
     points: [
       "Organized workshops on Google technologies.",
       "Hosted talks and panels with industry experts.",
@@ -191,7 +191,7 @@ export const defaultExperience = [
     title: "Head of Technology",
     company: "Fish on Toast",
     location: "Southampton, UK",
-    duration: "September 2024 \u2013 Present",
+    duration: "September 2024 \u2013 June 2025",
     points: [
       "Managed website operations and provided technical support.",
       "Collaborated with teams to enhance user experience.",
@@ -203,7 +203,7 @@ export const defaultExperience = [
     title: "Virtual Support Ambassador",
     company: "University of Southampton",
     location: "Southampton, UK",
-    duration: "September 2024 \u2013 Present",
+    duration: "September 2024 \u2013 June 2025",
     points: [
       "Managed CRM communications and Gecko system integrations.",
       "Provided troubleshooting support and coordinated with admissions teams.",
